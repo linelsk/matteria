@@ -1,0 +1,68 @@
+﻿<link href="../styles/v-accordion/v-accordion-do.css" rel="stylesheet" />
+<div class="row margin-bottom">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox" ng-repeat="sliders in slider">
+
+            <div class="item active">
+                <img class="img-responsive" src="{{API_PATH_MEDIA}}{{sliders.imagen}}" />
+                <div class="carousel-caption">
+                    <span class="negrita visible-lg" ng-bind-html="sliders.mensaje_imagen"></span>
+                </div>
+                <div class="carousel-caption-boton">
+                    <a href="/quienessomos/contacto#contacto" class="btn btn-lg btn-primary btn-banner">{{sliders.mensaje_boton}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+
+<div ng-cloak class="row">
+
+    <v-accordion id="accordionA" class="vAccordion--default" multiple control="accordionB" onexpand="expandCallback(index, id)" oncollapse="collapseCallback(index, id)">
+
+        <v-pane id="pane-1a" expanded="true">
+            <v-pane-header id="pane-1a-header" aria-controls="pane-1a-content" class="container">
+                <h2><span class="negrita">Sector privado</span></h2>
+            </v-pane-header>
+
+            <v-pane-content id="pane-1a-content" aria-labelledby="pane-1a-header">
+                <div class="row text-center">
+                    <div class="container">
+
+                        <div class="col-xs-12 col-lg-2 text-center margin-bottom" ng-repeat="clientes in clientesprivados" ng-if="clientes.sector == 'Privado'">
+                            <div style="width:100%; height:200px">
+                                <a href="{{clientes.cliente_website_url}}" target="_blank"><img class="img-responsive" width="150" height="150" src="{{API_PATH_MEDIA}}{{clientes.imagen}}"> </a>
+                                <h4>{{clientes.empresa}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </v-pane-content>
+        </v-pane>
+
+        <v-pane id="pane-2a" expanded="true">
+            <v-pane-header id="pane-2a-header" aria-controls="pane-2a-content" class="container">
+                <h2><span class="negrita">Sector civil</span></h2>
+            </v-pane-header>
+
+            <v-pane-content id="pane-2a-content" aria-labelledby="pane-2a-header">
+                <div class="row text-center">
+                    <div class="container">
+                        <div class="col-xs-12 col-lg-2 text-center margin-bottom" ng-repeat="clientes in clientesprivados" ng-if="clientes.sector == 'Civil'">
+                            <div style="width:100%; height:200px">
+                                <a href="{{clientes.cliente_website_url}}" target="_blank">
+                                    <img class="img-responsive" width="150" height="150" src="{{API_PATH_MEDIA}}{{clientes.imagen}}">
+                                </a>
+                                <h4>{{clientes.empresa}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </v-pane-content>
+        </v-pane>
+
+    </v-accordion>
+</div>

@@ -1,0 +1,331 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <base href="/">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" type="image/png" href="images/Avatar.jpg" />
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.css" />
+    <link rel="stylesheet" href="bower_components/v-accordion/dist/v-accordion.css" />
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+    <link rel="stylesheet" href="bower_components/ngImgCrop/compile/minified/ng-img-crop.css" />
+    <link rel="stylesheet" href="bower_components/textAngular/dist/textAngular.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link href="styles/rating/jk-rating-stars.css" rel="stylesheet" />
+    <link href="styles/datepicker/jquery-ui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+</head>
+<body ng-app="tcsGruntApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+    <div class="matteria-nav" ng-controller="HeaderCtrl">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#matteria-navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand cargador" href="/">
+                        <img class="img-responsive post-carga" data-src="{{API_PATH_MEDIA}}{{logo[0].logo}}" />
+                    </a>
+                </div>
+                <div id="matteria-navbar" class="navbar-collapse collapse text-center">
+                    <ul class="nav navbar-nav navbar-right matteria-navbar hidden-xs">
+                        <li class="dropdown">
+                            <a href ui-sref="organizaciones({scrollTo: ''})" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" role="button" aria-expanded="false"><span class="negrita">Para<br />Organizaciones</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href ui-sref="ingresa({user: 'organizacion'})" style="padding:10px 10px 10px 10px;"> Ingreso</a></li>
+                                <li><a href ui-sref="registro({user: 'organizacion'})" style="padding:10px 10px 10px 10px;"> Registro</a></li>
+                                <li><a href ui-sref="organizaciones({scrollTo: 'servicios'})" style="padding:10px 10px 10px 10px;"> Nuestros Servicios</a></li>
+                                <li><a href ui-sref="organizaciones({scrollTo: 'candidatos'})" style="padding:10px 10px 10px 10px;"> Nuestros Postulantes</a></li>
+                                <li><a href ui-sref="organizaciones({scrollTo: 'vacantes'})" style="padding:10px 10px 10px 10px;"> Vacantes Cubiertas</a></li>
+                                <li><a href="/clientes" style="padding:10px 10px 10px 10px;"> Nuestros Clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href ui-sref="comofunciona({scrollTo: 'comofunciona'})" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" role="button" aria-expanded="false"><span class="negrita">Para<br />Postulantes</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href ui-sref="ingresa({user: 'postulante'})" style="padding:10px 10px 10px 10px;"> Ingreso</a></li>
+                                <li><a href ui-sref="registro({user: 'postulante'})" style="padding:10px 10px 10px 10px;"> Registro</a></li>
+                                <li><a href ui-sref="comofunciona({scrollTo: 'vacantes'})" style="padding:10px 10px 10px 10px;"> Vacantes</a></li>
+                                <li><a href="/comofuncionahead" style="padding:10px 10px 10px 10px;"> Cómo Funciona</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href ui-sref="quienessomos({scrollTo: ''})" class="dropdown-toggle" data-toggle="dropdown" role="button" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false"><span class="negrita">Quiénes<br />somos</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href ui-sref="quienessomos({scrollTo: 'manifiesto'})" style="padding:10px 10px 10px 10px;"> Manifiesto Matteria</a></li>
+                                <li><a href ui-sref="quienessomos({scrollTo: 'direfencia'})" style="padding:10px 10px 10px 10px;"> Nuestra Diferencia</a></li>
+                                <li><a href ui-sref="quienessomos({scrollTo: 'valores'})" style="padding:10px 10px 10px 10px;"> Nuestro ADN</a></li>
+                                <li><a href ui-sref="quienessomos({scrollTo: 'equipo'})" style="padding:10px 10px 10px 10px;"> Equipo</a></li>
+                                <li><a href ui-sref="quienessomos({scrollTo: 'contacto'})" style="padding:10px 10px 10px 10px;"> Contáctanos</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="/blog"><span class="negrita">Noticias y<br />Contenido<br /></span></a></li>
+                        <li class="dropdown hidden-md hidden-sm" permission permission-only="'ANONIMO'">
+                            <a style="max-height:110px" href ui-sref="ingresa({user: 'ambos'})"><button class="btn btn-lg btn-primary btn-ingresa">Ingresa</button></a>
+                        </li>
+                        <li class="dropdown hidden-lg hidden-sx" permission permission-only="'ANONIMO'">
+                            <a href ui-sref="ingresa({user: 'ambos'})"><button class="btn btn-sm btn-primary btn-ingresa"><i class="fa fa-sign-in" aria-hidden="true"></i></button></a>
+                        </li>
+                        <li class="dropdown hidden-md hidden-sm" permission permission-only="'ANONIMO'">
+                            <a style="max-height:110px" href ui-sref="registro({user: 'ambos'})"><button class="btn btn-lg btn-primary btn-registrate ">Registrate</button></a>
+                        </li>
+                        <li class="dropdown hidden-lg hidden-sx" permission permission-only="'ANONIMO'">
+                            <a href ui-sref="registro({user: 'ambos'})"><button class="btn btn-sm btn-primary btn-registrate "><i class="fa fa-user-o" aria-hidden="true"></i></button></a>
+                        </li>
+                        <li class="dropdown" permission permission-except="['ANONIMO']" ng-cloak>
+                            <a style="padding-bottom:31px" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" role="button" aria-expanded="false">
+                                <img class="img-circle" width="50" height="50" src="{{API_PATH_MEDIA}}{{avatar}}" ng-if="avatar != 'null'" />
+                                <img class="img-circle-perfil" src="http://placehold.it/50x50" ng-if="avatar == 'null'" />
+                                <span class="negrita ">
+                                    {{nombre | limitTo:15}}
+                                </span>
+                                <span ng-if="nombre.length > 15">...</span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li permission permission-only="'POSTULANTE'"><a href="/perfilpostulante" style="padding:10px 10px 10px 10px;"> Mi perfil</a></li>
+                                <li permission permission-only="'ORGANIZACION'"><a href="/perfilorganizacion" style="padding:10px 10px 10px 10px;"> Mi perfil</a></li>
+                                <li permission permission-only="'POSTULANTE'"><a href="/mispostulaciones" style="padding:10px 10px 10px 10px;"> Mis postulaciones</a></li>
+                                <li permission permission-only="'ORGANIZACION'"><a href="/misvacantes" style="padding:10px 10px 10px 10px;"> Mis vacantes</a></li>
+                                <li permission permission-only="'POSTULANTE'"><a href="/configuracion" style="padding:10px 10px 10px 10px;"> Configuración</a></li>
+                                <li permission permission-only="'ORGANIZACION'"><a href="/configuracionorganizacion" style="padding:10px 10px 10px 10px;"> Configuración</a></li>
+                                <li><a style="padding:10px 10px 10px 10px; cursor:pointer" ng-click="salir();"> Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav hidden-lg hidden-md hidden-sm text-left">
+                        <li class="dropdown" permission permission-except="['ANONIMO']" ng-cloak>
+                            <a class="dropdown-toggle" style="padding:10px 10px 10px 20px" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <img class="img-circle img-responsive" width="50" height="50" src="{{API_PATH_MEDIA}}{{avatar}}" ng-if="avatar != 'null'" />
+                                <img class="img-circle-perfil img-responsive" src="http://placehold.it/50x50" ng-if="avatar == 'null'" />
+                                <span class="negrita">
+                                    {{nombre | limitTo:15}}
+                                </span>
+                                <span ng-if="nombre.length > 15">...</span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li permission permission-only="'POSTULANTE'"><a data-toggle="collapse" data-target=".navbar-collapse" href="/perfilpostulante" style="padding:10px 10px 10px 30px;"> Mi perfil</a></li>
+                                <li permission permission-only="'ORGANIZACION'"><a data-toggle="collapse" data-target=".navbar-collapse" href="/perfilorganizacion" style="padding:10px 10px 10px 30px;"> Mi perfil</a></li>
+                                <li permission permission-only="'POSTULANTE'"><a data-toggle="collapse" data-target=".navbar-collapse" href="/mispostulaciones" style="padding:10px 10px 10px 30px;"> Mis postulaciones</a></li>
+                                <li permission permission-only="'ORGANIZACION'"><a data-toggle="collapse" data-target=".navbar-collapse" href="/misvacantes" style="padding:10px 10px 10px 30px;"> Mis vacantes</a></li>
+                                <li permission permission-only="'POSTULANTE'"><a data-toggle="collapse" data-target=".navbar-collapse" href="/configuracion" style="padding:10px 10px 10px 30px;"> Configuración</a></li>
+                                <li permission permission-only="'ORGANIZACION'"><a data-toggle="collapse" data-target=".navbar-collapse" href="/configuracionorganizacion" style="padding:10px 10px 10px 30px;"> Configuración</a></li>
+                                <li><a style="padding:10px 10px 10px 30px;" ng-click="salir();"> Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" style="padding:10px 10px 10px 20px" data-toggle="dropdown" role="button" aria-expanded="false"><span class="negrita">Para organizaciones</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="ingresa({user: 'organizacion'})" style="padding:10px 10px 10px 30px;"> Ingreso</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="registro({user: 'organizacion'})" style="padding:10px 10px 10px 30px;"> Registro</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="organizaciones({scrollTo: 'servicios'})" style="padding:10px 10px 10px 30px;"> Nuestros Servicios</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="organizaciones({scrollTo: 'candidatos'})" style="padding:10px 10px 10px 30px;"> Nuestros Candidatos</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="organizaciones({scrollTo: 'vacantes'})" style="padding:10px 10px 10px 30px;"> Vacantes Cubiertas</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href="/clientes" style="padding:10px 10px 10px 30px;"> Nuestros Clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" style="padding:10px 10px 10px 20px" data-toggle="dropdown" role="button" aria-expanded="false"><span class="negrita">Para Postulantes</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a data-toggle="collapse" href ui-sref="ingresa({user: 'postulante'})" style="padding:10px 10px 10px 30px;"> Ingreso</a></li>
+                                <li><a data-toggle="collapse" href ui-sref="registro({user: 'postulante'})" style="padding:10px 10px 10px 30px;"> Registro</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="comofunciona({scrollTo: 'vacantes'})" style="padding:10px 10px 10px 30px;"> Vacantes</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href="/comofuncionahead" style="padding:10px 10px 10px 30px;"> Cómo Funciona</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" style="padding:10px 10px 10px 20px" data-toggle="dropdown" role="button" aria-expanded="false"><span class="negrita">Quiénes somos</span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="quienessomos({scrollTo: 'manifiesto'})" style="padding:10px 10px 10px 30px;"> Manifiesto Matteria</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="quienessomos({scrollTo: 'direfencia'})" style="padding:10px 10px 10px 30px;"> Nuestra Diferencia</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="quienessomos({scrollTo: 'valores'})" style="padding:10px 10px 10px 30px;"> Nuestro ADN</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="quienessomos({scrollTo: 'equipo'})" style="padding:10px 10px 10px 30px;"> Equipo</a></li>
+                                <li><a data-toggle="collapse" data-target=".navbar-collapse" href ui-sref="quienessomos({scrollTo: 'contacto'})" style="padding:10px 10px 10px 30px;"> Contáctanos</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a data-toggle="collapse" data-target=".navbar-collapse" style="padding:10px 10px 10px 20px" href="/blog"><span class="negrita">Noticias y contenido<br /></span></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right hidden-lg hidden-md hidden-sm text-left">
+                        <li class="dropdown" permission permission-only="'ANONIMO'">
+                            <div class="col-xs-12 text-center">
+                                <div class="col-xs-6">
+                                    <a data-toggle="collapse" data-target=".navbar-collapse" style="padding:10px 10px 10px 20px" href ui-sref="ingresa({user: 'ambos'})"><button class="btn btn-sm btn-primary btn-ingresa">Ingresa</button></a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a data-toggle="collapse" data-target=".navbar-collapse" style="padding:10px 10px 10px 20px" href ui-sref="registro({user: 'ambos'})"><button class="btn btn-sm btn-primary btn-registrate ">Registrate</button></a>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+
+
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+            <!--/.container-fluid -->
+        </nav>
+    </div>
+
+    <!--<div ng-http-loader template="views/templateMail/templatedialog.html"></div>-->
+    <div class="container-fluid">
+        <div ui-view></div>
+    </div>
+
+    <footer class="footer" ng-controller="HeaderCtrl">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-xs-12">
+                    <h3>Mapa del Sitio</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <ul>
+                        <li class="cargador" style="list-style-type:none">
+                            <img class="img-responsive post-carga" style="padding-top:0;" src="{{API_PATH_MEDIA}}{{logo[0].logo_footer}}" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <ul>
+                        <li><a href ui-sref="quienessomos({scrollTo: 'manifiesto'})">Quiénes Somos</a></li>
+                        <li><a href ui-sref="organizaciones({scrollTo: 'servicios'})">Qué hacemos</a></li>
+                        <li><a href="/faq">FAQ's</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <ul>
+                        <li><a href ui-sref="organizaciones({scrollTo: 'organizacion'})">Para Organizaciones</a></li>
+                        <li><a href ui-sref="comofunciona({scrollTo: 'comofunciona'})">Para Postulantes</a></li>
+                        <li><a href="/clientes">Clientes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <ul>
+                        <li style="list-style:none;"><h4>Contacto</h4></li>
+                        <li style="list-style:none;">
+                            <div class="col-lg-12 text-left margin-bottom" style="padding-left:0">
+                                <a href="http://bit.ly/matteria_facebook" target="_blank"><img width="30" height="30" src="images/redes sociales/Iconos redes sociales-02.png" /></a>
+                                <a href="http://bit.ly/matteria_twitter" target="_blank"><img width="30" height="30" src="images/redes sociales/Iconos redes sociales-03.png" /></a>
+                                <a href="http://bit.ly/matteria_instagram" target="_blank"><img width="30" height="30" src="images/redes sociales/Iconos redes sociales-04.png" /></a>
+                                <a href="http://bit.ly/matteria_linkedin" target="_blank"><img width="30" height="30" src="images/redes sociales/Iconos redes sociales-05.png" /></a>
+                            </div>
+                        </li>
+                        <li style="list-style:none;"><p><a href="https://www.google.com.mx/maps/place/Cl.+93+%2313-42,+Bogot%C3%A1,+Colombia/@4.6757218,-74.0523573,17z/data=!3m1!4b1!4m5!3m4!1s0x8e3f9a8d83f8f111:0xfe3a7090b5bab11!8m2!3d4.6757218!4d-74.0501686" target="_blank">matteria: Calle 93 #13-42, Oficina 306, Bogotá, Colombia</a></p></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-xs-12">
+                    <p>Copyright © 2017 matteria. Todos los Derechos Reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+        !function (A, n, g, u, l, a, r) {
+            A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
+                (A[l].q = A[l].q || []).push(arguments)
+            }, A[l].l = +new Date, a = n.createElement(g),
+            r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+        }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-XXXXX-X');
+        ga('send', 'pageview');
+    </script>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angularjs-slider/dist/rzslider.js"></script>
+    <script src="bower_components/v-accordion/dist/v-accordion.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-permission/dist/angular-permission.js"></script>
+    <script src="bower_components/angular-permission/dist/angular-permission-ui.js"></script>
+    <script src="bower_components/angular-permission/dist/angular-permission-ng.js"></script>
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="bower_components/ngImgCrop/compile/minified/ng-img-crop.js"></script>
+    <script src="bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="bower_components/angular-http-loader/app/package/js/angular-http-loader.js"></script>
+    <script src="bower_components/rangy/rangy-core.js"></script>
+    <script src="bower_components/rangy/rangy-classapplier.js"></script>
+    <script src="bower_components/rangy/rangy-highlighter.js"></script>
+    <script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+    <script src="bower_components/rangy/rangy-serializer.js"></script>
+    <script src="bower_components/rangy/rangy-textrange.js"></script>
+    <script src="bower_components/textAngular/dist/textAngular.js"></script>
+    <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+    <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/header.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/clientes.js"></script>
+    <script src="scripts/controllers/organizaciones.js"></script>
+    <script src="scripts/controllers/faq.js"></script>
+    <script src="scripts/controllers/quienessomos.js"></script>
+    <script src="scripts/controllers/comofunciona.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/registro.js"></script>
+    <script src="scripts/controllers/perfilpostulante.js"></script>
+    <script src="scripts/controllers/perfilorganizacion.js"></script>
+    <script src="scripts/controllers/vacante.js"></script>
+    <script src="scripts/controllers/perfilpublicoorganizacion.js"></script>
+    <script src="scripts/controllers/publicacionesoferta.js"></script>
+    <script src="scripts/controllers/viewoferta.js"></script>
+    <script src="scripts/controllers/misvacantes.js"></script>
+    <script src="scripts/controllers/perfilcompartidopostulante.js"></script>
+    <script src="scripts/controllers/mispostulaciones.js"></script>
+    <script src="scripts/controllers/verpostulantes.js"></script>
+    <script src="scripts/controllers/configuracionespostulante.js"></script>
+    <script src="scripts/controllers/configuracionesorganizacion.js"></script>
+    <script src="scripts/services/contenido.service.js"></script>
+    <script src="scripts/controllers/perfil.js"></script>
+    <script src="scripts/controllers/perfilo.js"></script>
+    <script src="scripts/services/imagen.service.js"></script>
+    <script src="scripts/filter/vacantes.js"></script>
+    <script src="scripts/paginacion/angular-pagination.js"></script>
+    <script src="scripts/rating/jk-rating-stars.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

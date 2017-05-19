@@ -1,0 +1,28 @@
+﻿<div class="row banner-verde">
+    <div class="container">
+        <div class="col-xs-12 text-center">
+            <h2 class="negrita" style="padding:15px 15px 25px 15px">Noticias y Contenido</h2>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="container">
+    <div class="col-xs-12">
+        <md-input-container class="md-block input-margin">
+            <label>Buscar</label>
+            <input name="busqueda" ng-model="busaqueda">
+        </md-input-container>
+    </div>
+    <div class="col-xs-12 text-left thumbnail" ng-repeat="blogs in blog | filter: busaqueda">
+        <a href="{{blogs.articulo_url}}" target="_blank">
+            <img class="img-responsive col-xs-6 col-lg-3" src="{{API_PATH_MEDIA}}{{blogs.imagen}}" alt="">
+        </a>
+        <h5 class="negrita"><a href="{{blogs.articulo_url}}" target="_blank"><span ng-bind-html="blogs.titulo"></span></a></h5> <p ng-bind-html="blogs.descripcion"></p>
+        <div class="text-right">
+            <small><a href="{{blogs.articulo_url}}" target="_blank">Ver mas...</a></small>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,111 @@
+﻿<div class="container">
+    <div class="col-xs-12 border-perfil margin-bottom">
+        <div class="col-xs-12 col-lg-5">
+            <h2>Configuración</h2>
+        </div>
+        <div class="col-xs-12 col-lg-7 text-right">
+            <h2>Notificaciones <span class="small">(Por correo electrónico)</span></h2>
+        </div>
+        <div class="col-xs-12 border-separacion margin-bottom">
+        </div>
+        <div class="col-xs-12 margin-bottom">
+            <h2>Cambiar contraseña</h2>
+        </div>
+        <div class="col-lg-7 col-xs-12">
+            <form name="formCambiarpsw">
+                <md-input-container class="md-block">
+                    <label>Password actual</label>
+                    <input type="password" required md-no-asterisk name="password" ng-model="configuracion.oldPassword">
+                    <div ng-messages="formCambiarpsw.description.$error">
+                        <div ng-message="required">Campo requerido.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Nuevo password</label>
+                    <input type="password" required md-no-asterisk name="password" ng-model="configuracion.password">
+                    <div ng-messages="formCambiarpsw.description.$error">
+                        <div ng-message="required">Campo requerido.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Repite tu password</label>
+                    <input type="password" md-maxlength="30" required md-no-asterisk name="password1" ng-model="configuracion.password1">
+                    <div ng-messages="formCambiarpsw.password1.$error">
+                        <div ng-message="required">Campo requerido</div>
+                    </div>
+                </md-input-container>
+
+                <div class="text-left">
+                    <button class="btn btn-md btn-primary" ng-click='formCambiarpsw.$valid ? cambiarPasword() : ""'>Cambiar contraseña</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-5 col-xs-12">
+            <div class="col-lg-12">
+                <md-switch ng-model="configuracion.mail_new_candidates" aria-label="Switch 1" ng-change="guardarNotificaciones()">
+                    Notificaciones de nuevos postulantes
+                </md-switch>
+                <md-switch ng-model="configuracion.mail_openings_ending" aria-label="Switch 1" ng-change="guardarNotificaciones()">
+                    Notificaciones de vacantes próximas a vencer
+                </md-switch>
+                <md-switch ng-model="configuracion.mail_site_improvements" aria-label="Switch 1" ng-change="guardarNotificaciones()">
+                    Actualizaciones de mejoras en el sitio web
+                </md-switch>
+                <md-switch ng-model="configuracion.mail_updates_news_matteria" aria-label="Switch 1" ng-change="guardarNotificaciones()">
+                    Noticias y novedades de Matteria
+                </md-switch>
+            </div>
+
+        </div>
+
+        <form name="formCambiarnombre">
+            <div class="col-xs-12 margin-bottom">
+                <h2>Datos de contacto</h2>
+            </div>
+            <div class="col-lg-7 col-xs-12 margin-bottom">                
+                <div class="col-xs-12 border-separacion margin-bottom">
+                </div>
+                <br />
+                <md-input-container class="md-block">
+                    <label>Nombre responsable</label>
+                    <input md-maxlength="30" required md-no-asterisk name="contact_name" ng-model="responsable.contact_name">
+                    <div ng-messages="formCambiarnombre.contact_name.$error">
+                        <div ng-message="required">Campo requerido</div>
+                    </div>
+                </md-input-container>
+                
+                <md-input-container class="md-block">
+                    <label>Teléfono</label>
+                    <input md-maxlength="30" required md-no-asterisk name="Nombre" ng-model="responsable.contact_phone_number">
+                    <div ng-messages="formCambiarnombre.contact_phone_number.$error">
+                        <div ng-message="required">Campo requerido</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Celular</label>
+                    <input md-maxlength="30" required md-no-asterisk name="Nombre" ng-model="responsable.contact_cellphone_number">
+                    <div ng-messages="formCambiarnombre.contact_cellphone_number.$error">
+                        <div ng-message="required">Campo requerido</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>E-mail de contacto</label>
+                    <input md-maxlength="30" required md-no-asterisk name="contact_email" ng-model="responsable.contact_email">
+                    <div ng-messages="formCambiarnombre.contact_email.$error">
+                        <div ng-message="required">Campo requerido</div>
+                    </div>
+                </md-input-container>
+                <div class="text-left">
+                    <button class="btn btn-md btn-primary" ng-click='formCambiarnombre.$valid ? cambiarresponsable() : ""'>Guardar datos de contacto</button>
+                </div>
+            </div>
+            <br />
+            <div class="col-lg-12 col-xs-12 margin-bottom">
+                <div class="text-right">
+                    <button class="btn btn-lg btn-primary" ng-click="desactivar($event);">Desactivar cuenta</button>
+                </div>
+            </div>
+        </form>
+       
+    </div>
+</div>

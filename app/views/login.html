@@ -1,0 +1,92 @@
+﻿
+<div class="row banner-verde">
+    <div class="container">
+        <div class="col-xs-12 text-center">
+            <h2 class="negrita" style="padding:15px 15px 25px 15px">Ingreso</h2>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="container margin-bottom">
+    <div class="col-xs-12">
+        <div ng-class="classregistro" ng-show="disableo">
+            <form name="formloginOrganizacion">
+                <div class="col-xs-12 text-center">
+                    <h2 class="negrita">Ingreso Organizaciones</h2>
+                </div>
+                <div class="col-xs-12">
+
+                    <md-input-container class="md-block">
+                        <label>Correo eléctronico</label>
+                        <!--<input type="email" md-maxlength="30" required md-no-asterisk name="email" ng-model="ingresaOrganizacion.email">
+                        <div ng-messages="formloginOrganizacion.email.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 30 caracteres.</div>
+                        </div>-->
+                        <input type="email" minlength="10" maxlength="100" required md-no-asterisk name="email" ng-model="ingresaOrganizacion.email" ng-pattern="/^.+@.+\..+$/">
+                        <div ng-messages="formloginPostulante.email.$error">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                No es un mail valido.
+                            </div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Contraseña</label>
+                        <input type="password" md-maxlength="30" required md-no-asterisk name="contrasena" ng-model="ingresaOrganizacion.contrasena">
+                        <div ng-messages="formloginOrganizacion.contrasena.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 30 caracteres.</div>
+                        </div>
+                    </md-input-container>
+                    <div class="col-xs-12 text-center margin-bottom">
+                        <a href="/recuperarcontrasena">¿Olvidaste tu contraseña? </a>
+                    </div>
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-lg btn-primary btn-registrate" ng-click="entrarOrganizacion($event);">Entrar</button>
+                    </div>
+                </div>
+            </form>           
+            
+        </div>
+        <div ng-class="classregistro" ng-show="disablep">
+            <form name="formloginPostulante">
+                <div class="col-xs-12 text-center">
+                    <h2 class="negrita">Ingreso Postulante</h2>
+                </div>
+                <div class="col-xs-12">
+
+                    <md-input-container class="md-block">
+                        <label>Correo eléctronico</label>                    
+                        <input type="email" minlength="10" maxlength="100" required md-no-asterisk name="Nombre" ng-model="ingresa.email" ng-pattern="/^.+@.+\..+$/">
+                        <div ng-messages="formloginPostulante.Nombre.$error">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                               No es un mail valido.
+                            </div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Contraseña</label>
+                        <input type="password" md-maxlength="30" required md-no-asterisk name="contrasena" ng-model="ingresa.contrasena">
+                        <div ng-messages="formloginPostulante.contrasena.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 30 caracteres.</div>
+                        </div>
+                    </md-input-container>
+                    <div class="col-xs-12 text-center margin-bottom">
+                        <a href="/recuperarcontrasena">¿Olvidaste tu contraseña? </a>
+                    </div>
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-lg btn-primary btn-registrate" ng-click="entrarPostulante($event);">Entrar</button>
+                    </div>
+                </div>
+
+            </form>
+            
+        </div>
+
+    </div>
+</div>
+

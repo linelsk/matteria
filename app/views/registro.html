@@ -1,0 +1,257 @@
+﻿<script>
+ $(document).ready(function(){
+    $(window).scrollTop(0);
+});
+</script>
+
+<div class="row banner-verde">
+    <div class="container">
+        <div class="col-xs-12 text-center">
+            <h2 class="negrita" style="padding:15px 15px 25px 15px">Registro</h2>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="container">
+    <div class="col-xs-12 text-center">
+        <div ng-class="classregistro" ng-show="disableo">
+            <form name="Organizacionfrom">
+                <div class="col-xs-12 text-center">
+                    <h2 class="negrita">Registro Organizaciones</h2>
+                </div>
+                <div class="col-xs-12">
+
+                    <md-input-container class="md-block">
+                        <label>Nombre de la organización <span style="color:dodgerblue">*</span></label>
+                        <input md-maxlength="30" required md-no-asterisk name="Nombre" ng-model="Registroorganizacion.nombre">
+                        <div ng-messages="Organizacionfrom.Nombre.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 30 caracteres.</div>
+                        </div>
+                    </md-input-container>
+
+                    <!--<md-input-container class="md-block">
+                        <label>Número/Registro Tributario de la organización <span style="color:dodgerblue">*</span></label>
+                        <input md-maxlength="30" required md-no-asterisk name="notributario" ng-model="Registroorganizacion.notributario">
+                        <div ng-messages="Organizacionfrom.notributario.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 30 caracteres.</div>
+                        </div>
+                    </md-input-container>-->
+
+                    <md-input-container class="md-block">
+                        <label>Nombre de la persona responsable <span style="color:dodgerblue">*</span></label>
+                        <input md-maxlength="30" required md-no-asterisk name="responsable" ng-model="Registroorganizacion.responsable">
+                        <div ng-messages="Organizacionfrom.responsable.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 30 caracteres.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Correo electrónico <span style="color:dodgerblue">*</span></label>
+                        <input type="email" minlength="10" maxlength="100" required md-no-asterisk name="correo" ng-model="Registroorganizacion.correo" ng-pattern="/^.+@.+\..+$/">
+                        <div ng-messages="Organizacionfrom.correo.$error">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                No es un mail valido.
+                            </div>
+                            <div ng-message="required">Campo requerido.</div>
+                        </div>
+
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Contraseña <span style="color:dodgerblue">*</span></label>
+                        <input type="password" md-maxlength="30" required md-no-asterisk name="contrasena" ng-model="Registroorganizacion.contrasena">
+                        <small style="color:red">*Nota: la contraseña debe contener por lo menos 8 caracteres alfanuméricos (al menos una letra y un número)</small>
+                        <div ng-messages="Organizacionfrom.contrasena.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">La Contraseña no puede ser mayor a 30 caracteres.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block md-input-has-value">
+                        <!--<md-select ng-model="Registroorganizacion.comoenteraste" aria-label="como">
+                            <md-option selected ng-value="0"><em>¿Cómo te enteraste de nosotros?</em></md-option>
+                            <md-option value="Recomendación">Recomendación</md-option>
+                            <md-option value="Redes Sociales">Redes Sociales</md-option>
+                            <md-option value="Buscador Web">Buscador Web</md-option>
+                            <md-option value="Email">Email</md-option>
+                            <md-option value="Evento">Evento</md-option>
+                            <md-option value="Otros Medios">Otros Medios</md-option>
+                        </md-select>-->
+                        <md-select ng-model="Registroorganizacion.comoenteraste" aria-label="como">
+                            <md-option selected ng-value="0"><em>¿Cómo te enteraste de nosotros?</em></md-option>
+                            <md-option ng-repeat="como in comoteenteraste" ng-value="como.id">
+                                {{como.name}}
+                            </md-option>
+                        </md-select>
+
+                    </md-input-container>
+                    <div class="margin-bottom"></div>
+                    <md-input-container class="md-block">
+                        <label>Teléfono Fijo <span style="color:dodgerblue">*</span></label>
+                        <input md-maxlength="30" required md-no-asterisk name="telefono" ng-model="Registroorganizacion.telefono">
+                        <div ng-messages="Organizacionfrom.telefono.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 30 caracteres.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Teléfono Móvil <span style="color:dodgerblue">*</span></label>
+                        <input md-maxlength="30" required md-no-asterisk name="telefonomovil" ng-model="Registroorganizacion.telefonomovil">
+                        <div ng-messages="Organizacionfrom.telefonomovil.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 30 caracteres.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <md-select ng-model="Registroorganizacion.servicioorganizacion" aria-label="como">
+                            <md-option selected ng-value="0"><em>¿Qué servicio te interesa?</em></md-option>
+                            <md-option ng-repeat="organizacion in serviciosorganizacion" ng-value="organizacion.id">
+                                {{organizacion.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div class="margin-bottom"></div>
+                    <md-input-container class="md-block">
+                        <label>Preguntas o Comentarios</label>
+                        <input md-maxlength="30" ng-model="Registroorganizacion.otros">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <p>NOTA: Una vez completado tu registro, este será evaluado por el equipo de matteria</p>
+                    </md-input-container>
+                </div>
+                <div class="col-xs-12 text-center margin-bottom">
+                    <md-input-container class="md-block">
+                        <md-checkbox name="tos" ng-model="Registroorganizacion.acepto" required>
+                            <a href="/politicasdeprivacidad" target="_blank">Acepto políticas de privacidad.</a>
+                        </md-checkbox>
+                        <div ng-messages="Organizacionfrom.tos.$error" multiple md-auto-hide="false">
+                            <div ng-message="required">
+                                Debes aceptar los términos y condiciones.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <br />
+
+                    <button class="btn btn-lg btn-primary btn-registrate" ng-click='Organizacionfrom.$valid ? RegistroOrganizacion() : ""'>Registrar</button>
+                </div>
+            </form>
+
+        </div>
+        <div ng-class="classregistro" ng-show="disablep">
+            <form name="projectForm">
+                <div class="col-xs-12 text-center">
+                    <h2 class="negrita">Registro Postulantes</h2>
+                </div>
+                <div class="col-xs-12">
+
+                    <md-input-container class="md-block">
+                        <label>Nombre <span style="color:dodgerblue">*</span></label>
+                        <input md-maxlength="30" required md-no-asterisk name="Nombre" ng-model="RegistroPostulante.nombre">
+                        <div ng-messages="projectForm.Nombre.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">El nombre no puede ser mayor a 30 caracteres.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Apellidos <span style="color:dodgerblue">*</span></label>
+                        <input md-maxlength="100" required md-no-asterisk name="apellidos" ng-model="RegistroPostulante.apellidos">
+                        <div ng-messages="projectForm.apellidos.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">El nombre no puede ser mayor a 100 caracteres.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Correo electrónico <span style="color:dodgerblue">*</span></label>
+                        <input type="email" minlength="10" maxlength="100" required md-no-asterisk name="correo" ng-model="RegistroPostulante.correo" ng-pattern="/^.+@.+\..+$/">
+                        <div ng-messages="projectForm.correo.$error">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                No es un mail valido.
+                            </div>
+                            <div ng-message="required">Campo requerido.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Contraseña <span style="color:dodgerblue">*</span></label>
+                        <input type="password" md-maxlength="30" required md-no-asterisk name="contrasena" ng-model="RegistroPostulante.contrasena">
+                        <small style="color:red">*Nota: la contraseña debe contener por lo menos 8 caracteres alfanuméricos (al menos una letra y un número)</small>
+                        <div ng-messages="projectForm.contrasena.$error">
+                            <div ng-message="required">Campo requerido.</div>
+                            <div ng-message="md-maxlength">La Contraseña no puede ser mayor a 30 caracteres.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label> ¿Cuál es el principal cambio positivo que quisieras generar en la sociedad?</label>
+                        <input type="text" md-maxlength="30" required md-no-asterisk name="answer_1" ng-model="RegistroPostulante.answer_1">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <!--<md-select ng-model="RegistroPostulante.comoenteraste" aria-label="como">
+                            <md-option selected ng-value="0"><em>¿Cómo te enteraste de nosotros?</em></md-option>
+                            <md-option value="Recomendación">Recomendación</md-option>
+                            <md-option value="Redes Sociales">Redes Sociales</md-option>
+                            <md-option value="Buscador Web">Buscador Web</md-option>
+                            <md-option value="Email">Email</md-option>
+                            <md-option value="Evento">Evento</md-option>
+                            <md-option value="Otros Medios">Otros Medios</md-option>
+                        </md-select>-->
+                        <md-select ng-model="RegistroPostulante.comoenteraste" aria-label="como">
+                            <md-option selected ng-value="0"><em>¿Cómo te enteraste de nosotros?</em></md-option>
+                            <md-option ng-repeat="como in comoteenteraste" ng-value="como.id">
+                                {{como.name}}
+                            </md-option>
+                        </md-select>
+
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>¿En qué tipo de organización quisieras involucrarte?</label>
+                        <br />
+                        <br />
+                        <div flex="60">
+                            <md-checkbox ng-repeat="organizacion in tipoorganizacion" ng-checked="exists(organizacion.id, selected)" ng-click="toggle(organizacion.id, selected)">
+                                {{ organizacion.name }}
+                            </md-checkbox>
+                        </div>
+                        <!--<md-select ng-model="RegistroPostulante.tipoorganizacion" aria-label="como">
+                            <md-option selected ng-value="0"><em>¿En qué tipo de organización quisieras involucrarte?</em></md-option>
+                            <md-option ng-repeat="organizacion in tipoorganizacion" ng-value="organizacion.name">
+                                {{organizacion.name}}
+                            </md-option>
+                        </md-select>-->
+                    </md-input-container>
+
+                    <div class="margin-bottom"></div>
+                    <md-input-container class="md-block">
+                        <label>¿Qué cargo o área de gestión te motiva más en una organización?</label>
+                        <input md-maxlength="30" name="area" ng-model="RegistroPostulante.tipoarea">
+                    </md-input-container>
+
+                </div>
+                <div class="col-xs-12 text-center margin-bottom">
+                    <md-input-container class="md-block">
+                        <md-checkbox name="tos" ng-model="RegistroPostulante.acepto" required>
+                            <a href="/politicasdeprivacidad" target="_blank">Acepto políticas de privacidad.</a>
+                        </md-checkbox>
+                        <div ng-messages="projectForm.tos.$error" multiple md-auto-hide="false">
+                            <div ng-message="required">
+                                Debes aceptar los términos y condiciones.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <br />
+
+                    <button class="btn btn-lg btn-primary btn-registrate" ng-click='projectForm.$valid ? RegistroPostulantes() : ""'>Registrar</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

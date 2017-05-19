@@ -1,0 +1,74 @@
+﻿<div id="slider" class="row margin-bottom text-center">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+        <div class="carousel-inner" role="listbox" ng-repeat="sliders in slider">
+
+            <div class="item active">
+                <img class="img-responsive" src="{{API_PATH_MEDIA}}{{sliders.imagen}}" />
+                <div class="carousel-caption">
+                    <span class="negrita hidden-xs">{{sliders.mensaje_imagen}}</span>
+                </div>
+                <div class="carousel-caption-boton">
+                    <a href="/quienessomos/contacto#contacto" class="btn btn-lg btn-primary btn-banner">{{sliders.mensaje_boton}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div id="servicios" class="col-xs-12 container text-center margin-bottom">
+        <h2><span class="negrita">¿ Qué hacemos ?</span></h2>
+        <br />
+    </div>
+    <div class="col-xs-12 margin-bottom" style="padding-left:0; padding-right:0">
+
+        <v-accordion id="accordionA" class="vAccordion--default" control="accordionA" onexpand="expandCallback(index, id)" oncollapse="collapseCallback(index, id)">
+            <v-pane id="pane-{{hacemos.texto}}" ng-repeat="hacemos in hacemoss" style="background-color:{{hacemos.color}}; color:#fff">
+                <v-pane-header id="pane-{{hacemos.texto}}-header" aria-controls="pane-{{hacemos.texto}}-content" class="container visible-lg visible-md">
+                    <span class="negrita"><img class="img-responsive" width="100" height="100" src="{{API_PATH_MEDIA}}{{hacemos.imagen}}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:large">{{hacemos.texto}}</span>
+                </v-pane-header>
+
+                <v-pane-header id="pane-{{hacemos.texto}}-header" aria-controls="pane-{{hacemos.texto}}-content" class="container hidden-lg hidden-md text-center">
+                    <span class="negrita"><img class="img-responsive" width="80" height="80" src="{{API_PATH_MEDIA}}{{hacemos.imagen}}" /></span><br /><span style="font-size:large;">{{hacemos.texto}}</span>
+                </v-pane-header>
+
+                <v-pane-content id="pane-{{hacemos.texto}}-content" aria-labelledby="pane-{{hacemos.texto}}-header">
+                    <div class="container text-left">
+                        <br />
+                        <h4 ng-show="ver"><span ng-bind-html="hacemos.descripcion"></span></h4>
+                        <br />
+                    </div>
+                </v-pane-content>
+            </v-pane>
+        </v-accordion>
+    </div>
+    <div id="candidatos" class="col-xs-12">
+        <br />
+        <div class="container">
+            <img class="img-responsive" src="{{API_PATH_MEDIA}}{{slider[0].segunda_imagen}}" alt="">
+        </div>        
+    </div>
+</div>
+
+<div id="vacantes" class="row col-xs-12">
+    <div class="container">
+        <div class="col-xs-12 text-center">
+            <h2><span class="negrita">Últimos cargos seleccionados</span></h2>
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-lg-2" ng-repeat="vacante in utimasvacantes">
+                    <div style="width:100%; height:250px;">
+                        <a href="{{vacante.website_url}}"></a>
+                        <img class="img-circle" width="150" height="150" src="{{API_PATH_MEDIA}}{{vacante.imagen}}">
+                        <h4 ng-bind-html="vacante.empresa"></h4>
+                        <p ng-bind-html="vacante.vacante"> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
