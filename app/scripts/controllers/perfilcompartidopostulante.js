@@ -26,9 +26,9 @@ angular.module('tcsGruntApp')
 
       //candidato
       function candidato() {
-          contenidoFactory.ServicePerfil('candidates/' + $stateParams.id + '/', 'GET', '{}').then(function (data) {
+          contenidoFactory.ServiceContenido('candidates/' + $stateParams.id + '/', 'GET', '{}').then(function (data) {
               console.log(data);
-              $scope.user = data;
+              $scope.user = data.data;
 
               $scope.user.birthdays = new Date(data.birthday);
               $scope.slider = {

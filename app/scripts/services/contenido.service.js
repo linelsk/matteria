@@ -93,6 +93,7 @@ angular.module('tcsGruntApp')
               }
               return null;
           },
+
           mensaje: function (ev, contenido) {             
 
               $mdDialog.show(

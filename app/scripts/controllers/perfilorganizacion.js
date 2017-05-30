@@ -8,7 +8,7 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('PerfilOrganizacionesCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$stateParams', '$window', 'Images', '$mdToast', function ($scope, API_PATH_MEDIA, contenidoFactory, $stateParams, $window, Images, $mdToast) {
+  .controller('PerfilOrganizacionesCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$stateParams', '$window', 'Images', '$mdToast', '$templateCache', '$mdDialog', function ($scope, API_PATH_MEDIA, contenidoFactory, $stateParams, $window, Images, $mdToast, $templateCache, $mdDialog) {
 
       $scope.datosgenerales = [{}];
       $scope.API_PATH_MEDIA = API_PATH_MEDIA;
@@ -19,15 +19,19 @@ angular.module('tcsGruntApp')
       $scope.myCroppedImage = '';
       $scope.crop = false;
       $scope.IsCiudad = true;
+      $scope.IsCiudadfactura = true;
       $scope.currentLocation = window.location.host;
-
+      $scope.company = [{}];
+      $scope.ph = false;
+      //console.log($scope.$parent.avatar);
       compania();
       function compania() {
           contenidoFactory.ServicePerfil('companies/' + $window.localStorage.id_company + '/', 'GET', '{}').then(function (data) {
               $scope.company = data;
-              console.log($scope.company);
-              for (var i = 0; i < $scope.company.services.length; i++)
-              {
+              console.log(data);
+              $scope.selectEstadosFactura($scope.company.billing_country);
+              if ($scope.company.custom_url == "" || $scope.company.custom_url == null || $scope.company.custom_url == undefined) { $scope.ph = false; console.log("1"); } else { $scope.ph = true; console.log("2"); }
+              for (var i = 0; i < $scope.company.services.length; i++) {
                   $scope.servicess.push($scope.company.services[i].id);
               }
               //console.log($scope.servicess);
@@ -86,13 +90,26 @@ angular.module('tcsGruntApp')
 
       //Paises
       contenidoFactory.ServiceContenido('catalogs/countries/?format=json', 'GET', '{}').then(function (data) {
+
           $scope.paises = data.data;
+          console.log(paisId);
+          //contenidoFactory.ServiceContenido('catalogs/countries/' + paisId + '/states/?format=json', 'GET', '{}').then(function (data) {
+          //    //console.log(data.data);
+          //    $scope.estados = data.data;
 
-          contenidoFactory.ServiceContenido('catalogs/countries/' + paisId + '/states/?format=json', 'GET', '{}').then(function (data) {
-              //console.log(data.data);
-              $scope.estados = data.data;
+          //});
 
-          });
+      });
+
+      //Paises Factura
+      contenidoFactory.ServiceContenido('catalogs/countries/?format=json', 'GET', '{}').then(function (data) {
+          $scope.paisesfactura = data.data;
+
+          //contenidoFactory.ServiceContenido('catalogs/countries/' + paisId + '/states/?format=json', 'GET', '{}').then(function (data) {
+          //    //console.log(data.data);
+          //    $scope.estadosfactura = data.data;
+
+          //});
 
       });
 
@@ -103,9 +120,8 @@ angular.module('tcsGruntApp')
       });
 
       $scope.updatecompany = function (ev) {
-          //console.log(ev);
-          if ($scope.userAvatar != undefined)
-          {
+          $templateCache.removeAll();
+          if ($scope.userAvatar != undefined) {
               contenidoFactory.ServicePerfil('companies/edit/logo/', 'PUT', {
                   "image": $scope.myCroppedImage.split(',')[1],
                   "extension": $scope.tipoimg
@@ -113,6 +129,16 @@ angular.module('tcsGruntApp')
               }).then(function (data) {
                   console.log(data);
 
+                  contenidoFactory.ServicePerfil('companies/' + $window.localStorage.id_company + '/', 'GET', '{}').then(function (data) {
+                      //$scope.company = data;
+                      //console.log($scope.company);
+                      //for (var i = 0; i < $scope.company.services.length; i++) {
+                      //    $scope.servicess.push($scope.company.services[i].id);
+                      //}
+                      console.log(data.logo);
+                      $window.localStorage.avatar = data.logo;
+                      //console.log($scope.servicess);
+                  });
               });
           }
           console.log($scope.company.city);
@@ -145,19 +171,43 @@ angular.module('tcsGruntApp')
               "social_facebook": $scope.company.social_facebook,
               "social_twitter": $scope.company.social_twitter,
               "social_linkedin": $scope.company.social_linkedin,
+              "social_instagram": $scope.company.social_instagram,
               //"show_profile_social_info": $scope.company.show_profile_social_info,
               "description": $scope.company.description,
               "our_impactinfo": $scope.company.our_impactinfo,
               "billing_name": $scope.company.billing_name,
               "billing_number": $scope.company.billing_number,
               "billing_address": $scope.company.billing_address,
-              "billing_country": $scope.company.billingpais,
+              "billing_country": $scope.company.billing_country,
               "billing_city": $scope.company.billing_city,
               "billing_phone_number": $scope.company.billing_phone_number,
               "custom_url": $scope.company.custom_url
           }).then(function (data) {
               if (data.name != undefined) {
-                  contenidoFactory.mensaje(ev, "Tus datos se han actualizado correctamente");
+                  //contenidoFactory.mensaje(ev, "Tus datos se han actualizado correctamente");
+
+                  var confirm = $mdDialog.confirm(
+                  {
+                      targetEvent: ev,
+                      template: '<md-dialog md-theme="{{ dialog.theme || dialog.defaultTheme }}" aria-label="{{ dialog.ariaLabel }}" ng-class="dialog.css">' +
+                                '<md-dialog-content class="md-dialog-content" role="document" tabIndex="-1">' +
+                                '<div class="md-dialog-content-body"><h4 class="negrita">Tus datos se han actualizado correctamente</h4></div>' +
+                                '</md-dialog-content>' +
+                                '<md-dialog-actions>' +
+                                '<md-button ng-click="dialog.hide()" class="md-primary md-confirm-button">Aceptar</md-button>' +
+                                '</md-dialog-actions>' +
+                                '</md-dialog>'
+                  });
+                  //.title('Borrar Experiencia Laboral?')
+                  //.textContent('Estas seguro que deseas borrar este item.')
+                  //.ariaLabel('')
+                  //.targetEvent(ev)
+                  //.cancel('No')
+                  //.ok('Si');                
+                  ////confirm);
+                  $mdDialog.show(confirm).then(function () {
+                      location.reload();
+                  });
               }
               //$mdToast.show($mdToast.simple().content("Tus datos se han actualizado correctamente").parent($("#toast-container")).hideDelay(6000).theme('error-toast'));
           });
@@ -202,8 +252,28 @@ angular.module('tcsGruntApp')
           });
       }
 
-      $scope.selectEstadosss = function () {
-          console.log("OKkl");
+      $scope.selectEstadosFactura = function (obj) {
+          console.log(obj);
+          $scope.estadosfactura = [{}];
+          //$scope.company.city = "";
+          contenidoFactory.ServiceContenido('catalogs/countries/' + obj + '/states/?format=json', 'GET', '{}').then(function (data) {
+              //console.log(data.data);
+              $scope.estadosfactura = data.data;
+
+              if ($scope.estadosfactura == "") {
+                  $scope.IsCiudadfactura = false;
+                  //$scope.user.city = "";
+                  //if ($scope.user.city != "") {
+                  //    $scope.user.city = $scope.user.city;
+                  //}
+                  //else {
+
+                  //}
+              }
+              else {
+                  $scope.IsCiudadfactura = true;
+              }
+          });
       }
 
   }]);

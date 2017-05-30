@@ -16,9 +16,9 @@ angular.module('tcsGruntApp')
 
       compania();
       function compania() {
-          contenidoFactory.ServicePerfil('companies/' + +$stateParams.id + '/', 'GET', '{}').then(function (data) {
-              $scope.company = data;
-              console.log($scope.company.company_type);
+          contenidoFactory.ServiceContenido('companies/' + +$stateParams.id + '/', 'GET', '{}').then(function (data) {
+              $scope.company = data.data;
+              console.log($scope.company);
           });
       }
 

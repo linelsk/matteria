@@ -51,14 +51,15 @@ angular.module('tcsGruntApp')
 
           contenidoFactory.login($scope.ingresaOrganizacion.email, $scope.ingresaOrganizacion.contrasena, 'companies/login/').then(function (data) {
               console.log(data);
-              if (data.response == "Sesión exitosa") {
-                  location.href = "/";
+              if (data.response == "Sesión exitosa") {                  
                   $window.localStorage.role = "ORGANIZACION";
                   $window.localStorage.token = data.token;
                   $window.localStorage.avatar = data.logo;
                   $window.localStorage.nombre = data.name;
                   $window.localStorage.id_user = data.id_user;
                   $window.localStorage.id_company = data.id_company;
+
+                  location.href = "/";
               }
               else {
                   //$mdToast.show($mdToast.simple().content(data.response).parent($("#toast-container")).hideDelay(6000).theme('error-toast'));

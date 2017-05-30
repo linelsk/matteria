@@ -30,6 +30,7 @@ angular
   ])
   .constant('API_PATH', 'http://138.197.87.134:8002/api/')
   .constant('API_PATH_MEDIA', 'http://138.197.87.134:8002')
+
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $qProvider, $httpProvider)
   {
       //$httpProvider.defaults.headers.common = {};
@@ -63,7 +64,7 @@ angular
         .state('perfilorganizacion', {
             url: '/perfilorganizacion',
             templateUrl: 'views/perfilorganizacion.html',
-            controller: 'PerfilOrganizacionesCtrl',
+            
             data: {
                 permissions: {
                     only: ['ORGANIZACION'],

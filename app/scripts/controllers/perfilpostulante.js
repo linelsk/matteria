@@ -8,7 +8,7 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('PerfilPostulanteCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', 'focus', '$stateParams', '$window', '$mdDialog', 'Images', '$mdToast', function ($scope, API_PATH_MEDIA, contenidoFactory, focus, $stateParams, $window, $mdDialog, Images, $mdToast) {
+  .controller('PerfilPostulanteCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', 'focus', '$stateParams', '$window', '$mdDialog', 'Images', '$mdToast', '$templateCache', function ($scope, API_PATH_MEDIA, contenidoFactory, focus, $stateParams, $window, $mdDialog, Images, $mdToast, $templateCache) {
 
       $scope.actual_job = false;
       $scope.actual_volunteer = false;
@@ -36,7 +36,7 @@ angular.module('tcsGruntApp')
       $scope.crop = false;
       $scope.currentLocation = window.location.host;
       $scope.ayudasexo = " ¿Por qué te hacemos esta pregunta? Por que queremos conocer a nuestra comunidad de postulantes, defendiendo los avances a nivel de diversidad y tolerancia que con mucho esfuerzo hemos ido logrando como sociedad. Esto por ningún motivo representa un factor de discriminación postiva o negativa, más allá de si tu perfil se ajusta o no a la vacante requerida.";
-
+      $scope.ph = false;
       candidato();
 
       //Imagen
@@ -98,6 +98,7 @@ angular.module('tcsGruntApp')
       //Experiencia
       $scope.viewexperiencia = function () {
           $scope.experties = {};
+          focus('experties.name');
           $scope.agregarExpericia = true;
           $scope.btnAgregar = true;
           $scope.btnEditar = false;
@@ -153,15 +154,20 @@ angular.module('tcsGruntApp')
 
       $scope.editarExperiencia = function () {
           console.log($scope.experties.city);          
-          $scope.experties.work_to == undefined || $scope.experties.work_to == "" ? $scope.experties.work_to = null : $scope.experties.work_to = $scope.experties.work_to;
-
+          //$scope.experties.work_to == undefined || $scope.experties.work_to == "" ? $scope.experties.work_to = null : $scope.experties.work_to = $scope.experties.work_to;
+          if ($scope.actual_job == true) {
+              $scope.experties.work_to_month = null;
+              $scope.experties.work_to_year = null;
+          }
           contenidoFactory.ServicePerfil('candidates/wse/' + $scope.experties.id + '/edit/', 'PUT', {
               name: $scope.experties.name,
               title: $scope.experties.title,
               country: $scope.experties.country,
-              city: $scope.experties.city,
-              work_from: $scope.experties.work_from,
-              work_to: $scope.experties.work_to,
+              city: $scope.experties.cities,
+              work_from_month: $scope.experties.work_from_month,
+              work_from_year: $scope.experties.work_from_year,
+              work_to_month: $scope.experties.work_to_month,
+              work_to_year: $scope.experties.work_to_year,
               actual_job: $scope.actual_job,
               description: $scope.experties.description,
               positive_impact: $scope.experties.positive_impact,
@@ -177,13 +183,20 @@ angular.module('tcsGruntApp')
       $scope.agregarExpericenia = function () {
           $scope.experties.work_to == undefined || $scope.experties.work_to == "" ? $scope.experties.work_to = null : $scope.experties.work_to = $scope.experties.work_to;
           ////$scope.experties.work_to);
+          if ($scope.actual_job == true) {
+              $scope.experties.work_to_month = null;
+              $scope.experties.work_to_year = null;
+          }
+
           contenidoFactory.ServicePerfil('candidates/wse/create/', 'POST', {
               name: $scope.experties.name,
               title: $scope.experties.title,
               country: $scope.experties.country,
-              city: $scope.experties.city,
-              work_from: $scope.experties.work_from,
-              work_to: $scope.experties.work_to,
+              city: $scope.experties.cities,
+              work_from_month: $scope.experties.work_from_month,
+              work_from_year: $scope.experties.work_from_year,
+              work_to_month: $scope.experties.work_to_month,
+              work_to_year: $scope.experties.work_to_year,
               actual_job: $scope.actual_job,
               description: $scope.experties.description,
               positive_impact: $scope.experties.positive_impact,
@@ -199,6 +212,7 @@ angular.module('tcsGruntApp')
       //Voluntariado
       $scope.viewvoluntariado = function () {
           $scope.volunteering = {};
+          focus('volunteering.name');
           $scope.agregarVoluntariado = true;
           $scope.btnAgregar = true;
           $scope.btnEditar = false;
@@ -210,6 +224,7 @@ angular.module('tcsGruntApp')
 
       $scope.editvoluntariado = function (voluntariado) {
           //voluntariado);
+
           focus('volunteering.name');
           $scope.volunteering = voluntariado;
           $scope.volunteering.volunteer_froms = new Date(voluntariado.volunteer_from);
@@ -252,14 +267,19 @@ angular.module('tcsGruntApp')
       }
 
       $scope.agregarVoluntariados = function () {
-          $scope.volunteering.volunteer_to == undefined || $scope.volunteering.volunteer_to == "" ? $scope.volunteering.volunteer_to = null : $scope.volunteering.volunteer_to = $scope.volunteering.volunteer_to;
-
+          //$scope.volunteering.volunteer_to == undefined || $scope.volunteering.volunteer_to == "" ? $scope.volunteering.volunteer_to = null : $scope.volunteering.volunteer_to = $scope.volunteering.volunteer_to;
+          if ($scope.actual_volunteer == true) {
+              $scope.volunteering.volunteer_to_month = null;
+              $scope.volunteering.volunteer_to_year = null;
+          }
           contenidoFactory.ServicePerfil('candidates/ve/create/', 'POST', {
               "name": $scope.volunteering.name,
               "volunteer_function": $scope.volunteering.volunteer_function,
               "cause": $scope.user.causa,
-              "volunteer_from": $scope.volunteering.volunteer_from,
-              "volunteer_to": $scope.volunteering.volunteer_to,
+              "volunteer_from_month": $scope.volunteering.volunteer_from_month,
+              "volunteer_from_year": $scope.volunteering.volunteer_from_year,
+              "volunteer_to_month": $scope.volunteering.volunteer_to_month,
+              "volunteer_to_year": $scope.volunteering.volunteer_to_year,
               "actual_volunteer": $scope.actual_volunteer,
               "description": $scope.volunteering.volunteer_function,
               "candidate": $window.localStorage.id_candidate
@@ -271,14 +291,19 @@ angular.module('tcsGruntApp')
       }
 
       $scope.editarVoluntariados = function () {
-          $scope.volunteering.volunteer_to == undefined || $scope.volunteering.volunteer_to == "" ? $scope.volunteering.volunteer_to = null : $scope.volunteering.volunteer_to = $scope.volunteering.volunteer_to;
-
+          //$scope.volunteering.volunteer_to == undefined || $scope.volunteering.volunteer_to == "" ? $scope.volunteering.volunteer_to = null : $scope.volunteering.volunteer_to = $scope.volunteering.volunteer_to;
+          if ($scope.actual_volunteer == true) {
+              $scope.volunteering.volunteer_to_month = null;
+              $scope.volunteering.volunteer_to_year = null;
+          }
           contenidoFactory.ServicePerfil('candidates/ve/' + $scope.volunteering.id + '/edit/', 'PUT', {
               "name": $scope.volunteering.name,
               "volunteer_function": $scope.volunteering.volunteer_function,
               "cause": $scope.user.causa,
-              "volunteer_from": $scope.volunteering.volunteer_from,
-              "volunteer_to": $scope.volunteering.volunteer_to,
+              "volunteer_from_month": $scope.volunteering.volunteer_from_month,
+              "volunteer_from_year": $scope.volunteering.volunteer_from_year,
+              "volunteer_to_month": $scope.volunteering.volunteer_to_month,
+              "volunteer_to_year": $scope.volunteering.volunteer_to_year,
               "actual_volunteer": $scope.actual_volunteer,
               "description": $scope.volunteering.description,
               "candidate": $window.localStorage.id_candidate
@@ -292,6 +317,7 @@ angular.module('tcsGruntApp')
       //Educacion
       $scope.vieweducacion = function () {
           $scope.education = {};
+          focus('education.institution');
           $scope.agregarEducacion = true;
           $scope.btnAgregar = true;
           $scope.btnEditar = false;
@@ -344,14 +370,19 @@ angular.module('tcsGruntApp')
       }
 
       $scope.agregarEducations = function () {
-          $scope.education.studied_to == undefined || $scope.education.studied_to == "" ? $scope.education.studied_to = null : $scope.education.studied_to = $scope.education.studied_to;
-
+          //$scope.education.studied_to == undefined || $scope.education.studied_to == "" ? $scope.education.studied_to = null : $scope.education.studied_to = $scope.education.studied_to;
+          if ($scope.actual_student == true) {
+              $scope.education.studied_to_month = null;
+              $scope.education.studied_to_year = null;
+          }
           contenidoFactory.ServicePerfil('candidates/education/create/', 'POST', {
               "institution": $scope.education.institution,
               "discipline": $scope.education.discipline,
               "grade": $scope.education.grade,
-              "studied_from": $scope.education.studied_from,
-              "studied_to": $scope.education.studied_to,
+              "studied_from_month": $scope.education.studied_from_month,
+              "studied_from_year": $scope.education.studied_from_year,
+              "studied_to_month": $scope.education.studied_to_month,
+              "studied_to_year": $scope.education.studied_to_year,
               "actual_student": $scope.actual_student,
               "description": $scope.education.description,
               "group_and_activities": $scope.education.group_and_activities,
@@ -365,13 +396,19 @@ angular.module('tcsGruntApp')
       }
 
       $scope.editarEducationes = function () {
-          $scope.education.studied_to == undefined || $scope.education.studied_to == "" ? $scope.education.studied_to = null : $scope.education.studied_to = $scope.education.studied_to;
+          //$scope.education.studied_to == undefined || $scope.education.studied_to == "" ? $scope.education.studied_to = null : $scope.education.studied_to = $scope.education.studied_to;
+          if ($scope.actual_student == true) {
+              $scope.education.studied_to_month = null;
+              $scope.education.studied_to_year = null;
+          }
           contenidoFactory.ServicePerfil('candidates/education/' + +$scope.education.id + '/edit/', 'PUT', {
               "institution": $scope.education.institution,
               "discipline": $scope.education.discipline,
               "grade": $scope.education.grade,
-              "studied_from": $scope.education.studied_from,
-              "studied_to": $scope.education.studied_to,
+              "studied_from_month": $scope.education.studied_from_month,
+              "studied_from_year": $scope.education.studied_from_year,
+              "studied_to_month": $scope.education.studied_to_month,
+              "studied_to_year": $scope.education.studied_to_year,
               "actual_student": $scope.actual_student,
               "description": $scope.education.description,
               "group_and_activities": $scope.education.group_and_activities,
@@ -553,9 +590,14 @@ angular.module('tcsGruntApp')
                   $scope.selectPais(data.country.id);
               }
               
-              console.log(data);
+              console.log($window.localStorage.avatar);
               $scope.user = data;
-              //$window.localStorage.avatar = data.avatar;
+
+              if ($scope.user.custom_url == "" || $scope.user.custom_url == null || $scope.user.custom_url == undefined) { $scope.ph = false; console.log("1"); } else { $scope.ph = true; console.log("2"); }
+
+
+              $scope.user.avatar = $window.localStorage.avatar;
+              console.log(data);
 
               if (data.salary_min == 0 || data.salary_min == "" | data.salary_min == null) {
                   data.salary_min = 0;
@@ -896,15 +938,24 @@ angular.module('tcsGruntApp')
 
       //Guardar General
       $scope.guardarGeneral = function (ev) {
-
+          $templateCache.removeAll();
           if ($scope.userAvatar != undefined) {
               contenidoFactory.ServicePerfil('candidates/me/avatar/', 'PUT', {
                   "image": $scope.myCroppedImage.split(',')[1],
                   "extension": $scope.tipoimg
 
               }).then(function (data) {
-                  //data);
-
+                  console.log(data);
+                  contenidoFactory.ServicePerfil('companies/' + $window.localStorage.id_company + '/', 'GET', '{}').then(function (data) {
+                      //$scope.company = data;
+                      //console.log($scope.company);
+                      //for (var i = 0; i < $scope.company.services.length; i++) {
+                      //    $scope.servicess.push($scope.company.services[i].id);
+                      //}
+                      console.log(data.avatar);
+                      $window.localStorage.avatar = data.avatar;
+                      //console.log($scope.servicess);
+                  });
               });
           }
 
@@ -949,7 +1000,28 @@ angular.module('tcsGruntApp')
               custom_url: $scope.user.custom_url
           }).then(function (data) {
               //data);
-              contenidoFactory.mensaje(ev, "Tus datos se han actualizado correctamente");
+              var confirm = $mdDialog.confirm(
+                  {
+                      targetEvent: ev,
+                      template: '<md-dialog md-theme="{{ dialog.theme || dialog.defaultTheme }}" aria-label="{{ dialog.ariaLabel }}" ng-class="dialog.css">' +
+                                '<md-dialog-content class="md-dialog-content" role="document" tabIndex="-1">' +
+                                '<div class="md-dialog-content-body"><h4 class="negrita">Tus datos se han actualizado correctamente</h4></div>' +
+                                '</md-dialog-content>' +
+                                '<md-dialog-actions>' +
+                                '<md-button ng-click="dialog.hide()" class="md-primary md-confirm-button">Aceptar</md-button>' +
+                                '</md-dialog-actions>' +
+                                '</md-dialog>'
+                  });
+              //.title('Borrar Experiencia Laboral?')
+              //.textContent('Estas seguro que deseas borrar este item.')
+              //.ariaLabel('')
+              //.targetEvent(ev)
+              //.cancel('No')
+              //.ok('Si');                
+              ////confirm);
+              $mdDialog.show(confirm).then(function () {
+                  location.reload();
+              });
 
           });
       }

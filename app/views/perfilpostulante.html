@@ -95,10 +95,10 @@
                         </md-input-container>
                     </div>
                     <div class="col-xs-12 col-lg-3">
-                  
+
                         <md-input-container class="md-block">
                             <label>País de residencia<span style="color:dodgerblue">*</span></label>
-                            <md-select ng-model="user.pais" required md-no-asterisk name="pais" aria-label="pais" ng-change="selectEstado();" >
+                            <md-select ng-model="user.pais" required md-no-asterisk name="pais" aria-label="pais" ng-change="selectEstado();">
                                 <md-option ng-repeat="pais in paises" ng-value="pais.id" ng-selected="pais.id == user.country.id">
                                     {{pais.name}}
                                 </md-option>
@@ -118,7 +118,7 @@
                                 </md-option>
                             </md-select>
                         </md-input-container>
-                        
+
                         <md-input-container class="md-block" ng-if="!IsCiudad">
                             <label>Cuidad de residencia</label>
                             <input name="city" ng-model="user.city">
@@ -148,17 +148,42 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <div class="col-xs-12 col-lg-3" style="padding-left:0; padding-right:0;">
-                            <h4>{{currentLocation}}/perfil/</h4>
-                        </div>
-                        <div class="col-xs-12 col-lg-9" style="padding-left:0; padding-right:0;">
-
-                            <md-input-container class="md-block" style="top:-15px">
-                                <label>Url Personalizada</label>
-                                <input name="custom_url" ng-model="user.custom_url" ng-change="existeurl()" style="text-transform: lowercase;">
+                        <md-input-container class="md-block" style="padding:0;">
+                            <label>Liga personalizada</label>
+                        </md-input-container>
+                        <span ng-if="!ph">
+                            www.{{currentLocation}}/perfil/
+                            <md-input-container flex-gt-sm="80" style="top:12px; margin: 5px 0">
+                                <!--<label>Liga Personalizada</label>
+                                <input name="custom_url" ng-model="user.custom_url" ng-change="existeurl()" style="text-transform: lowercase;">-->
+                                <input ng-model="user.custom_url" type="text" placeholder="{{user.first_name | lowercase}}.{{user.first_name | lowercase}}">
+                                <md-icon>
+                                    <div class=" tooltip_sitio">
+                                        <i class="fa fa-question-circle" aria-hidden="true" style="color:#337ab7">
+                                            <span class="tooltiptext tooltip-right">
+                                                Tu "liga" personalizada debe contener entre 5 y 30 caracteres. Por favor no utilices espacios, símbolos y caracteres especiales.
+                                            </span>
+                                        </i>
+                                    </div>
+                                </md-icon>
                             </md-input-container>
+                        </span>
 
-                        </div>
+                        <span ng-if="ph">
+                            www.{{currentLocation}}/perfil/
+                            <md-input-container flex-gt-sm="80" style="top:12px; margin: 5px 0">
+                                <input ng-model="user.custom_url" type="text">
+                                <md-icon>
+                                    <div class=" tooltip_sitio">
+                                        <i class="fa fa-question-circle" aria-hidden="true" style="color:#337ab7">
+                                            <span class="tooltiptext tooltip-right">
+                                                Tu "liga" personalizada debe contener entre 5 y 30 caracteres. Por favor no utilices espacios, símbolos y caracteres especiales.
+                                            </span>
+                                        </i>
+                                    </div>
+                                </md-icon>
+                            </md-input-container>
+                        </span>
                     </div>
                 </div>
 
@@ -196,7 +221,7 @@
                     <div class="col-xs-12">
                         <md-input-container class="md-block input-margin">
                             <label>Nombre de la organización</label>
-                            <input required md-no-asterisk name="name" ng-model="experties.name">
+                            <input id="experties.name" required md-no-asterisk name="name" ng-model="experties.name">
                             <div ng-messages="formExperiencia.name.$error">
                                 <div ng-message="required">Campo requerido.</div>
                             </div>
@@ -227,8 +252,7 @@
                     <div class="col-xs-12 col-lg-6">
                         <md-input-container class="md-block" ng-if="IsCiudadEsperiencia">
                             <label>Cuidad</label>
-                            <md-select ng-model="experties.city" required md-no-asterisk name="city" aria-label="city">
-                                <md-option selected><em>Ciudad</em></md-option>
+                            <md-select ng-model="experties.cities" name="experties.cities" aria-label="experties.cities">
                                 <md-option ng-repeat="estado in estadosExperiencia track by $index" ng-value="estado.name" ng-selected="estado.name == experties.city">
                                     {{estado.name}}
                                 </md-option>
@@ -241,27 +265,209 @@
                         </md-input-container>
                     </div>
                     <div class="col-xs-12">
-                        <div class="col-xs-12 col-lg-4">
+                        <md-input-container class="md-block">
+                            <label>Periodo</label>
+                        </md-input-container>
+                    </div>
+                    <div class="col-xs-12" style="padding-bottom:0;">
+                        <div class="col-xs-12 col-lg-4" style="padding-bottom:0;">
                             <md-input-container class="md-block">
-                                <label>Fecha de Inicio</label>
-                                <input type="text" class="datepickers" name="genre" ng-model="experties.work_from">
+                                <label>de</label>
                             </md-input-container>
                         </div>
-                        <div class="col-xs-12 col-lg-4 text-left">
+                        <div class="col-xs-12 col-lg-4 text-left" style="padding-bottom:0;">
                             <md-input-container class="md-block">
-                                <label>Fecha de Fin</label>
-                                <input type="text" class="datepickers" name="genre" ng-model="experties.work_to">
+                                <label>a</label>
                             </md-input-container>
                         </div>
                         <div class="col-xs-12 col-lg-4">
+                           
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding-top:0;">
+                        <div class="col-xs-12 col-lg-4" style="padding-top:0;">
+                            <md-input-container class="md-block" >
+                                <label>Mes</label>
+                                <md-select ng-model="experties.work_from_month" required md-no-asterisk name="work_from_month" aria-label="work_from_month">
+                                    <md-option value="Enero">Enero</md-option>
+                                    <md-option value="Febrero">Febrero</md-option>
+                                    <md-option value="Marzo">Marzo</md-option>
+                                    <md-option value="Abril">Abril</md-option>
+                                    <md-option value="Mayo">Mayo</md-option>
+                                    <md-option value="Junio">Junio</md-option>
+                                    <md-option value="Julio">Julio</md-option>
+                                    <md-option value="Agosto">Agosto</md-option>
+                                    <md-option value="Septiembre">Septiembre</md-option>
+                                    <md-option value="Octubre">Octubre</md-option>
+                                    <md-option value="Noviembre">Noviembre</md-option>
+                                    <md-option value="Diciembre">Diciembre</md-option>
+                                </md-select>
+                            </md-input-container>
+
                             <md-input-container class="md-block">
+                                <label>Año</label>
+                                <md-select ng-model="experties.work_from_year" required md-no-asterisk name="work_from_year" aria-label="work_from_year">
+                                    <md-option value="2017">2017</md-option>
+                                    <md-option value="2016">2016</md-option>
+                                    <md-option value="2015">2015</md-option>
+                                    <md-option value="2014">2014</md-option>
+                                    <md-option value="2013">2013</md-option>
+                                    <md-option value="2012">2012</md-option>
+                                    <md-option value="2011">2011</md-option>
+                                    <md-option value="2010">2010</md-option>
+                                    <md-option value="2009">2009</md-option>
+                                    <md-option value="2008">2008</md-option>
+                                    <md-option value="2007">2007</md-option>
+                                    <md-option value="2006">2006</md-option>
+                                    <md-option value="2005">2005</md-option>
+                                    <md-option value="2004">2004</md-option>
+                                    <md-option value="2003">2003</md-option>
+                                    <md-option value="2002">2002</md-option>
+                                    <md-option value="2001">2001</md-option>
+                                    <md-option value="2000">2000</md-option>
+                                    <md-option value="1999">1999</md-option>
+                                    <md-option value="1998">1998</md-option>
+                                    <md-option value="1997">1997</md-option>
+                                    <md-option value="1996">1996</md-option>
+                                    <md-option value="1995">1995</md-option>
+                                    <md-option value="1994">1994</md-option>
+                                    <md-option value="1993">1993</md-option>
+                                    <md-option value="1992">1992</md-option>
+                                    <md-option value="1991">1991</md-option>
+                                    <md-option value="1990">1990</md-option>
+                                    <md-option value="1989">1989</md-option>
+                                    <md-option value="1988">1988</md-option>
+                                    <md-option value="1987">1987</md-option>
+                                    <md-option value="1986">1986</md-option>
+                                    <md-option value="1985">1985</md-option>
+                                    <md-option value="1984">1984</md-option>
+                                    <md-option value="1983">1983</md-option>
+                                    <md-option value="1982">1982</md-option>
+                                    <md-option value="1981">1981</md-option>
+                                    <md-option value="1980">1980</md-option>
+                                    <md-option value="1979">1979</md-option>
+                                    <md-option value="1978">1978</md-option>
+                                    <md-option value="1977">1977</md-option>
+                                    <md-option value="1976">1976</md-option>
+                                    <md-option value="1975">1975</md-option>
+                                    <md-option value="1974">1974</md-option>
+                                    <md-option value="1973">1973</md-option>
+                                    <md-option value="1972">1972</md-option>
+                                    <md-option value="1971">1971</md-option>
+                                    <md-option value="1970">1970</md-option>
+                                    <md-option value="1969">1969</md-option>
+                                    <md-option value="1968">1968</md-option>
+                                    <md-option value="1967">1967</md-option>
+                                    <md-option value="1966">1966</md-option>
+                                    <md-option value="1965">1965</md-option>
+                                    <md-option value="1964">1964</md-option>
+                                    <md-option value="1963">1963</md-option>
+                                    <md-option value="1962">1962</md-option>
+                                    <md-option value="1961">1961</md-option>
+                                    <md-option value="1960">1960</md-option>
+                                    <md-option value="1959">1959</md-option>
+                                    <md-option value="1958">1958</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="col-xs-12 col-lg-4 text-left" style="padding-top:0;" ng-if="!actual_job">
+                            <md-input-container class="md-block">
+                                <label>Mes</label>
+                                <md-select ng-model="experties.work_to_month" required md-no-asterisk name="work_to_month" aria-label="work_to_month">
+                                    <md-option value="Enero">Enero</md-option>
+                                    <md-option value="Febrero">Febrero</md-option>
+                                    <md-option value="Marzo">Marzo</md-option>
+                                    <md-option value="Abril">Abril</md-option>
+                                    <md-option value="Mayo">Mayo</md-option>
+                                    <md-option value="Junio">Junio</md-option>
+                                    <md-option value="Julio">Julio</md-option>
+                                    <md-option value="Agosto">Agosto</md-option>
+                                    <md-option value="Septiembre">Septiembre</md-option>
+                                    <md-option value="Octubre">Octubre</md-option>
+                                    <md-option value="Noviembre">Noviembre</md-option>
+                                    <md-option value="Diciembre">Diciembre</md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Año</label>
+                                <md-select ng-model="experties.work_to_year" required md-no-asterisk name="work_to_year" aria-label="work_to_year">
+                                    <md-option value="2017">2017</md-option>
+                                    <md-option value="2016">2016</md-option>
+                                    <md-option value="2015">2015</md-option>
+                                    <md-option value="2014">2014</md-option>
+                                    <md-option value="2013">2013</md-option>
+                                    <md-option value="2012">2012</md-option>
+                                    <md-option value="2011">2011</md-option>
+                                    <md-option value="2010">2010</md-option>
+                                    <md-option value="2009">2009</md-option>
+                                    <md-option value="2008">2008</md-option>
+                                    <md-option value="2007">2007</md-option>
+                                    <md-option value="2006">2006</md-option>
+                                    <md-option value="2005">2005</md-option>
+                                    <md-option value="2004">2004</md-option>
+                                    <md-option value="2003">2003</md-option>
+                                    <md-option value="2002">2002</md-option>
+                                    <md-option value="2001">2001</md-option>
+                                    <md-option value="2000">2000</md-option>
+                                    <md-option value="1999">1999</md-option>
+                                    <md-option value="1998">1998</md-option>
+                                    <md-option value="1997">1997</md-option>
+                                    <md-option value="1996">1996</md-option>
+                                    <md-option value="1995">1995</md-option>
+                                    <md-option value="1994">1994</md-option>
+                                    <md-option value="1993">1993</md-option>
+                                    <md-option value="1992">1992</md-option>
+                                    <md-option value="1991">1991</md-option>
+                                    <md-option value="1990">1990</md-option>
+                                    <md-option value="1989">1989</md-option>
+                                    <md-option value="1988">1988</md-option>
+                                    <md-option value="1987">1987</md-option>
+                                    <md-option value="1986">1986</md-option>
+                                    <md-option value="1985">1985</md-option>
+                                    <md-option value="1984">1984</md-option>
+                                    <md-option value="1983">1983</md-option>
+                                    <md-option value="1982">1982</md-option>
+                                    <md-option value="1981">1981</md-option>
+                                    <md-option value="1980">1980</md-option>
+                                    <md-option value="1979">1979</md-option>
+                                    <md-option value="1978">1978</md-option>
+                                    <md-option value="1977">1977</md-option>
+                                    <md-option value="1976">1976</md-option>
+                                    <md-option value="1975">1975</md-option>
+                                    <md-option value="1974">1974</md-option>
+                                    <md-option value="1973">1973</md-option>
+                                    <md-option value="1972">1972</md-option>
+                                    <md-option value="1971">1971</md-option>
+                                    <md-option value="1970">1970</md-option>
+                                    <md-option value="1969">1969</md-option>
+                                    <md-option value="1968">1968</md-option>
+                                    <md-option value="1967">1967</md-option>
+                                    <md-option value="1966">1966</md-option>
+                                    <md-option value="1965">1965</md-option>
+                                    <md-option value="1964">1964</md-option>
+                                    <md-option value="1963">1963</md-option>
+                                    <md-option value="1962">1962</md-option>
+                                    <md-option value="1961">1961</md-option>
+                                    <md-option value="1960">1960</md-option>
+                                    <md-option value="1959">1959</md-option>
+                                    <md-option value="1958">1958</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="col-xs-12 col-lg-4 text-left" ng-if="actual_job">
+                            <h2>Actual</h2> 
+                        </div>
+                        <div class="col-xs-12 col-lg-4" style="padding-top:0;">
+                            <md-input-container class="md-block">
+                                <br />
                                 <md-checkbox ng-model="actual_job" aria-label="Checkbox1">
                                     Trabajo actualmente aquí
                                 </md-checkbox>
                             </md-input-container>
                         </div>
                     </div>
-
+                    <div class="margin-bottom"></div>
                     <div class="col-xs-12">
                         <md-input-container class="md-block input-margin">
                             <label>Descripcion</label>
@@ -292,7 +498,7 @@
                     <h3 class="negrita">{{experiencia.name}}</h3>
                     <h4>{{experiencia.title}}</h4>
                     <h4>{{experiencia.Belfast}}</h4>
-                    <h4><span>{{experiencia.work_from}}</span> - <span ng-if="experiencia.work_to != null || experiencia.work_to != ''">{{experiencia.work_to}}</span><span ng-if="experiencia.actual_job == true">Actual</span></h4>
+                    <h4><span>{{experiencia.work_from_month}} {{experiencia.work_from_year}}</span> - <span ng-if="experiencia.work_from_month != null || experiencia.work_from_month != ''">{{experiencia.work_to_month}} {{experiencia.work_to_year}}</span><span ng-if="experiencia.actual_job == true">Actual</span></h4>
                     <p>{{experiencia.description}}</p>
                     <p>{{experiencia.positive_impact}}</p>
 
@@ -322,17 +528,16 @@
                     <div class="col-xs-12">
                         <md-input-container class="md-block input-margin">
                             <label>Centro de estudios</label>
-                            <input required md-no-asterisk name="institution" ng-model="education.institution" id="education.institution">
+                            <input id="education.institution" required md-no-asterisk name="institution" ng-model="education.institution">
                             <div ng-messages="formEducaion.institution.$error">
                                 <div ng-message="required">Campo requerido.</div>
                             </div>
                         </md-input-container>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-6" style="padding-bottom:0; margin-bottom:0">
                         <md-input-container class="md-block">
                             <label>Nivel academico</label>
-                            <md-select ng-model="education.grade" required md-no-asterisk name="grade" aria-label="grade">
-                                <md-option selected ng-value=""><em>Seleccionar</em></md-option>
+                            <md-select ng-model="education.grade" required md-no-asterisk name="grade" aria-label="grade" style="padding-bottom:0; margin-bottom:0">
                                 <md-option value="Pre-grado: Nivel Técnico Profesional">Pre-grado: Nivel Técnico Profesional</md-option>
                                 <md-option value="Pre-grado: Nivel Tecnológico">Pre-grado: Nivel Tecnológico</md-option>
                                 <md-option value="Pre-grado: Nivel Profesional">Pre-grado: Nivel Profesional</md-option>
@@ -346,8 +551,8 @@
                             </div>
                         </md-input-container>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <md-input-container class="md-block">
+                    <div class="col-xs-12 col-lg-6" style="padding-bottom:0; margin-bottom:0">
+                        <md-input-container class="md-block" style="padding-bottom:0; margin-bottom:0">
                             <label>Disciplina académica </label>
                             <input name="discipline" required md-no-asterisk ng-model="education.discipline">
                             <div ng-messages="formEducaion.discipline.$error">
@@ -355,20 +560,202 @@
                             </div>
                         </md-input-container>
                     </div>
-                    <div class="col-xs-12">
-                        <div class="col-xs-12 col-lg-4" style="padding-left:0">
+
+                    <div class="col-xs-12" style="padding-top:0; margin-top:0">
+                        <md-input-container class="md-block">
+                            <label>Periodo</label>
+                        </md-input-container>
+                    </div>
+                    <div class="col-xs-12" style="padding-bottom:0;">
+                        <div class="col-xs-12 col-lg-4" style="padding-bottom:0;">
                             <md-input-container class="md-block">
-                                <label>Fecha de Inicio</label>
-                                <input type="text" class="datepickers" name="genre" ng-model="education.studied_from">
+                                <label>de</label>
                             </md-input-container>
                         </div>
-                        <div class="col-xs-12 col-lg-4 text-left">
+                        <div class="col-xs-12 col-lg-4 text-left" style="padding-bottom:0;">
                             <md-input-container class="md-block">
-                                <label>Fecha de Fin</label>
-                                <input type="text" class="datepickers" name="genre" ng-model="education.studied_to">
+                                <label>a</label>
                             </md-input-container>
                         </div>
                         <div class="col-xs-12 col-lg-4">
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 margin-bottom" style="padding-top:0;">
+                        <div class="col-xs-12 col-lg-4" style="padding-top:0;">
+                            <md-input-container class="md-block">
+                                <label>Mes</label>
+                                <md-select ng-model="education.studied_from_month" required md-no-asterisk name="studied_from_month" aria-label="studied_from_month">
+                                    <md-option value="Enero">Enero</md-option>
+                                    <md-option value="Febrero">Febrero</md-option>
+                                    <md-option value="Marzo">Marzo</md-option>
+                                    <md-option value="Abril">Abril</md-option>
+                                    <md-option value="Mayo">Mayo</md-option>
+                                    <md-option value="Junio">Junio</md-option>
+                                    <md-option value="Julio">Julio</md-option>
+                                    <md-option value="Agosto">Agosto</md-option>
+                                    <md-option value="Septiembre">Septiembre</md-option>
+                                    <md-option value="Octubre">Octubre</md-option>
+                                    <md-option value="Noviembre">Noviembre</md-option>
+                                    <md-option value="Diciembre">Diciembre</md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Año</label>
+                                <md-select ng-model="education.studied_from_year" required md-no-asterisk name="studied_from_year" aria-label="studied_from_year">
+                                    <md-option value="2017">2017</md-option>
+                                    <md-option value="2016">2016</md-option>
+                                    <md-option value="2015">2015</md-option>
+                                    <md-option value="2014">2014</md-option>
+                                    <md-option value="2013">2013</md-option>
+                                    <md-option value="2012">2012</md-option>
+                                    <md-option value="2011">2011</md-option>
+                                    <md-option value="2010">2010</md-option>
+                                    <md-option value="2009">2009</md-option>
+                                    <md-option value="2008">2008</md-option>
+                                    <md-option value="2007">2007</md-option>
+                                    <md-option value="2006">2006</md-option>
+                                    <md-option value="2005">2005</md-option>
+                                    <md-option value="2004">2004</md-option>
+                                    <md-option value="2003">2003</md-option>
+                                    <md-option value="2002">2002</md-option>
+                                    <md-option value="2001">2001</md-option>
+                                    <md-option value="2000">2000</md-option>
+                                    <md-option value="1999">1999</md-option>
+                                    <md-option value="1998">1998</md-option>
+                                    <md-option value="1997">1997</md-option>
+                                    <md-option value="1996">1996</md-option>
+                                    <md-option value="1995">1995</md-option>
+                                    <md-option value="1994">1994</md-option>
+                                    <md-option value="1993">1993</md-option>
+                                    <md-option value="1992">1992</md-option>
+                                    <md-option value="1991">1991</md-option>
+                                    <md-option value="1990">1990</md-option>
+                                    <md-option value="1989">1989</md-option>
+                                    <md-option value="1988">1988</md-option>
+                                    <md-option value="1987">1987</md-option>
+                                    <md-option value="1986">1986</md-option>
+                                    <md-option value="1985">1985</md-option>
+                                    <md-option value="1984">1984</md-option>
+                                    <md-option value="1983">1983</md-option>
+                                    <md-option value="1982">1982</md-option>
+                                    <md-option value="1981">1981</md-option>
+                                    <md-option value="1980">1980</md-option>
+                                    <md-option value="1979">1979</md-option>
+                                    <md-option value="1978">1978</md-option>
+                                    <md-option value="1977">1977</md-option>
+                                    <md-option value="1976">1976</md-option>
+                                    <md-option value="1975">1975</md-option>
+                                    <md-option value="1974">1974</md-option>
+                                    <md-option value="1973">1973</md-option>
+                                    <md-option value="1972">1972</md-option>
+                                    <md-option value="1971">1971</md-option>
+                                    <md-option value="1970">1970</md-option>
+                                    <md-option value="1969">1969</md-option>
+                                    <md-option value="1968">1968</md-option>
+                                    <md-option value="1967">1967</md-option>
+                                    <md-option value="1966">1966</md-option>
+                                    <md-option value="1965">1965</md-option>
+                                    <md-option value="1964">1964</md-option>
+                                    <md-option value="1963">1963</md-option>
+                                    <md-option value="1962">1962</md-option>
+                                    <md-option value="1961">1961</md-option>
+                                    <md-option value="1960">1960</md-option>
+                                    <md-option value="1959">1959</md-option>
+                                    <md-option value="1958">1958</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="col-xs-12 col-lg-4 text-left" style="padding-top:0;" ng-if="!actual_student">
+                            <md-input-container class="md-block">
+                                <label>Mes</label>
+                                <md-select ng-model="education.studied_to_month" required md-no-asterisk name="studied_to_month" aria-label="studied_to_month">
+                                    <md-option value="Enero">Enero</md-option>
+                                    <md-option value="Febrero">Febrero</md-option>
+                                    <md-option value="Marzo">Marzo</md-option>
+                                    <md-option value="Abril">Abril</md-option>
+                                    <md-option value="Mayo">Mayo</md-option>
+                                    <md-option value="Junio">Junio</md-option>
+                                    <md-option value="Julio">Julio</md-option>
+                                    <md-option value="Agosto">Agosto</md-option>
+                                    <md-option value="Septiembre">Septiembre</md-option>
+                                    <md-option value="Octubre">Octubre</md-option>
+                                    <md-option value="Noviembre">Noviembre</md-option>
+                                    <md-option value="Diciembre">Diciembre</md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Año</label>
+                                <md-select ng-model="education.studied_to_year" required md-no-asterisk name="studied_to_year" aria-label="studied_to_year">
+                                    <md-option value="2017">2017</md-option>
+                                    <md-option value="2016">2016</md-option>
+                                    <md-option value="2015">2015</md-option>
+                                    <md-option value="2014">2014</md-option>
+                                    <md-option value="2013">2013</md-option>
+                                    <md-option value="2012">2012</md-option>
+                                    <md-option value="2011">2011</md-option>
+                                    <md-option value="2010">2010</md-option>
+                                    <md-option value="2009">2009</md-option>
+                                    <md-option value="2008">2008</md-option>
+                                    <md-option value="2007">2007</md-option>
+                                    <md-option value="2006">2006</md-option>
+                                    <md-option value="2005">2005</md-option>
+                                    <md-option value="2004">2004</md-option>
+                                    <md-option value="2003">2003</md-option>
+                                    <md-option value="2002">2002</md-option>
+                                    <md-option value="2001">2001</md-option>
+                                    <md-option value="2000">2000</md-option>
+                                    <md-option value="1999">1999</md-option>
+                                    <md-option value="1998">1998</md-option>
+                                    <md-option value="1997">1997</md-option>
+                                    <md-option value="1996">1996</md-option>
+                                    <md-option value="1995">1995</md-option>
+                                    <md-option value="1994">1994</md-option>
+                                    <md-option value="1993">1993</md-option>
+                                    <md-option value="1992">1992</md-option>
+                                    <md-option value="1991">1991</md-option>
+                                    <md-option value="1990">1990</md-option>
+                                    <md-option value="1989">1989</md-option>
+                                    <md-option value="1988">1988</md-option>
+                                    <md-option value="1987">1987</md-option>
+                                    <md-option value="1986">1986</md-option>
+                                    <md-option value="1985">1985</md-option>
+                                    <md-option value="1984">1984</md-option>
+                                    <md-option value="1983">1983</md-option>
+                                    <md-option value="1982">1982</md-option>
+                                    <md-option value="1981">1981</md-option>
+                                    <md-option value="1980">1980</md-option>
+                                    <md-option value="1979">1979</md-option>
+                                    <md-option value="1978">1978</md-option>
+                                    <md-option value="1977">1977</md-option>
+                                    <md-option value="1976">1976</md-option>
+                                    <md-option value="1975">1975</md-option>
+                                    <md-option value="1974">1974</md-option>
+                                    <md-option value="1973">1973</md-option>
+                                    <md-option value="1972">1972</md-option>
+                                    <md-option value="1971">1971</md-option>
+                                    <md-option value="1970">1970</md-option>
+                                    <md-option value="1969">1969</md-option>
+                                    <md-option value="1968">1968</md-option>
+                                    <md-option value="1967">1967</md-option>
+                                    <md-option value="1966">1966</md-option>
+                                    <md-option value="1965">1965</md-option>
+                                    <md-option value="1964">1964</md-option>
+                                    <md-option value="1963">1963</md-option>
+                                    <md-option value="1962">1962</md-option>
+                                    <md-option value="1961">1961</md-option>
+                                    <md-option value="1960">1960</md-option>
+                                    <md-option value="1959">1959</md-option>
+                                    <md-option value="1958">1958</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="col-xs-12 col-lg-4 text-left" ng-if="actual_student">
+                            <h2>Actual</h2>
+                        </div>
+                        <div class="col-xs-12 col-lg-4" style="padding-top:0;">
                             <md-input-container class="md-block">
                                 <br />
                                 <md-checkbox ng-model="actual_student" aria-label="Checkbox 1">
@@ -376,12 +763,6 @@
                                 </md-checkbox>
                             </md-input-container>
                         </div>
-                        <!--<div class="col-xs-12" style="padding-left:0">
-                            <md-input-container class="md-block input-margin">
-                                <label>Actividades y grupo</label>
-                                <textarea ng-model="education.group_and_activities" md-maxlength="2000" rows="1" md-select-on-focus></textarea>
-                            </md-input-container>
-                        </div>-->
                     </div>
                     <div class="col-xs-12 text-center">
                         <button class="btn btn-md btn-primary btn-ingresa" ng-show="btnAgregar" ng-click='formEducaion.$valid ? agregarEducations() : ""'>Guardar</button>
@@ -403,7 +784,7 @@
                     <h3 class="negrita">{{educacion.institution}}</h3>
                     <h4>{{educacion.discipline.name}}</h4>
                     <h4>{{educacion.grade}}</h4>
-                    <h4><span>{{educacion.studied_from}}</span> - <span ng-if="educacion.studied_to != null || educacion.studied_to != ''">{{educacion.studied_to}}</span><span ng-if="educacion.actual_student == true">Actual</span></h4>
+                    <h4><span>{{educacion.studied_from_month}} {{educacion.studied_from_year}}</span> - <span ng-if="educacion.studied_to_month != null || educacion.studied_to_month != ''">{{educacion.studied_to_month}} {{educacion.studied_to_year}}</span><span ng-if="educacion.actual_student == true">Actual</span></h4>
                     <p>{{educacion.description}}</p>
                     <p>{{educacion.group_and_activities}}</p>
                 </div>
@@ -432,7 +813,7 @@
                     <div class="col-xs-12">
                         <md-input-container class="md-block input-margin">
                             <label>Nombre de la organizacion</label>
-                            <input required md-no-asterisk name="name" ng-model="volunteering.name" id="volunteering.name">
+                            <input id="volunteering.name" required md-no-asterisk name="name" ng-model="volunteering.name">
                             <div ng-messages="formvoluntariado.name.$error">
                                 <div ng-message="required">Campo requerido.</div>
                             </div>
@@ -451,40 +832,216 @@
                         <md-input-container class="md-block">
                             <label>Causa de la organización</label>
                             <md-select ng-model="user.causa" aria-label="causa">
-                                <md-option selected ng-value="0"><em>Todos</em></md-option>
                                 <md-option ng-repeat="causa in causas" ng-value="causa.id" ng-selected="causa.id == volunteering.causeid">
                                     {{causa.name}}
                                 </md-option>
                             </md-select>
                         </md-input-container>
                     </div>
-                    <div class="col-xs-12">
-                        <div class="col-xs-12 col-lg-4" style="padding-left:0">
+
+                    <div class="col-xs-12" style="padding-top:0; margin-top:0">
+                        <md-input-container class="md-block">
+                            <label>Periodo</label>
+                        </md-input-container>
+                    </div>
+                    <div class="col-xs-12" style="padding-bottom:0;">
+                        <div class="col-xs-12 col-lg-4" style="padding-bottom:0;">
                             <md-input-container class="md-block">
-                                <label>Fecha de Inicio</label>
-                                <input type="text" class="datepickers" name="volunteer_from" ng-model="volunteering.volunteer_from">
+                                <label>de</label>
                             </md-input-container>
                         </div>
-                        <div class="col-xs-12 col-lg-4 text-left">
+                        <div class="col-xs-12 col-lg-4 text-left" style="padding-bottom:0;">
                             <md-input-container class="md-block">
-                                <label>Fecha de Fin</label>
-                                <input type="text" class="datepickers" name="volunteer_from" ng-model="volunteering.volunteer_to">
+                                <label>a</label>
                             </md-input-container>
                         </div>
                         <div class="col-xs-12 col-lg-4">
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 margin-bottom" style="padding-top:0;">
+                        <div class="col-xs-12 col-lg-4" style="padding-top:0;">
+                            <md-input-container class="md-block">
+                                <label>Mes</label>
+                                <md-select ng-model="volunteering.volunteer_from_month" required md-no-asterisk name="volunteer_from_month" aria-label="volunteer_from_month">
+                                    <md-option value="Enero">Enero</md-option>
+                                    <md-option value="Febrero">Febrero</md-option>
+                                    <md-option value="Marzo">Marzo</md-option>
+                                    <md-option value="Abril">Abril</md-option>
+                                    <md-option value="Mayo">Mayo</md-option>
+                                    <md-option value="Junio">Junio</md-option>
+                                    <md-option value="Julio">Julio</md-option>
+                                    <md-option value="Agosto">Agosto</md-option>
+                                    <md-option value="Septiembre">Septiembre</md-option>
+                                    <md-option value="Octubre">Octubre</md-option>
+                                    <md-option value="Noviembre">Noviembre</md-option>
+                                    <md-option value="Diciembre">Diciembre</md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Año</label>
+                                <md-select ng-model="volunteering.volunteer_from_year" required md-no-asterisk name="volunteer_from_year" aria-label="volunteer_from_year">
+                                    <md-option value="2017">2017</md-option>
+                                    <md-option value="2016">2016</md-option>
+                                    <md-option value="2015">2015</md-option>
+                                    <md-option value="2014">2014</md-option>
+                                    <md-option value="2013">2013</md-option>
+                                    <md-option value="2012">2012</md-option>
+                                    <md-option value="2011">2011</md-option>
+                                    <md-option value="2010">2010</md-option>
+                                    <md-option value="2009">2009</md-option>
+                                    <md-option value="2008">2008</md-option>
+                                    <md-option value="2007">2007</md-option>
+                                    <md-option value="2006">2006</md-option>
+                                    <md-option value="2005">2005</md-option>
+                                    <md-option value="2004">2004</md-option>
+                                    <md-option value="2003">2003</md-option>
+                                    <md-option value="2002">2002</md-option>
+                                    <md-option value="2001">2001</md-option>
+                                    <md-option value="2000">2000</md-option>
+                                    <md-option value="1999">1999</md-option>
+                                    <md-option value="1998">1998</md-option>
+                                    <md-option value="1997">1997</md-option>
+                                    <md-option value="1996">1996</md-option>
+                                    <md-option value="1995">1995</md-option>
+                                    <md-option value="1994">1994</md-option>
+                                    <md-option value="1993">1993</md-option>
+                                    <md-option value="1992">1992</md-option>
+                                    <md-option value="1991">1991</md-option>
+                                    <md-option value="1990">1990</md-option>
+                                    <md-option value="1989">1989</md-option>
+                                    <md-option value="1988">1988</md-option>
+                                    <md-option value="1987">1987</md-option>
+                                    <md-option value="1986">1986</md-option>
+                                    <md-option value="1985">1985</md-option>
+                                    <md-option value="1984">1984</md-option>
+                                    <md-option value="1983">1983</md-option>
+                                    <md-option value="1982">1982</md-option>
+                                    <md-option value="1981">1981</md-option>
+                                    <md-option value="1980">1980</md-option>
+                                    <md-option value="1979">1979</md-option>
+                                    <md-option value="1978">1978</md-option>
+                                    <md-option value="1977">1977</md-option>
+                                    <md-option value="1976">1976</md-option>
+                                    <md-option value="1975">1975</md-option>
+                                    <md-option value="1974">1974</md-option>
+                                    <md-option value="1973">1973</md-option>
+                                    <md-option value="1972">1972</md-option>
+                                    <md-option value="1971">1971</md-option>
+                                    <md-option value="1970">1970</md-option>
+                                    <md-option value="1969">1969</md-option>
+                                    <md-option value="1968">1968</md-option>
+                                    <md-option value="1967">1967</md-option>
+                                    <md-option value="1966">1966</md-option>
+                                    <md-option value="1965">1965</md-option>
+                                    <md-option value="1964">1964</md-option>
+                                    <md-option value="1963">1963</md-option>
+                                    <md-option value="1962">1962</md-option>
+                                    <md-option value="1961">1961</md-option>
+                                    <md-option value="1960">1960</md-option>
+                                    <md-option value="1959">1959</md-option>
+                                    <md-option value="1958">1958</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="col-xs-12 col-lg-4 text-left" style="padding-top:0;" ng-if="!actual_volunteer">
+                            <md-input-container class="md-block">
+                                <label>Mes</label>
+                                <md-select ng-model="volunteering.volunteer_to_month" required md-no-asterisk name="volunteer_to_month" aria-label="volunteer_to_month">
+                                    <md-option value="Enero">Enero</md-option>
+                                    <md-option value="Febrero">Febrero</md-option>
+                                    <md-option value="Marzo">Marzo</md-option>
+                                    <md-option value="Abril">Abril</md-option>
+                                    <md-option value="Mayo">Mayo</md-option>
+                                    <md-option value="Junio">Junio</md-option>
+                                    <md-option value="Julio">Julio</md-option>
+                                    <md-option value="Agosto">Agosto</md-option>
+                                    <md-option value="Septiembre">Septiembre</md-option>
+                                    <md-option value="Octubre">Octubre</md-option>
+                                    <md-option value="Noviembre">Noviembre</md-option>
+                                    <md-option value="Diciembre">Diciembre</md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Año</label>
+                                <md-select ng-model="volunteering.volunteer_to_year" required md-no-asterisk name="volunteer_to_year" aria-label="volunteer_to_year">
+                                    <md-option value="2017">2017</md-option>
+                                    <md-option value="2016">2016</md-option>
+                                    <md-option value="2015">2015</md-option>
+                                    <md-option value="2014">2014</md-option>
+                                    <md-option value="2013">2013</md-option>
+                                    <md-option value="2012">2012</md-option>
+                                    <md-option value="2011">2011</md-option>
+                                    <md-option value="2010">2010</md-option>
+                                    <md-option value="2009">2009</md-option>
+                                    <md-option value="2008">2008</md-option>
+                                    <md-option value="2007">2007</md-option>
+                                    <md-option value="2006">2006</md-option>
+                                    <md-option value="2005">2005</md-option>
+                                    <md-option value="2004">2004</md-option>
+                                    <md-option value="2003">2003</md-option>
+                                    <md-option value="2002">2002</md-option>
+                                    <md-option value="2001">2001</md-option>
+                                    <md-option value="2000">2000</md-option>
+                                    <md-option value="1999">1999</md-option>
+                                    <md-option value="1998">1998</md-option>
+                                    <md-option value="1997">1997</md-option>
+                                    <md-option value="1996">1996</md-option>
+                                    <md-option value="1995">1995</md-option>
+                                    <md-option value="1994">1994</md-option>
+                                    <md-option value="1993">1993</md-option>
+                                    <md-option value="1992">1992</md-option>
+                                    <md-option value="1991">1991</md-option>
+                                    <md-option value="1990">1990</md-option>
+                                    <md-option value="1989">1989</md-option>
+                                    <md-option value="1988">1988</md-option>
+                                    <md-option value="1987">1987</md-option>
+                                    <md-option value="1986">1986</md-option>
+                                    <md-option value="1985">1985</md-option>
+                                    <md-option value="1984">1984</md-option>
+                                    <md-option value="1983">1983</md-option>
+                                    <md-option value="1982">1982</md-option>
+                                    <md-option value="1981">1981</md-option>
+                                    <md-option value="1980">1980</md-option>
+                                    <md-option value="1979">1979</md-option>
+                                    <md-option value="1978">1978</md-option>
+                                    <md-option value="1977">1977</md-option>
+                                    <md-option value="1976">1976</md-option>
+                                    <md-option value="1975">1975</md-option>
+                                    <md-option value="1974">1974</md-option>
+                                    <md-option value="1973">1973</md-option>
+                                    <md-option value="1972">1972</md-option>
+                                    <md-option value="1971">1971</md-option>
+                                    <md-option value="1970">1970</md-option>
+                                    <md-option value="1969">1969</md-option>
+                                    <md-option value="1968">1968</md-option>
+                                    <md-option value="1967">1967</md-option>
+                                    <md-option value="1966">1966</md-option>
+                                    <md-option value="1965">1965</md-option>
+                                    <md-option value="1964">1964</md-option>
+                                    <md-option value="1963">1963</md-option>
+                                    <md-option value="1962">1962</md-option>
+                                    <md-option value="1961">1961</md-option>
+                                    <md-option value="1960">1960</md-option>
+                                    <md-option value="1959">1959</md-option>
+                                    <md-option value="1958">1958</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="col-xs-12 col-lg-4 text-left" ng-if="actual_volunteer">
+                            <h2>Actual</h2>
+                        </div>
+                        <div class="col-xs-12 col-lg-4" style="padding-top:0;">
                             <md-input-container class="md-block">
                                 <md-checkbox ng-model="actual_volunteer" aria-label="Checkbox 1">
                                     Hago mi voluntariado aquí actualmente.
                                 </md-checkbox>
                             </md-input-container>
                         </div>
-                        <!--<div class="col-xs-12" style="padding-left:0">
-                            <md-input-container class="md-block input-margin">
-                                <label>Descripción</label>
-                                <textarea ng-model="volunteering.description" md-maxlength="2000" rows="1" md-select-on-focus></textarea>
-                            </md-input-container>
-                        </div>-->
                     </div>
+
                     <div class="col-xs-12 text-center margin-bottom">
                         <button class="btn btn-md btn-primary btn-ingresa" ng-show="btnAgregar" ng-click='formvoluntariado.$valid ? agregarVoluntariados() : ""'>Agregar</button>
                         <button class="btn btn-md btn-primary btn-ingresa" ng-show="btnEditar" ng-click='formvoluntariado.$valid ? editarVoluntariados() : ""'>Editar</button>
@@ -504,7 +1061,7 @@
                     <h3 class="negrita">{{voluntariado.name}}</h3>
                     <h4>{{voluntariado.volunteer_function}}</h4>
                     <h4>{{voluntariado.cause.name}}</h4>
-                    <h4><span>{{voluntariado.volunteer_from}}</span> - <span ng-if="voluntariado.volunteer_to != null || voluntariado.volunteer_to != ''">{{voluntariado.volunteer_to}}</span><span ng-if="voluntariado.actual_volunteer == true">Actual</span></h4>
+                    <h4><span>{{voluntariado.volunteer_from_month}} {{voluntariado.volunteer_from_year}}</span> - <span ng-if="voluntariado.volunteer_to_month != null || voluntariado.volunteer_to_month != ''">{{voluntariado.volunteer_to_month}} {{voluntariado.volunteer_to_year}}</span><span ng-if="voluntariado.actual_volunteer == true">Actual</span></h4>
                     <p>{{voluntariado.description}}</p>
 
                 </div>
@@ -665,7 +1222,7 @@
                     </md-input-container>
                     <md-input-container class="visible-lg">
                         <label>Disponibilidad de tiempo</label><br /><br />
-                        <md-radio-group layout="row" ng-model="user.avaliability" >
+                        <md-radio-group layout="row" ng-model="user.avaliability">
                             <md-radio-button value="Full-time" class="md-primary">Tiempo completo</md-radio-button>
                             <md-radio-button value="Part-time" class="md-primary">Medio tiempo</md-radio-button>
                             <md-radio-button value="Freelance" class="md-primary">Freelance</md-radio-button>

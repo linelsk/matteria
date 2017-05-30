@@ -31,11 +31,11 @@ angular.module('tcsGruntApp')
 
       //Carrousel
       contenidoFactory.ServiceContenido('fcm/sliders/', 'GET', '{}').then(function (data) {
-         
+          console.log(data)
           $scope.Indicators = "";
           $scope.Wrapper = "";
 
-          //$scope.Indicators += '<ol class="carousel-indicators">';          
+          $scope.Indicators += '<ol class="carousel-indicators">';          
           for(var i = 0; i<data.data.length; i++)
           {
               switch(i) {
@@ -65,7 +65,10 @@ angular.module('tcsGruntApp')
               }
                                   
           }
-          //$scope.Indicators += '</ol>';
+          
+          $scope.Indicators += '</ol>';
+
+          console.log($scope.Indicators);
       });
 
       //Fast Facts

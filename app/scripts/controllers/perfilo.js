@@ -15,11 +15,11 @@ angular.module('tcsGruntApp')
       $scope.currentLocation = window.location.host;
       $scope.nombre = $stateParams.user
       
-      contenidoFactory.ServicePerfil('companies/custom-url/' + $stateParams.user + '/', 'GET', {
+      contenidoFactory.ServiceContenido('companies/custom-url/' + $stateParams.user + '/', 'GET', {
          
       }).then(function (data) {
           console.log(data);
-          $scope.company = data
+          $scope.company = data.data;
       });
 
   }]);
