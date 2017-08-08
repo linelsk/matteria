@@ -34,7 +34,7 @@
             <p class="negrita" style="margin-bottom:0; margin-top:0;">
                 Mision del cargo:
             </p>
-            <p class="text-left">{{vacante.opening.activities}}</p>
+            <p class="text-left" ng-bind-html="vacante.opening.activities"></p>
             <div class="col-xs-12 text-right">
                 <a class="btn btn-md btn-primary" ng-click="urlPostulantes(vacante.opening.id);">Ver vacante</a>
                 <a class="btn btn-md btn-primary btn-registrate" ng-click="deletepostulacion(vacante.id, $event);">Anular postulación</a>

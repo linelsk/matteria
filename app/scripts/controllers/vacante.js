@@ -8,12 +8,13 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('VacanteCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$stateParams', '$window', '$mdDialog', function ($scope, API_PATH_MEDIA, contenidoFactory, $stateParams, $window, $mdDialog) {
+    .controller('VacanteCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$stateParams', '$window', '$mdDialog', 'API_PATH', 'Socialshare', function ($scope, API_PATH_MEDIA, contenidoFactory, $stateParams, $window, $mdDialog, API_PATH, Socialshare) {
 
       $scope.vacante = [{}];
       $scope.compania = [{}];
       $scope.rango = [{}];
       $scope.API_PATH_MEDIA = API_PATH_MEDIA;
+      $scope.API_PATH = API_PATH;
       $scope.postulado = false;
       $scope.dialog = false;
       var newLine = escape("\n");
@@ -25,6 +26,22 @@ angular.module('tcsGruntApp')
           $window.history.back();
       };
 
+      $scope.url_ = API_PATH + 'vacante/94';
+      console.log($scope.url_);
+      //Socialshare.share({
+      //    'provider': 'facebook',
+      //    'attrs': {
+      //        'socialshareUrl': $scope.url_
+      //    }
+      //});
+
+      //Socialshare.share({
+      //    'provider': 'twitter',
+      //    'attrs': {
+      //        'socialshareUrl': 'http://720kb.net',
+      //        'socialshareHashtags': '720kb, angular, socialshare'
+      //    }
+      //});
 
       //function ventana($scope) {
       //    $scope.hide = function () {
@@ -54,7 +71,6 @@ angular.module('tcsGruntApp')
               }
               else {
                   contenidoFactory.ServicePerfil('openings/applications/create/', 'POST', {
-
                       "candidate": $window.localStorage.id_candidate,
                       "opening": $stateParams.id,
                       "salary_min": null,
@@ -66,7 +82,22 @@ angular.module('tcsGruntApp')
               }
           }
           else {
-              $window.location.href = "/registro/postulante";
+              var confirm = $mdDialog.confirm(
+                  {
+                      targetEvent: ev,
+                      template: '<md-dialog md-theme="{{ dialog.theme || dialog.defaultTheme }}" aria-label="{{ dialog.ariaLabel }}" ng-class="dialog.css">' +
+                      '<md-dialog-content class="md-dialog-content" role="document" tabIndex="-1">' +
+                      '<div class="md-dialog-content-body"><h4 class="negrita">Para poder aplicar a esta vacante es necesario estar registrado en materia.</h4></div>' +
+                      '</md-dialog-content>' +
+                      '<md-dialog-actions>' +
+                      '<md-button ng-click="dialog.hide()" class="md-primary md-confirm-button">Entendido</md-button>' +
+                      '<md-button ng-click="dialog.abort()" class="md-primary md-cancel-button">Cerrar</md-button>' +
+                      '</md-dialog-actions>' +
+                      '</md-dialog>'
+                  });
+              $mdDialog.show(confirm).then(function () {
+                  $window.location.href = "/registro/postulante";
+              });              
           }
       }
 
@@ -80,9 +111,14 @@ angular.module('tcsGruntApp')
           });
       });
 
-      contenidoFactory.ServicePerfil('openings/' + $stateParams.id + '/applied/?format=json', 'GET', '{}').then(function (data) {
-          $scope.postulado = data.applied;
-      });
+      console.log($window.localStorage.role);
+      if ($window.localStorage.role == 'POSTULANTE') {
+          console.log($scope.postulado);
+          contenidoFactory.ServicePerfil('openings/' + $stateParams.id + '/applied/?format=json', 'GET', '{}').then(function (data) {
+              $scope.postulado = data.applied;
+          });
+      }
+      
 
       function ventana() {
           $scope.dialog = true;

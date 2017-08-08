@@ -1,11 +1,45 @@
 ﻿<div class="container">    
     <br />
-    <div class="col-xs-12 text-left margin-bottom" style="padding-left:0">
+    <div class="text-left hidden-xs hidden-sm margin-bottom">
         <a href="/publicacionesoferta" class="btn btn-lg btn-primary btn-ingresa">Nueva vacante</a>
     </div>
+    <div class="text-center hidden-md hidden-lg margin-bottom">
+        <a href="/publicacionesoferta" class="btn btn-lg btn-primary btn-ingresa">Nueva vacante</a>
+        <a class="btn btn-lg btn-primary"  ng-click="toggleLeft()">Ver filtros</a>
+    </div>
+   
+    <div class="row">        
+        <section layout="row" flex>
 
-    <div class="row">
-        <div class="col-xs-12 col-md-3" style="height:100%;">
+            <md-sidenav class="md-sidenav-left" md-component-id="left"
+                        md-disable-backdrop md-whiteframe="4">
+                <div class="col-xs-12">
+                    <br />
+                    <md-input-container class="md-block">
+                        <label>Buscar </label>
+                        <input name="Buscar" ng-model="busaqueda">
+                    </md-input-container>
+
+                    <md-radio-group ng-model="rankingmodel">
+                        <md-radio-button value="" class="md-primary"><span style="font-size:large" class="negrita">Todos</span></md-radio-button>
+                        <md-radio-button value="published" class="md-primary"><span style="font-size:large" class="negrita">Activas</span></md-radio-button>
+                        <md-radio-button value="draft" class="md-primary"><span style="font-size:large" class="negrita">Borradores</span></md-radio-button>
+                        <md-radio-button value="expired" class="md-primary"><span style="font-size:large" class="negrita">Caducas</span></md-radio-button>
+                    </md-radio-group>
+
+                    <div class="col-xs-12 text-center">
+                        <br />
+                        <br />
+                        <a class="btn btn-lg btn-primary btn-ingresa" ng-click="toggleLeft()">Buscar</a>
+                        <a class="btn btn-lg btn-primary btn-registrate " ng-click="toggleLeft()">Cerrar</a>
+                    </div>
+                </div>
+               
+            </md-sidenav>
+
+        </section>
+
+        <div class="col-xs-12 col-md-3 hidden-xs hidden-sm" style="height:100%;">
             <div class="col-xs-12 thumbnail-vacantes">
                 <md-input-container class="md-block">
                     <label>Buscar </label>
@@ -78,17 +112,7 @@
                 </div>
             </div>
         </div>
-        
-
-        <div class="col-xs-12 col-md-3 margin-bottom">
-            
-
-        </div>
-
-        <div class="col-xs-12 col-md-9 margin-bottom" style="padding:0" ng-repeat="vacante in vacantes | filterMultiple:{name:busaqueda, draft:rankingmodel, expired:rankingmodelff}">
-
-            
-        </div>
+       
     </div>
 
 </div>

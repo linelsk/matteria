@@ -8,7 +8,7 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('QuienesSomosCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$mdToast', function ($scope, API_PATH_MEDIA, contenidoFactory, $mdToast) {
+    .controller('QuienesSomosCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$mdToast', '$window', function ($scope, API_PATH_MEDIA, contenidoFactory, $mdToast, $window) {
 
       $scope.matteria = [{}];
       $scope.diferente = [];
@@ -17,6 +17,21 @@ angular.module('tcsGruntApp')
       $scope.descripcioquienesomos = "";
       $scope.tituloquienesomos = "";
       $scope.API_PATH_MEDIA = API_PATH_MEDIA;
+      $scope.idiomaLocal = $window.localStorage.idioma;
+
+      $scope.calcular = function () {
+
+          if ($window.localStorage.idioma == 'es_MX') {
+              $scope.idiomaLocal = 'es_MX';
+          }
+          else {
+              $scope.idiomaLocal = 'en_EN';
+          }
+          $scope.matteria = $scope.matteria;
+
+      }
+
+      $scope.$watch($scope.calcular);
 
       $scope.hovertexto = function (obj) {
           $scope.tituloquienesomos = obj.titulo;
@@ -41,8 +56,10 @@ angular.module('tcsGruntApp')
           for (var i = 0; i < data.data.length; i++) {
               $scope.diferente.push({
                   descripcion: data.data[i].descripcion,
+                  descripcion_en: data.data[i].descripcion_en,
                   imagen: data.data[i].imagen,
                   titulo: data.data[i].titulo,
+                  titulo_en: data.data[i].titulo_en,
                   color: $scope.color[i]
               })
           }
@@ -51,6 +68,7 @@ angular.module('tcsGruntApp')
 
       //Valores
       contenidoFactory.ServiceContenido('fcm/valores-matteria-info/?format=json', 'GET', '{}').then(function (data) {
+          //console.log(data);
           $scope.valores = data.data
       });
 

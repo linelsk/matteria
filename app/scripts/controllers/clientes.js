@@ -8,12 +8,26 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('ClientesCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', function ($scope, API_PATH_MEDIA, contenidoFactory) {
+    .controller('ClientesCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$window', function ($scope, API_PATH_MEDIA, contenidoFactory, $window) {
 
       $scope.clientesprivados = [{}];
       $scope.clientescivil = [{}];
       $scope.slider = [{}];
       $scope.API_PATH_MEDIA = API_PATH_MEDIA;
+      $scope.idiomaLocal = $window.localStorage.idioma;
+
+      $scope.calcular = function () {
+
+          if ($window.localStorage.idioma == 'es_MX') {
+              $scope.idiomaLocal = 'es_MX';
+          }
+          else {
+              $scope.idiomaLocal = 'en_EN';
+          }
+          $scope.slider = $scope.slider;
+      }
+
+      $scope.$watch($scope.calcular);
 
       //Slider
       contenidoFactory.ServiceContenido('fcm/nuestros-clientes-info/?format=json', 'GET', '{}').then(function (data) {

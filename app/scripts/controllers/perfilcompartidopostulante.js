@@ -21,7 +21,15 @@ angular.module('tcsGruntApp')
       $scope.classazul = 'dp-btn-boton-interes-exp';
       $scope.classblanco = 'dp-btn-boton-interes-exp-sin';
       $scope.currentLocation = window.location.host;
-
+      $scope.serviciocontratado = false;
+      //console.log($window.localStorage.info_candidate);
+      //if ($window.localStorage.info_candidate == 'true') {
+      //    $scope.serviciocontratado = true;
+      //}
+      //else {
+      //    $scope.serviciocontratado = false;
+      //}
+      
       candidato();
 
       //candidato

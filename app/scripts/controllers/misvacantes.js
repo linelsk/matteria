@@ -8,7 +8,7 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('MisVacanteCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$stateParams', '$window', '$location', '$mdDialog', function ($scope, API_PATH_MEDIA, contenidoFactory, $stateParams, $window, $location, $mdDialog) {
+  .controller('MisVacanteCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$stateParams', '$window', '$location', '$mdDialog', '$mdSidenav', function ($scope, API_PATH_MEDIA, contenidoFactory, $stateParams, $window, $location, $mdDialog, $mdSidenav) {
 
       $scope.rankingmodel = "";
       $scope.vacantes = [{}];
@@ -30,6 +30,15 @@ angular.module('tcsGruntApp')
       $scope.urlPostulantes = function (id) {
           console.log(id);
           $location.url('/verpostulantes/' + id);
+      }
+
+      $scope.toggleLeft = buildToggler('left');
+      $scope.toggleRight = buildToggler('right');
+
+      function buildToggler(componentId) {
+          return function () {
+              $mdSidenav(componentId).toggle();
+          };
       }
 
       $scope.caducar = function (id, ev) {

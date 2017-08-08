@@ -8,7 +8,7 @@
 
       //Postulaicones
       contenidoFactory.ServiceContenido('openings/' + $stateParams.id + '/candidates/?format=json', 'GET', '{}').then(function (data) {
-          //console.log(data.data);
+          console.log(data.data);
           $scope.postulantes = data.data
           //for (var i = 0; i < $scope.postulantes.length; i++) {
           //    if ($scope.postulantes[i].ranking == 0) {
@@ -27,8 +27,14 @@
           //    //$scope.postulantes.push($scope.newpostulante[i]);
           //}
           //console.log($scope.newpostulante);
-          console.log($scope.postulantes);
+          //console.log($scope.postulantes);
+          contenidoFactory.ServiceContenido('openings/' + $stateParams.id + '/?format=json', 'GET', '{}').then(function (data) {
+              $scope.infopostulante = data.data
+              console.log($scope.infopostulante);
+          });
       });
+
+
 
       $scope.rateFunction = function (rating, postulantes) {
           console.log(postulantes.id);

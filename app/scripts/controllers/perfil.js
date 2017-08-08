@@ -14,6 +14,12 @@ angular.module('tcsGruntApp')
       $scope.API_PATH_MEDIA = API_PATH_MEDIA;
       $scope.currentLocation = window.location.host;
       $scope.nombre = $stateParams.user
+      if ($window.localStorage.info_candidate == 'true') {
+          $scope.serviciocontratado = true;
+      }
+      else {
+          $scope.serviciocontratado = false;
+      }
 
       contenidoFactory.ServiceContenido('candidates/custom-url/' + $stateParams.user + '/', 'GET', {
          

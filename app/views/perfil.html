@@ -38,7 +38,14 @@
                         <h4>{{user.city}}, {{user.country.name}}</h4>
 
                     </div>
+                    <div class="col-xs-12 col-lg-12" ng-if="serviciocontratado">
+                        <h4>Móvil: {{user.cellphone_number}}</h4>
 
+                    </div>
+                    <div class="col-xs-12 col-lg-12" ng-if="serviciocontratado">
+                        <h4>Email: {{user.email}}</h4>
+
+                    </div>
                     <div class="col-xs-12 col-lg-12">
                         <h4><span>Fecha de nacimiento: </span>{{user.birthday}}</h4>
                     </div>

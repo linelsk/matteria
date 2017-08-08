@@ -8,12 +8,27 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('FaqCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', 'filterFilter', function ($scope, API_PATH_MEDIA, contenidoFactory, filterFilter) {
+    .controller('FaqCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', 'filterFilter', '$window', function ($scope, API_PATH_MEDIA, contenidoFactory, filterFilter, $window) {
 
       $scope.candidatos = [{}];
       $scope.organizaciones = [{}];
       $scope.faq = [{}];
       $scope.API_PATH_MEDIA = API_PATH_MEDIA;
+      $scope.idiomaLocal = $window.localStorage.idioma;
+
+      $scope.calcular = function () {
+
+          if ($window.localStorage.idioma == 'es_MX') {
+              $scope.idiomaLocal = 'es_MX';
+          }
+          else {
+              $scope.idiomaLocal = 'en_EN';
+          }
+          //$scope.matteria = $scope.matteria;
+
+      }
+
+      $scope.$watch($scope.calcular);
 
       //faq
       contenidoFactory.ServiceContenido('fcm/faq/', 'GET', '{}').then(function (data) {

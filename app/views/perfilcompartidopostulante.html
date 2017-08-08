@@ -37,15 +37,22 @@
                         <h4>{{user.city}}, {{user.country.name}}</h4>
                         
                     </div> 
+                    <div class="col-xs-12 col-lg-12" ng-if="serviciocontratado">
+                        <h4>Móvil: {{user.cellphone_number}}</h4>
 
+                    </div>
+                    <div class="col-xs-12 col-lg-12" ng-if="serviciocontratado">
+                        <h4>Email: {{user.email}}</h4>
+
+                    </div>
                     <div class="col-xs-12 col-lg-12">
                         <h4><span>Fecha de nacimiento: </span>{{user.birthday}}</h4>
                     </div> 
                     <div class="col-xs-12 col-lg-12">
-                        <h4><span>Sexo: </span><span ng-if="user.genre == 'F'">Femenino</span><span ng-if="user.genre == 'M'">Masculino</span></h4>
+                        <h4><span>Género: </span>{{user.genre}}</h4>
                     </div> 
                     <div class="col-xs-12 col-lg-12">
-                        <h4>{{currentLocation}}/perfil/{{user.custom_url}}</h4>
+                        <a data-ng-href="/perfil/{{user.custom_url}}" target="_blank"> <h4>{{currentLocation}}/perfil/{{user.custom_url}}</h4></a>
                     </div> 
                 </div>
             </form>
@@ -66,40 +73,13 @@
                     <h3 class="negrita">{{experiencia.name}}</h3>
                     <h4>{{experiencia.title}}</h4>
                     <h4>{{experiencia.Belfast}}</h4>
-                    <h4><span>{{experiencia.work_from}}</span> - <span>{{experiencia.work_to}}</span></h4>
-                    <h4><span>{{experiencia.actual_job}}</span></h4>
+                    <h4><span>{{experiencia.work_from_month}} {{experiencia.work_from_year}}</span> - <span ng-if="experiencia.work_from_month != null || experiencia.work_from_month != ''">{{experiencia.work_to_month}} {{experiencia.work_to_year}}</span><span ng-if="experiencia.actual_job == true">Actual</span></h4>
                     <p>{{experiencia.description}}</p>
                     <p>{{experiencia.positive_impact}}</p>
 
                 </div>
                 <md-divider></md-divider>
             </div>
-        </div>
-
-        <div class="col-xs-12 text-right margin-bottom"></div>
-
-        <div class="col-xs-12 border-perfil margin-bottom">
-            <div class="col-xs-12 col-lg-5">
-                <h2>Voluntariado</h2>
-            </div>            
-            <div class="col-xs-12 border-separacion margin-bottom">
-            </div>
-            <div class="col-xs-12 margin-bottom">
-            </div>
-            
-            <div class="col-xs-12" ng-repeat="voluntariado in user.VolunteerExp_candidate">
-                <div class="col-xs-12">
-                    <h3 class="negrita">{{voluntariado.name}}</h3>
-                    <h4>{{voluntariado.volunteer_function}}</h4>
-                    <h4>{{voluntariado.cause.name}}</h4>
-                    <h4><span>{{voluntariado.volunteer_from}}</span> - <span>{{voluntariado.volunteer_to}}</span></h4>
-                    <h4><span>{{voluntariado.actual_volunteer}}</span></h4>
-                    <p>{{voluntariado.description}}</p>
-
-                </div>
-                <md-divider></md-divider>
-            </div>
-
         </div>
 
         <div class="col-xs-12 text-right margin-bottom"></div>
@@ -118,13 +98,37 @@
                     <h3 class="negrita">{{educacion.institution}}</h3>
                     <h4>{{educacion.discipline.name}}</h4>
                     <h4>{{educacion.grade}}</h4>
-                    <h4><span>{{educacion.studied_from}}</span> - <span>{{educacion.studied_to}}</span></h4>
-                    <h4><span>{{educacion.actual_student}}</span></h4>
+                    <h4><span>{{educacion.studied_from_month}} {{educacion.studied_from_year}}</span> - <span ng-if="educacion.studied_to_month != null || educacion.studied_to_month != ''">{{educacion.studied_to_month}} {{educacion.studied_to_year}}</span><span ng-if="educacion.actual_student == true">Actual</span></h4>
                     <p>{{educacion.description}}</p>
                     <p>{{educacion.group_and_activities}}</p>
                 </div>
                 <md-divider></md-divider>
             </div>
+        </div>
+
+        <div class="col-xs-12 text-right margin-bottom"></div>
+
+        <div class="col-xs-12 border-perfil margin-bottom">
+            <div class="col-xs-12 col-lg-5">
+                <h2>Voluntariado</h2>
+            </div>
+            <div class="col-xs-12 border-separacion margin-bottom">
+            </div>
+            <div class="col-xs-12 margin-bottom">
+            </div>
+
+            <div class="col-xs-12" ng-repeat="voluntariado in user.VolunteerExp_candidate">
+                <div class="col-xs-12">
+                    <h3 class="negrita">{{voluntariado.name}}</h3>
+                    <h4>{{voluntariado.volunteer_function}}</h4>
+                    <h4>{{voluntariado.cause.name}}</h4>
+                    <h4><span>{{voluntariado.volunteer_from_month}} {{voluntariado.volunteer_from_year}}</span> - <span ng-if="voluntariado.volunteer_to_month != null || voluntariado.volunteer_to_month != ''">{{voluntariado.volunteer_to_month}} {{voluntariado.volunteer_to_year}}</span><span ng-if="voluntariado.actual_volunteer == true">Actual</span></h4>
+                    <p>{{voluntariado.description}}</p>
+
+                </div>
+                <md-divider></md-divider>
+            </div>
+
         </div>
 
         <div class="col-xs-12 text-right margin-bottom"></div>
@@ -143,8 +147,10 @@
                             <md-tab label="Profesiones">
                                 <md-content class="md-padding">
                                     <div class="col-xs-12 text-center">
-                                        <div class="col-xs-6 col-lg-3" style="padding-left: 15px; padding-right: 15px; padding-bottom: 15px" ng-repeat="profesiones in user.professions">
-                                            <button class="col-xs-12 btn btn-lg btn-primary dp-btn-boton-interes-exp">{{profesiones.name}}</button>
+                                        <div class="col-xs-6 col-lg-2 text-center" ng-repeat="prof in user.professions">
+                                            <div style="width:100%; height:60px">
+                                                <a style="cursor:pointer; text-decoration:none; padding:15px 10px 10px 10px" class="col-xs-12 dp-btn-boton-interes-exp" id="btn-{{prof.name}}">{{prof.name}}</a>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -153,8 +159,10 @@
                             <md-tab label="Intereses">
                                 <md-content class="md-padding">
                                     <div class="col-xs-12 text-center">
-                                        <div class="col-xs-6 col-lg-3" style="padding-left: 15px; padding-right: 15px; padding-bottom: 15px" ng-repeat="intereses in user.interests">
-                                            <button class="col-xs-12 btn btn-lg btn-primary dp-btn-boton-interes-exp">{{intereses.name}}</button>
+                                        <div class="col-xs-6 col-lg-2 text-center" ng-repeat="intereses in user.interests">
+                                            <div style="width:100%; height:100px">
+                                                <a style="cursor:pointer; text-decoration:none; padding:15px 5px 10px 5px" class="col-xs-12 dp-btn-boton-interes-exp">{{intereses.name}}</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </md-content>
@@ -162,8 +170,10 @@
                             <md-tab label="Sectores de experiencia">
                                 <md-content class="md-padding">
                                     <div class="col-xs-12 text-center">
-                                        <div class="col-xs-6 col-lg-3" style="padding-left: 15px; padding-right: 15px; padding-bottom: 15px" ng-repeat="sectores in user.exp_sectors">
-                                            <button class="col-xs-12 btn btn-lg btn-primary dp-btn-boton-interes-exp">{{sectores.name}}</button>
+                                        <div class="col-xs-6 col-lg-2 text-center" ng-repeat="sectores in user.exp_sectors">
+                                            <div style="width:100%; height:100px">
+                                                <a style="cursor:pointer; text-decoration:none; padding:15px 5px 10px 5px" class="col-xs-12 dp-btn-boton-interes-exp">{{sectores.name}}</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </md-content>
@@ -171,8 +181,10 @@
                             <md-tab label="Areas de experiencia">
                                 <md-content class="md-padding">
                                     <div class="col-xs-12 text-center">
-                                        <div class="col-xs-6 col-lg-3" style="padding-left: 15px; padding-right: 15px; padding-bottom: 15px" ng-repeat="areas in user.exp_areas">
-                                            <button class="col-xs-12 btn btn-lg btn-primary dp-btn-boton-interes-exp">{{areas.name}}</button>
+                                        <div class="col-xs-6 col-lg-2 text-center" ng-repeat="areas in user.exp_areas">
+                                            <div style="width:100%; height:100px">
+                                                <a style="cursor:pointer; text-decoration:none; padding:15px 5px 10px 5px" class="col-xs-12 dp-btn-boton-interes-exp">{{areas.name}}</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </md-content>
@@ -241,7 +253,7 @@
         </div>
 
         <div class="text-right">
-            <a href="/politicasantidiscriminacion">Políticas anti discriminación</a>
+            <a href="/politicasantidiscriminacion">Politicas anti discriminacion</a>
         </div>
         <div class="margin-bottom"></div>
     </div>

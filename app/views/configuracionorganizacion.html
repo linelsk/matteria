@@ -1,10 +1,15 @@
-﻿<div class="container">
+﻿<br />
+<br />
+<div class="container">
     <div class="col-xs-12 border-perfil margin-bottom">
         <div class="col-xs-12 col-lg-5">
             <h2>Configuración</h2>
         </div>
-        <div class="col-xs-12 col-lg-7 text-right">
+        <div class="col-xs-12 col-lg-7 text-right hidden-xs hidden-sm">
             <h2>Notificaciones <span class="small">(Por correo electrónico)</span></h2>
+        </div>
+        <div class="col-xs-12 col-lg-7 hidden-md hidden-lg">
+            <h3>Notificaciones <br /><span class="small">(Por correo electrónico)</span></h3>
         </div>
         <div class="col-xs-12 border-separacion margin-bottom">
         </div>
@@ -29,32 +34,46 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Repite tu password</label>
-                    <input type="password" md-maxlength="30" required md-no-asterisk name="password1" ng-model="configuracion.password1">
+                    <input type="password" required md-no-asterisk name="password1" ng-model="configuracion.password1">
                     <div ng-messages="formCambiarpsw.password1.$error">
                         <div ng-message="required">Campo requerido</div>
                     </div>
                 </md-input-container>
 
-                <div class="text-left">
+                <div class="text-left hidden-xs hidden-sm">
+                    <button class="btn btn-md btn-primary" ng-click='formCambiarpsw.$valid ? cambiarPasword() : ""'>Cambiar contraseña</button>
+                </div>
+                <div class="text-center hidden-md hidden-lg">
                     <button class="btn btn-md btn-primary" ng-click='formCambiarpsw.$valid ? cambiarPasword() : ""'>Cambiar contraseña</button>
                 </div>
             </form>
         </div>
         <div class="col-lg-5 col-xs-12">
-            <div class="col-lg-12">
-                <md-switch ng-model="configuracion.mail_new_candidates" aria-label="Switch 1" ng-change="guardarNotificaciones()">
-                    Notificaciones de nuevos postulantes
-                </md-switch>
-                <md-switch ng-model="configuracion.mail_openings_ending" aria-label="Switch 1" ng-change="guardarNotificaciones()">
-                    Notificaciones de vacantes próximas a vencer
-                </md-switch>
-                <md-switch ng-model="configuracion.mail_site_improvements" aria-label="Switch 1" ng-change="guardarNotificaciones()">
-                    Actualizaciones de mejoras en el sitio web
-                </md-switch>
-                <md-switch ng-model="configuracion.mail_updates_news_matteria" aria-label="Switch 1" ng-change="guardarNotificaciones()">
-                    Noticias y novedades de Matteria
-                </md-switch>
-            </div>
+            
+            <md-switch ng-model="configuracion.mail_new_candidates" aria-label="Switch 1" ng-change="guardarNotificaciones()">
+                <div lang="en" class="col-xs-12 hidden-md hidden-lg hidden-sm break-word" style="padding-left:30px">
+                   <span>Notificaciones de nuevos postulantes</span>
+                </div>
+                <span class="hidden-xs">Notificaciones de nuevos postulantes</span>
+            </md-switch>
+            <md-switch ng-model="configuracion.mail_openings_ending" aria-label="Switch 2" ng-change="guardarNotificaciones()">
+                <div lang="en" class="col-xs-12 hidden-md hidden-lg hidden-sm break-word" style="padding-left:30px; hyphens:auto;">
+                    <span>Notificaciones de vacantes próximas <br /> a vencer</span>
+                </div>
+                <span class="hidden-xs">Notificaciones de vacantes próximas a vencer</span>
+            </md-switch>            
+            <md-switch ng-model="configuracion.mail_updates_news_matteria" aria-label="Switch 4" ng-change="guardarNotificaciones()">
+                <div class="col-xs-12 hidden-md hidden-lg hidden-sm" style="padding-left:30px; hyphens:auto;">
+                    <span>Noticias y novedades de Matteria</span>
+                </div>
+                <span class="hidden-xs">Noticias y novedades de Matteria</span>
+            </md-switch>
+            <md-switch ng-model="configuracion.mail_site_improvements" aria-label="Switch 3" ng-change="guardarNotificaciones()">
+                <div class="col-xs-12 hidden-md hidden-lg hidden-sm" style="padding-left:30px; hyphens:auto;">
+                    <span>Actualizaciones de mejoras en el sitio <br /> web </span>
+                </div>
+                <span class="hidden-xs">Actualizaciones de mejoras en el sitio web</span>
+            </md-switch>
 
         </div>
 
@@ -68,7 +87,7 @@
                 <br />
                 <md-input-container class="md-block">
                     <label>Nombre responsable</label>
-                    <input md-maxlength="30" required md-no-asterisk name="contact_name" ng-model="responsable.contact_name">
+                    <input required md-no-asterisk name="contact_name" ng-model="responsable.contact_name">
                     <div ng-messages="formCambiarnombre.contact_name.$error">
                         <div ng-message="required">Campo requerido</div>
                     </div>
@@ -76,32 +95,39 @@
                 
                 <md-input-container class="md-block">
                     <label>Teléfono</label>
-                    <input md-maxlength="30" required md-no-asterisk name="Nombre" ng-model="responsable.contact_phone_number">
+                    <input required md-no-asterisk name="Nombre" ng-model="responsable.contact_phone_number">
                     <div ng-messages="formCambiarnombre.contact_phone_number.$error">
                         <div ng-message="required">Campo requerido</div>
                     </div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Celular</label>
-                    <input md-maxlength="30" required md-no-asterisk name="Nombre" ng-model="responsable.contact_cellphone_number">
+                    <input required md-no-asterisk name="Nombre" ng-model="responsable.contact_cellphone_number">
                     <div ng-messages="formCambiarnombre.contact_cellphone_number.$error">
                         <div ng-message="required">Campo requerido</div>
                     </div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>E-mail de contacto</label>
-                    <input md-maxlength="30" required md-no-asterisk name="contact_email" ng-model="responsable.contact_email">
+                    <input required md-no-asterisk name="contact_email" ng-model="responsable.contact_email">
                     <div ng-messages="formCambiarnombre.contact_email.$error">
                         <div ng-message="required">Campo requerido</div>
                     </div>
                 </md-input-container>
-                <div class="text-left">
+
+                <div class="text-left hidden-xs hidden-sm">
+                    <button class="btn btn-md btn-primary" ng-click='formCambiarnombre.$valid ? cambiarresponsable() : ""'>Guardar datos de contacto</button>
+                </div>
+                <div class="text-center hidden-md hidden-lg">
                     <button class="btn btn-md btn-primary" ng-click='formCambiarnombre.$valid ? cambiarresponsable() : ""'>Guardar datos de contacto</button>
                 </div>
             </div>
             <br />
             <div class="col-lg-12 col-xs-12 margin-bottom">
-                <div class="text-right">
+                <div class="text-right hidden-xs hidden-sm">
+                    <button class="btn btn-lg btn-primary" ng-click="desactivar($event);">Desactivar cuenta</button>
+                </div>
+                <div class="text-center hidden-md hidden-lg">
                     <button class="btn btn-lg btn-primary" ng-click="desactivar($event);">Desactivar cuenta</button>
                 </div>
             </div>

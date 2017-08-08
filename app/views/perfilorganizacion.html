@@ -139,7 +139,7 @@
                                         <label>Liga personalizada</label>
                                     </md-input-container>
                                     <span ng-if="!ph">
-                                        www.{{currentLocation}}/perfilo/
+                                        {{currentLocation}}/perfilo/
                                         <md-input-container flex-gt-sm="80" style="top:12px; margin: 5px 0">
                                             <!--<label>Liga Personalizada</label>
                 <input name="custom_url" ng-model="user.custom_url" ng-change="existeurl()" style="text-transform: lowercase;">-->
@@ -157,7 +157,7 @@
                                     </span>
 
                                     <span ng-if="ph">
-                                        www.{{currentLocation}}/perfil/
+                                        {{currentLocation}}/perfil/
                                         <md-input-container flex-gt-sm="80" style="top:12px; margin: 5px 0">
                                             <input ng-model="company.custom_url" type="text">
                                             <md-icon>
@@ -186,37 +186,25 @@
                             <div class="col-xs-12 col-lg-3">
                                 <md-input-container class="md-block">
                                     <label>Facebook</label>
-                                    <input md-maxlength="100" name="social_facebook" ng-model="company.social_facebook">
-                                    <div ng-messages="formOrganizacion.social_facebook.$error">
-                                        <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 100 caracteres.</div>
-                                    </div>
+                                    <input name="social_facebook" ng-model="company.social_facebook">
                                 </md-input-container>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <md-input-container class="md-block">
                                     <label>Twitter</label>
-                                    <input md-maxlength="100" name="social_twitter" ng-model="company.social_twitter">
-                                    <div ng-messages="formOrganizacion.social_twitter.$error">
-                                        <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 100 caracteres.</div>
-                                    </div>
+                                    <input name="social_twitter" ng-model="company.social_twitter">
                                 </md-input-container>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <md-input-container class="md-block">
                                     <label>Instagram</label>
-                                    <input md-maxlength="100" name="social_instagram" ng-model="company.social_instagram">
-                                    <div ng-messages="formOrganizacion.social_instagram.$error">
-                                        <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 100 caracteres.</div>
-                                    </div>
+                                    <input name="social_instagram" ng-model="company.social_instagram">
                                 </md-input-container>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <md-input-container class="md-block">
                                     <label>Linkedin</label>
-                                    <input md-maxlength="100" name="social_linkedin" ng-model="company.social_linkedin">
-                                    <div ng-messages="formOrganizacion.social_linkedin.$error">
-                                        <div ng-message="md-maxlength">El nombre de la organizacion no puede ser mayor a 100 caracteres.</div>
-                                    </div>
+                                    <input name="social_linkedin" ng-model="company.social_linkedin">
                                 </md-input-container>
                             </div>
                         </div>
@@ -283,7 +271,7 @@
                 <div class="col-xs-12" style="padding:0">
                     <span layout="row">
                         <h2>
-                            ¿Quiénes somos? Descripcion de la organización
+                          ¿Cuál es nuestro impacto?
                         </h2>
                     </span>
                 </div>
@@ -329,7 +317,7 @@
                 </div>
                 <div class="col-xs-12">
                     <md-input-container class="md-block input-margin">
-                        <label>Nombre tributario <span style="color:dodgerblue">*</span></label>
+                        <label>Número tributario <span style="color:dodgerblue">*</span></label>
                         <input required md-no-asterisk name="NIT" ng-model="company.billing_number">
                         <div ng-messages="formFacturacion.NIT.$error">
                             <div ng-message="required">Campo requerido.</div>

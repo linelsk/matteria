@@ -8,7 +8,7 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('OrganizacionesCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', function ($scope, API_PATH_MEDIA, contenidoFactory) {
+    .controller('OrganizacionesCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$window', function ($scope, API_PATH_MEDIA, contenidoFactory, $window) {
 
       $scope.slider = [{}];
       $scope.quehacemos = [{}];
@@ -18,6 +18,21 @@ angular.module('tcsGruntApp')
       $scope.API_PATH_MEDIA = API_PATH_MEDIA;
       $scope.hacemoss = [];
       $scope.ver = true;
+      $scope.idiomaLocal = $window.localStorage.idioma;
+
+      $scope.calcular = function () {
+
+          if ($window.localStorage.idioma == 'es_MX') {
+              $scope.idiomaLocal = 'es_MX';
+          }
+          else {
+              $scope.idiomaLocal = 'en_EN';
+          }
+          $scope.slider = $scope.slider;
+          $scope.hacemoss = $scope.hacemoss;
+      }
+
+      $scope.$watch($scope.calcular);
 
       $scope.vermas = function () {
           $scope.ver = false;
@@ -48,7 +63,7 @@ angular.module('tcsGruntApp')
 
       //Slider
       contenidoFactory.ServiceContenido('fcm/organizaciones-info/', 'GET', '{}').then(function (data) {
-          //console.log(data.data);
+          console.log(data.data);
           $scope.slider = data.data
       });
 
@@ -59,12 +74,14 @@ angular.module('tcsGruntApp')
           for (var i = 0; i < data.data.length; i++) {
               $scope.hacemoss.push({
                   descripcion: data.data[i].descripcion,
+                  descripcion_en: data.data[i].descripcion_en,
                   imagen: data.data[i].imagen,
                   texto: data.data[i].texto,
+                  texto_en: data.data[i].texto_en,
                   color: $scope.color[i]
               })
           }
-          console.log($scope.hacemoss);
+          //console.log($scope.hacemoss);
       });
 
       //Vacantes Cubiertas

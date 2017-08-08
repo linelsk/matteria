@@ -34,7 +34,7 @@ angular.module('tcsGruntApp')
               for (var i = 0; i < $scope.company.services.length; i++) {
                   $scope.servicess.push($scope.company.services[i].id);
               }
-              //console.log($scope.servicess);
+              console.log($scope.servicess);
           });
       }
 

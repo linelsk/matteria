@@ -37,6 +37,7 @@ angular.module('tcsGruntApp')
       $scope.currentLocation = window.location.host;
       $scope.ayudasexo = " ¿Por qué te hacemos esta pregunta? Por que queremos conocer a nuestra comunidad de postulantes, defendiendo los avances a nivel de diversidad y tolerancia que con mucho esfuerzo hemos ido logrando como sociedad. Esto por ningún motivo representa un factor de discriminación postiva o negativa, más allá de si tu perfil se ajusta o no a la vacante requerida.";
       $scope.ph = false;
+      
       candidato();
 
       //Imagen
@@ -986,6 +987,7 @@ angular.module('tcsGruntApp')
               social_linkedin: $scope.user.social_linkedin,
               social_snapchat: $scope.user.social_snapchat,
               social_youtube: $scope.user.social_youtube,
+              cellphone_number: $scope.user.cellphone_number,
               professions: $scope.tempProfesiones,
               interests: $scope.tempIntereses,
               exp_sectors: $scope.tempSectores,

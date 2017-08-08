@@ -8,7 +8,7 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('ComoFuncionaCtrl', ['$scope', 'API_PATH_MEDIA', 'API_PATH', 'contenidoFactory', '$location', '$timeout', '$q', '$http', '$window', function ($scope, API_PATH_MEDIA, API_PATH, contenidoFactory, $location, $timeout, $q, $http, $window) {
+  .controller('ComoFuncionaCtrl', ['$scope', 'API_PATH_MEDIA', 'API_PATH', 'contenidoFactory', '$location', '$timeout', '$q', '$http', '$window', '$mdSidenav', function ($scope, API_PATH_MEDIA, API_PATH, contenidoFactory, $location, $timeout, $q, $http, $window, $mdSidenav) {
       $scope.filterInicio = new Date();
       $scope.filterFin = new Date();
 
@@ -19,6 +19,7 @@ angular.module('tcsGruntApp')
       $scope.next = [{}];
       $scope.previous = [{}];
       $scope.pages = [{}];
+      $scope.pagesinit = 1;
       $scope.comofunciona = [];
       $scope.intereses = [{}];
       $scope.paises = [{}];
@@ -30,6 +31,21 @@ angular.module('tcsGruntApp')
       $scope.tituloquienesomos = "";
       $scope.IsCiudad = false;
       $scope.API_PATH_MEDIA = API_PATH_MEDIA;
+      $scope.idiomaLocal = $window.localStorage.idioma;
+
+      $scope.calcular = function () {
+
+          if ($window.localStorage.idioma == 'es_MX') {
+              $scope.idiomaLocal = 'es_MX';
+          }
+          else {
+              $scope.idiomaLocal = 'en_EN';
+          }
+          $scope.sllider = $scope.sllider;
+
+      }
+
+      $scope.$watch($scope.calcular);
 
       $scope.tipohorario = [
         {
@@ -56,6 +72,15 @@ angular.module('tcsGruntApp')
           $scope.descripcioquienesomos = "";
       }
 
+      $scope.toggleLeft = buildToggler('left');
+      $scope.toggleRight = buildToggler('right');
+
+      function buildToggler(componentId) {
+          return function () {
+              $mdSidenav(componentId).toggle();
+          };
+      }
+
       //slider
       contenidoFactory.ServiceContenido('fcm/para-candidatos-info/?format=json', 'GET', '{}').then(function (data) {
           $scope.sllider = data.data
@@ -63,7 +88,7 @@ angular.module('tcsGruntApp')
 
       //vacantes
       contenidoFactory.ServiceContenido('openings/?format=json', 'GET', '{}').then(function (data) {
-          //console.log(data.data);
+          console.log(data.data.results);
           $scope.vacantes = data.data.results;
           $scope.pages = data.data.pages;
           $scope.next = data.data.next;
@@ -81,13 +106,16 @@ angular.module('tcsGruntApp')
           for (var i = 0; i < data.data.length; i++) {
               $scope.comofunciona.push({
                   descripcion: data.data[i].descripcion,
+                  descripcion_en: data.data[i].descripcion_en,
                   imagen: data.data[i].imagen,
                   titulo: data.data[i].titulo,
+                  titulo_en: data.data[i].titulo_en,
                   color: $scope.color[i]
               })
           }
 
           //$scope.comofunciona = data.data
+          
       });
 
       //Intereses clave
@@ -337,7 +365,7 @@ angular.module('tcsGruntApp')
 
       $scope.buscar_vacante = function (ev) {
           //console.log($scope.selectedVegetables);
-
+          $scope.pagesinit = 1;
           var avaliability = "";
           var interests = "";
           var professions = "";
@@ -404,6 +432,7 @@ angular.module('tcsGruntApp')
               $scope.busqueda = {};
               $scope.vacantes = data.data.results;
               $scope.pages = data.data.pages;
+              $scope.pagesinit = 1;
               $scope.next = data.data.next.toString().split("api/")[1];
               $scope.previous = data.data.previous.toString().split("api/")[1];
           });
@@ -466,6 +495,7 @@ angular.module('tcsGruntApp')
           }).then(function successCallback(data) {
               $scope.vacantes = data.data.results;
               $scope.pages = data.data.pages;
+              $scope.pagesinit = $scope.pagesinit + 1;
               $scope.next = data.data.next;
               $scope.previous = data.data.previous;
           });
@@ -496,6 +526,7 @@ angular.module('tcsGruntApp')
           }).then(function successCallback(data) {
               $scope.vacantes = data.data.results;
               $scope.pages = data.data.pages;
+              $scope.pagesinit = $scope.pagesinit - 1;
               $scope.next = data.data.next;
               $scope.previous = data.data.previous;
           });

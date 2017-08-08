@@ -6,11 +6,13 @@
             <div class="item active">
                 <img class="img-responsive" src="{{API_PATH_MEDIA}}{{sliders.imagen}}" />
                 <div class="carousel-caption">
-                    <span class="negrita hidden-xs">{{sliders.mensaje_imagen}}</span>
+                    <span class="negrita hidden-xs" ng-if="idiomaLocal == 'es_MX'">{{sliders.mensaje_imagen}}</span>
+                    <span class="negrita hidden-xs" ng-if="idiomaLocal == 'en_EN'">{{sliders.mensaje_imagen_en}}</span>
                 </div>
                 <div class="carousel-caption-boton">
-                    <a href="/quienessomos/contacto#contacto" class="btn btn-lg btn-primary btn-banner">{{sliders.mensaje_boton}}</a>
-                </div>
+                    <a href="/quienessomos/contacto#contacto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm"><span ng-if="idiomaLocal == 'es_MX'">{{sliders.mensaje_boton}}</span><span ng-if="idiomaLocal == 'en_EN'">{{sliders.mensaje_boton_en}}</span></a>
+                    <a href="/quienessomos/contacto#contacto" class="btn btn-xs btn-primary btn-banner hidden-md hidden-lg"><span ng-if="idiomaLocal == 'es_MX'">{{sliders.mensaje_boton}}</span><span ng-if="idiomaLocal == 'en_EN'">{{sliders.mensaje_boton_en}}</span></a>
+                </div> 
             </div>
         </div>
     </div>
@@ -20,7 +22,7 @@
 <div class="row">
 
     <div id="servicios" class="col-xs-12 container text-center margin-bottom">
-        <h2><span class="negrita">¿ Qué hacemos ?</span></h2>
+        <h2><span class="negrita" ng-if="idiomaLocal == 'es_MX'">¿ Qué hacemos ?</span><span class="negrita" ng-if="idiomaLocal == 'en_EN'">What we do</span></h2>      
         <br />
     </div>
     <div class="col-xs-12 margin-bottom" style="padding-left:0; padding-right:0">
@@ -28,17 +30,17 @@
         <v-accordion id="accordionA" class="vAccordion--default" control="accordionA" onexpand="expandCallback(index, id)" oncollapse="collapseCallback(index, id)">
             <v-pane id="pane-{{hacemos.texto}}" ng-repeat="hacemos in hacemoss" style="background-color:{{hacemos.color}}; color:#fff">
                 <v-pane-header id="pane-{{hacemos.texto}}-header" aria-controls="pane-{{hacemos.texto}}-content" class="container visible-lg visible-md">
-                    <span class="negrita"><img class="img-responsive" width="100" height="100" src="{{API_PATH_MEDIA}}{{hacemos.imagen}}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:large">{{hacemos.texto}}</span>
+                    <span class="negrita"><img class="img-responsive" width="100" height="100" src="{{API_PATH_MEDIA}}{{hacemos.imagen}}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:large;" ng-if="idiomaLocal == 'es_MX'">{{hacemos.texto}}</span><span style="font-size:large;" ng-if="idiomaLocal == 'en_EN'">{{hacemos.texto_en}}</span>
                 </v-pane-header>
 
                 <v-pane-header id="pane-{{hacemos.texto}}-header" aria-controls="pane-{{hacemos.texto}}-content" class="container hidden-lg hidden-md text-center">
-                    <span class="negrita"><img class="img-responsive" width="80" height="80" src="{{API_PATH_MEDIA}}{{hacemos.imagen}}" /></span><br /><span style="font-size:large;">{{hacemos.texto}}</span>
+                    <span class="negrita"><img class="img-responsive" width="80" height="80" src="{{API_PATH_MEDIA}}{{hacemos.imagen}}" /></span><br /><span style="font-size:large;" ng-if="idiomaLocal == 'es_MX'">{{hacemos.texto}}</span><span style="font-size:large;" ng-if="idiomaLocal == 'en_EN'">{{hacemos.texto_en}}</span>
                 </v-pane-header>
 
                 <v-pane-content id="pane-{{hacemos.texto}}-content" aria-labelledby="pane-{{hacemos.texto}}-header">
                     <div class="container text-left">
                         <br />
-                        <h4 ng-show="ver"><span ng-bind-html="hacemos.descripcion"></span></h4>
+                        <h4 ng-show="ver"><span ng-if="idiomaLocal == 'es_MX'" ng-bind-html="hacemos.descripcion"></span><span ng-if="idiomaLocal == 'en_EN'" ng-bind-html="hacemos.descripcion_en"></span></h4>
                         <br />
                     </div>
                 </v-pane-content>
@@ -48,7 +50,8 @@
     <div id="candidatos" class="col-xs-12">
         <br />
         <div class="container">
-            <img class="img-responsive" src="{{API_PATH_MEDIA}}{{slider[0].segunda_imagen}}" alt="">
+            <img class="img-responsive" src="{{API_PATH_MEDIA}}{{slider[0].segunda_imagen}}" alt="" ng-if="idiomaLocal == 'es_MX'">
+            <img class="img-responsive" src="{{API_PATH_MEDIA}}{{slider[0].segunda_imagen_en}}" alt="" ng-if="idiomaLocal == 'en_EN'">
         </div>        
     </div>
 </div>
@@ -56,7 +59,8 @@
 <div id="vacantes" class="row col-xs-12">
     <div class="container">
         <div class="col-xs-12 text-center">
-            <h2><span class="negrita">Últimos cargos seleccionados</span></h2>
+            <h2><span class="negrita" ng-if="idiomaLocal == 'es_MX'">Últimos cargos seleccionados</span></h2>          
+            <h2><span class="negrita" ng-if="idiomaLocal == 'en_EN'">Roles we have placed</span></h2>  
             <br />
             <div class="row">
                 <div class="col-xs-12 col-lg-2" ng-repeat="vacante in utimasvacantes">

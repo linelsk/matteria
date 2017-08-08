@@ -105,7 +105,7 @@ angular.module('tcsGruntApp')
                     .ok('Aceptar')
                     .targetEvent(ev)
                 );
-          },
+          }
           
       }
   }])

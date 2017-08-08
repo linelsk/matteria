@@ -189,7 +189,7 @@ angular.module('tcsGruntApp')
       }
 
       $scope.error = function () {
-          console.log($scope.oferta.activities);
+          //console.log($scope.oferta.activities);
           if ($scope.oferta.name == undefined || $scope.oferta.name == "") {
               focus('oferta.name');
           }

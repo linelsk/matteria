@@ -8,6 +8,21 @@ angular.module('tcsGruntApp')
       $scope.disablep = "";
       $scope.disableo = "";
       $scope.classregistro
+      $scope.idiomaLocal = $window.localStorage.idioma;
+
+      $scope.calcular = function () {
+
+          if ($window.localStorage.idioma == 'es_MX') {
+              $scope.idiomaLocal = 'es_MX';
+          }
+          else {
+              $scope.idiomaLocal = 'en_EN';
+          }
+          $scope.matteria = $scope.matteria;
+
+      }
+
+      $scope.$watch($scope.calcular);
 
       if ($stateParams.user == "postulante") {
           $scope.disableo = false;
@@ -58,6 +73,7 @@ angular.module('tcsGruntApp')
                   $window.localStorage.nombre = data.name;
                   $window.localStorage.id_user = data.id_user;
                   $window.localStorage.id_company = data.id_company;
+                  $window.localStorage.info_candidate = data.info_candidate;
 
                   location.href = "/";
               }

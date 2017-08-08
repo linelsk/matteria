@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 /**
  * @ngdoc overview
@@ -26,12 +26,15 @@ angular
     'ngImgCrop',
     'ngPagination',
     'jkAngularRatingStars',
-    'textAngular'
+    'textAngular',
+    'angular-loading-bar',
+    'pascalprecht.translate',
+    '720kb.socialshare'
   ])
-  .constant('API_PATH', 'http://138.197.87.134:8002/api/')
-  .constant('API_PATH_MEDIA', 'http://138.197.87.134:8002')
+  .constant('API_PATH', 'http://matteria.co:8003/api/')
+  .constant('API_PATH_MEDIA', 'http://matteria.co:8003')
 
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $qProvider, $httpProvider)
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $qProvider, $httpProvider, $translateProvider, API_PATH)
   {
       //$httpProvider.defaults.headers.common = {};
       //$httpProvider.defaults.headers.post = {};
@@ -42,13 +45,31 @@ angular
       $httpProvider.defaults.useXDomain = true;
       delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
+      //$.get(API_PATH + "fcm/sliders/", function (data, status) {
+      //    console.log(data);
+      //});
+
+      //$translateProvider.translations('es_MX', {
+      //    'TITLE': 'Hello',
+      //    'FOO': 'This is a paragraph'
+      //});
+
+      //$translateProvider.translations('en_EN', {
+      //    'TITLE': 'Hallo',
+      //    'FOO': 'Dies ist ein Absatz'
+      //});
+
+      $translateProvider.useMissingTranslationHandlerLog();
+      $translateProvider.useSanitizeValueStrategy('sanitize');
+      $translateProvider.preferredLanguage('es_MX');
+
       $urlRouterProvider.otherwise('/');
 
       $stateProvider
         .state('main', {
             url: '/',
-            templateUrl: 'views/main.html',
-            controller: 'MainCtrl',
+            templateUrl: 'views/main.html'
+            //controller: 'MainCtrl'
             //data: {
             //    permissions: {
             //        only: ['ANONIMO'],
