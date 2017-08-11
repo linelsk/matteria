@@ -8,205 +8,241 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('MainCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$interpolate', 'API_PATH', '$window', function ($scope, API_PATH_MEDIA, contenidoFactory, $interpolate, API_PATH, $window) {
+    .controller('MainCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$interpolate', 'API_PATH', '$window', function ($scope, API_PATH_MEDIA, contenidoFactory, $interpolate, API_PATH, $window) {
 
-      $scope.fastfacts = [{}];
-      $scope.ofertas = [{}];
-      $scope.quehacemos = [{}];
-      $scope.comofunciona = [{}];
-      $scope.regpro = [{}];
-      $scope.regorg = [{}];
-      $scope.aliados = [{}];
-      $scope.clientes = [{}];
-      $scope.Wrapper_slider1 = [{}];
-      $scope.blog = [{}];
-      $scope.API_PATH_MEDIA = API_PATH_MEDIA;
-      $scope.idiomaLocal = $window.localStorage.idioma;
-      $scope.text = "";
+        $scope.fastfacts = [{}];
+        $scope.ofertas = [{}];
+        $scope.quehacemos = [{}];
+        $scope.comofunciona = [{}];
+        $scope.regpro = [{}];
+        $scope.regorg = [{}];
+        $scope.aliados = [{}];
+        $scope.clientes = [{}];
+        $scope.Wrapper_slider1 = [{}];
+        $scope.Wrapper_slider2 = [{}];
+        $scope.blog = [{}];
+        $scope.API_PATH_MEDIA = API_PATH_MEDIA;
+        $scope.idiomaLocal = $window.localStorage.idioma;
+        $scope.text = "";
 
-      $scope.Indicators = "";
-      $scope.Wrapper = "";
-      $scope.IndicatorsEsp = "";
-      $scope.WrapperEsp = "";
-      $scope.IndicatorsIn = "";
-      $scope.WrapperIn = "";
+        $scope.Indicators = "";
+        $scope.Wrapper = "";
+        $scope.IndicatorsEsp = "";
+        $scope.WrapperEsp = "";
+        $scope.IndicatorsIn = "";
+        $scope.WrapperIn = "";
 
-      //console.log($scope.idiomaLocal);
-      
+        //console.log($scope.idiomaLocal);
 
-      $scope.calcular = function () {
 
-          if ($window.localStorage.idioma == 'es_MX') {
-              $scope.idiomaLocal = 'es_MX';
-              $scope.Indicators = $scope.IndicatorsEsp;
-              $scope.Wrapper = $scope.WrapperEsp;
-          }
-          else {
-              $scope.idiomaLocal = 'en_EN';
-              $scope.Indicators = $scope.IndicatorsIn;
-              $scope.Wrapper = $scope.WrapperIn;
-          }
-          $scope.fastfacts = $scope.fastfacts;
-          $scope.ofertas = $scope.ofertas;
-          $scope.quehacemos = $scope.quehacemos;
-          $scope.comofunciona = $scope.comofunciona;
-          
-      }
+        $scope.calcular = function () {
 
-      $scope.$watch($scope.calcular);
+            if ($window.localStorage.idioma == 'es_MX') {
+                $scope.idiomaLocal = 'es_MX';
+                $scope.Indicators = $scope.IndicatorsEsp;
+                $scope.Wrapper = $scope.WrapperEsp;
+            }
+            else {
+                $scope.idiomaLocal = 'en_EN';
+                $scope.Indicators = $scope.IndicatorsIn;
+                $scope.Wrapper = $scope.WrapperIn;
+            }
+            $scope.fastfacts = $scope.fastfacts;
+            $scope.ofertas = $scope.ofertas;
+            $scope.quehacemos = $scope.quehacemos;
+            $scope.comofunciona = $scope.comofunciona;
 
-      //Carrousel
-      carrousel();
-      function carrousel() {
-          contenidoFactory.ServiceContenido('fcm/sliders/', 'GET', '{}').then(function (data) {
-              //(data);             
+        }
 
-              $scope.IndicatorsEsp += '<ol class="carousel-indicators">';
-              for (var i = 0; i < data.data.length; i++) {
-                  switch (i) {
-                      case 0:
-                          $scope.IndicatorsEsp += '<li data-target="#myCarousel" data-slide-to="' + i + '" class="active"></li>'
-                          $scope.WrapperEsp += '<div class="item active">' +
-                                            '<img src="' + API_PATH_MEDIA + data.data[i].imagen + '" />' +
-                                            '<div class="carousel-caption">' +
-                                            '<span class="negrita hidden-xs">' + data.data[i].mensaje + '</span>' +
-                                            '</div>' +
-                                            '<div class="carousel-caption-boton">' +
-                                            '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton + '</a>' +
-                                            '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton + '</a>' +
-                                            '</div>' +
-                                            '</div>';
-                          break;
-                      default:
-                          $scope.IndicatorsEsp += '<li data-target="#myCarousel" data-slide-to="' + i + '"></li>'
-                          $scope.WrapperEsp += '<div class="item">' +
-                                            '<img src="' + API_PATH_MEDIA + data.data[i].imagen + '" />' +
-                                            '<div class="carousel-caption">' +
-                                            '<span class="negrita hidden-xs">' + data.data[i].mensaje + '</span>' +
-                                            '</div>' +
-                                            '<div class="carousel-caption-boton">' +
-                                            '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton + '</a>' +
-                                            '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton + '</a>' +
-                                            '</div>' +
-                                            '</div>';
-                  }
+        $scope.$watch($scope.calcular);
 
-              }
+        //Carrousel
+        carrousel();
+        function carrousel() {
+            contenidoFactory.ServiceContenido('fcm/sliders/', 'GET', '{}').then(function (data) {
+                //(data);             
 
-              $scope.IndicatorsIn += '<ol class="carousel-indicators">';
-              $scope.IndicatorsIn += '<ol class="carousel-indicators">';
-              for (var i = 0; i < data.data.length; i++) {
-                  switch (i) {
-                      case 0:
-                          $scope.IndicatorsIn += '<li data-target="#myCarousel" data-slide-to="' + i + '" class="active"></li>'
-                          $scope.WrapperIn += '<div class="item active">' +
-                                            '<img src="' + API_PATH_MEDIA + data.data[i].imagen + '" />' +
-                                            '<div class="carousel-caption">' +
-                                            '<span class="negrita hidden-xs">' + data.data[i].mensaje_en + '</span>' +
-                                            '</div>' +
-                                            '<div class="carousel-caption-boton">' +
-                                            '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton_en + '</a>' +
-                                            '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton_en + '</a>' +
-                                            '</div>' +
-                                            '</div>';
-                          break;
-                      default:
-                          $scope.IndicatorsIn += '<li data-target="#myCarousel" data-slide-to="' + i + '"></li>'
-                          $scope.WrapperIn += '<div class="item">' +
-                                            '<img src="' + API_PATH_MEDIA + data.data[i].imagen + '" />' +
-                                            '<div class="carousel-caption">' +
-                                            '<span class="negrita hidden-xs">' + data.data[i].mensaje_en + '</span>' +
-                                            '</div>' +
-                                            '<div class="carousel-caption-boton">' +
-                                            '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton_en + '</a>' +
-                                            '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton_en + '</a>' +
-                                            '</div>' +
-                                            '</div>';
-                  }
+                $scope.IndicatorsEsp += '<ol class="carousel-indicators">';
+                for (var i = 0; i < data.data.length; i++) {
+                    switch (i) {
+                        case 0:
+                            $scope.IndicatorsEsp += '<li data-target="#myCarousel" data-slide-to="' + i + '" class="active"></li>'
+                            $scope.WrapperEsp += '<div class="item active">' +
+                                '<img src="' + API_PATH_MEDIA + data.data[i].imagen + '" />' +
+                                '<div class="carousel-caption">' +
+                                '<span class="negrita hidden-xs">' + data.data[i].mensaje + '</span>' +
+                                '</div>' +
+                                '<div class="carousel-caption-boton">' +
+                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton + '</a>' +
+                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton + '</a>' +
+                                '</div>' +
+                                '</div>';
+                            break;
+                        default:
+                            $scope.IndicatorsEsp += '<li data-target="#myCarousel" data-slide-to="' + i + '"></li>'
+                            $scope.WrapperEsp += '<div class="item">' +
+                                '<img src="' + API_PATH_MEDIA + data.data[i].imagen + '" />' +
+                                '<div class="carousel-caption">' +
+                                '<span class="negrita hidden-xs">' + data.data[i].mensaje + '</span>' +
+                                '</div>' +
+                                '<div class="carousel-caption-boton">' +
+                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton + '</a>' +
+                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton + '</a>' +
+                                '</div>' +
+                                '</div>';
+                    }
 
-              }
+                }
 
-              $scope.IndicatorsEsp += '</ol>';
-              $scope.IndicatorsIn += '</ol>';
-          });
-      }
+                $scope.IndicatorsIn += '<ol class="carousel-indicators">';
+                $scope.IndicatorsIn += '<ol class="carousel-indicators">';
+                for (var i = 0; i < data.data.length; i++) {
+                    switch (i) {
+                        case 0:
+                            $scope.IndicatorsIn += '<li data-target="#myCarousel" data-slide-to="' + i + '" class="active"></li>'
+                            $scope.WrapperIn += '<div class="item active">' +
+                                '<img src="' + API_PATH_MEDIA + data.data[i].imagen + '" />' +
+                                '<div class="carousel-caption">' +
+                                '<span class="negrita hidden-xs">' + data.data[i].mensaje_en + '</span>' +
+                                '</div>' +
+                                '<div class="carousel-caption-boton">' +
+                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton_en + '</a>' +
+                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton_en + '</a>' +
+                                '</div>' +
+                                '</div>';
+                            break;
+                        default:
+                            $scope.IndicatorsIn += '<li data-target="#myCarousel" data-slide-to="' + i + '"></li>'
+                            $scope.WrapperIn += '<div class="item">' +
+                                '<img src="' + API_PATH_MEDIA + data.data[i].imagen + '" />' +
+                                '<div class="carousel-caption">' +
+                                '<span class="negrita hidden-xs">' + data.data[i].mensaje_en + '</span>' +
+                                '</div>' +
+                                '<div class="carousel-caption-boton">' +
+                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton_en + '</a>' +
+                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton_en + '</a>' +
+                                '</div>' +
+                                '</div>';
+                    }
 
-      //Fast Facts
-      contenidoFactory.ServiceContenido('fcm/fast-facts/', 'GET', '{}').then(function (data) {
-          $scope.fastfacts = data.data;
-      });
+                }
 
-      //Ofertas destacadas
-      contenidoFactory.ServiceContenido('openings/', 'GET', '{}').then(function (data) {
+                $scope.IndicatorsEsp += '</ol>';
+                $scope.IndicatorsIn += '</ol>';
+            });
+        }
 
-          //console.log(data.data.results.length);
-          var content = [];
-          var text = [];
-          for (var i = 0; i < data.data.results.length; i++) {
-              //console.log(content[i]);
-              $scope.ofertas.push({
-                  company_logo: data.data.results[i].company_logo,
-                  name: data.data.results[i].name,
-                  company: data.data.results[i].company,
-                  activities: htmlToPlaintext(data.data.results[i].activities),
-                  keep_company_alias: data.data.results[i].keep_company_alias,
-                  alternate_company_alias: data.data.results[i].alternate_company_alias,
-                  alternate_company_description: data.data.results[i].alternate_company_description,
-                  id: data.data.results[i].id
-              });
-              //$scope.ofertas.push(content[i]);
-          }
+        //Fast Facts
+        contenidoFactory.ServiceContenido('fcm/fast-facts/', 'GET', '{}').then(function (data) {
+            $scope.fastfacts = data.data;
+        });
 
-          console.log($scope.ofertas);
-      });
+        //Ofertas destacadas
+        contenidoFactory.ServiceContenido('openings/', 'GET', '{}').then(function (data) {
 
-      function htmlToPlaintext(text) {
-          return text ? String(text).replace(/<[^>]+>/gm, '') : '';
-      }
+            //console.log(data.data.results.length);
+            var content = [];
+            var text = [];
+            for (var i = 0; i < data.data.results.length; i++) {
+                //console.log(content[i]);
+                $scope.ofertas.push({
+                    company_logo: data.data.results[i].company_logo,
+                    name: data.data.results[i].name,
+                    company: data.data.results[i].company,
+                    activities: htmlToPlaintext(data.data.results[i].activities),
+                    keep_company_alias: data.data.results[i].keep_company_alias,
+                    alternate_company_alias: data.data.results[i].alternate_company_alias,
+                    alternate_company_description: data.data.results[i].alternate_company_description,
+                    id: data.data.results[i].id
+                });
+                //$scope.ofertas.push(content[i]);
+            }
 
-      //Que hacemos
-      contenidoFactory.ServiceContenido('fcm/que-hacemos/', 'GET', '{}').then(function (data) {
-          //console.log(data);
-          $scope.quehacemos = data.data;
-      });
+            //console.log($scope.ofertas);
+        });
 
-      //Como funciona
-      contenidoFactory.ServiceContenido('fcm/como-funciona/', 'GET', '{}').then(function (data) {
-          //console.log(data.data);
-          $scope.comofunciona = data.data;
-      });
+        function htmlToPlaintext(text) {
+            return text ? String(text).replace(/<[^>]+>/gm, '') : '';
+        }
 
-      //Registro profesional
-      contenidoFactory.ServiceContenido('fcm/reg-pro/', 'GET', '{}').then(function (data) {
-          $scope.regpro = data.data;
-          //console.log(data);
-      });
+        //Que hacemos
+        contenidoFactory.ServiceContenido('fcm/que-hacemos/', 'GET', '{}').then(function (data) {
+            //console.log(data);
+            $scope.quehacemos = data.data;
+        });
 
-      //Registro organizacion
-      contenidoFactory.ServiceContenido('fcm/reg-org/', 'GET', '{}').then(function (data) {
-          //console.log(data);
-          $scope.regorg = data.data;
-      });
+        //Como funciona
+        contenidoFactory.ServiceContenido('fcm/como-funciona/', 'GET', '{}').then(function (data) {
+            //console.log(data.data);
+            $scope.comofunciona = data.data;
+        });
 
-      //Nuestros aliados
-      contenidoFactory.ServiceContenido('fcm/aliados/', 'GET', '{}').then(function (data) {
-          //.log(data.data);
-          $scope.aliados = data.data;
-      });
+        //Registro profesional
+        contenidoFactory.ServiceContenido('fcm/reg-pro/', 'GET', '{}').then(function (data) {
+            $scope.regpro = data.data;
+            //console.log(data);
+        });
 
-      //Carrousel Clientes
-      contenidoFactory.ServiceContenido('fcm/clientes/', 'GET', '{}').then(function (data) {
-          //.log(data.data);
-          $scope.Wrapper_slider1 = data.data;
+        //Registro organizacion
+        contenidoFactory.ServiceContenido('fcm/reg-org/', 'GET', '{}').then(function (data) {
+            //console.log(data);
+            $scope.regorg = data.data;
+        });
 
-      });
+        //Nuestros aliados
+        contenidoFactory.ServiceContenido('fcm/aliados/', 'GET', '{}').then(function (data) {
+            //.log(data.data);
+            $scope.aliados = data.data;
+        });
 
-      //Blog
-      contenidoFactory.ServiceContenido('fcm/blog/', 'GET', '{}').then(function (data) {
-          //console.log(data);
-          $scope.text = data.data[0].descripcion;
-          $scope.blog = data.data;
+        //Carrousel Clientes
+        contenidoFactory.ServiceContenido('fcm/clientes/', 'GET', '{}').then(function (data) {
+            // console.log(data.data.length % 2);
 
-      });
+            if (data.data.length % 2 == 1) {
+                for (var i = 0; i < Math.round(data.data.length / 2); i++) {
+                    $scope.Wrapper_slider1.push({
+                        cliente_website_url: data.data[i].cliente_website_url,
+                        imagen: $scope.API_PATH_MEDIA + data.data[i].imagen
+                    });
+                }
 
-  }]);
+                for (var i = Math.round(data.data.length / 2); i < data.data.length; i++) {
+                    $scope.Wrapper_slider2.push({
+                        cliente_website_url: data.data[i].cliente_website_url,
+                        imagen: $scope.API_PATH_MEDIA + data.data[i].imagen
+                    });
+                }
+            }
+            else {
+                for (var i = 0; i < data.data.length / 2; i++) {
+                    $scope.Wrapper_slider1.push({
+                        cliente_website_url: data.data[i].cliente_website_url,
+                        imagen: $scope.API_PATH_MEDIA + data.data[i].imagen
+                    });
+                }
+
+                for (var i = data.data.length / 2; i < data.data.length; i++) {
+                    $scope.Wrapper_slider2.push({
+                        cliente_website_url: data.data[i].cliente_website_url,
+                        imagen: $scope.API_PATH_MEDIA + data.data[i].imagen
+                    });
+                }
+            }
+
+            $scope.Wrapper_slider1.splice(0, 1);
+            $scope.Wrapper_slider2.splice(0, 1);
+
+            //console.log($scope.Wrapper_slider1);
+            //console.log($scope.Wrapper_slider2);
+        });
+
+        //Blog
+        contenidoFactory.ServiceContenido('fcm/blog/', 'GET', '{}').then(function (data) {
+            //console.log(data);
+            $scope.text = data.data[0].descripcion;
+            $scope.blog = data.data;
+
+        });
+
+    }]);

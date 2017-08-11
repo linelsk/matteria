@@ -57,6 +57,7 @@ module.exports = function(config) {
       'bower_components/angular-loading-bar/build/loading-bar.js',
       'bower_components/angular-translate/angular-translate.js',
       'bower_components/angularjs-socialshare/dist/angular-socialshare.min.js',
+      'bower_components/angular-ui-carousel/dist/ui-carousel.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

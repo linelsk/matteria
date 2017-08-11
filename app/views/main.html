@@ -70,7 +70,7 @@
                 <h4 ng-if="idiomaLocal == 'es_MX'" class="negrita">{{ofert.name | limitTo:20}}<span ng-if="ofert.name.length > 20">...</span></h4>
                 <h4 ng-if="idiomaLocal == 'en_EN'" class="negrita">{{ofert.name | limitTo:20}}<span ng-if="ofert.name.length > 20">...</span></h4>
               </a>
-             
+
               <small class="negrita" ng-bind-html="ofert.company" ng-if="!ofert.keep_company_alias"></small>
               <small class="negrita" ng-bind-html="ofert.alternate_company_alias" ng-if="ofert.keep_company_alias"></small>
               <p ng-if="idiomaLocal == 'es_MX' && !ofert.keep_company_alias">{{ofert.activities | limitTo:40}}<span ng-if="ofert.name.length > 35">...</span></p>
@@ -93,42 +93,52 @@
       <div class="margin-bottom"></div>
       <div class="row">
         <div class="col-md-12">
-          <div class="carousel carousel-showmanymoveone slide" id="carouselclientes1">
+          <ui-carousel slides="Wrapper_slider1" slides-to-show="4" slides-to-scroll="1">
+            <carousel-item>
+              <a href="{{item.cliente_website_url}}"><img width="150" height="150" src="{{item.imagen}}" class="img-responsive"></a>
+            </carousel-item>
+          </ui-carousel>
+          <!--<div class="carousel carousel-showmanymoveone slide" id="carouselclientes1">
             <div class="carousel-inner">
+              
+
               <div class="item active">
-                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[0].cliente_website_url}}"><img width="150" height="150" src="{{API_PATH_MEDIA}}{{Wrapper_slider1[0].imagen}}" class="img-responsive"></a></div>
+                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[0].cliente_website_url}}"><img width="150" height="150" src="{{Wrapper_slider1[0].imagen}}" class="img-responsive"></a></div>
               </div>
               <div class="item">
-                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[1].cliente_website_url}}"><img width="150" height="150" src="{{API_PATH_MEDIA}}{{Wrapper_slider1[1].imagen}}" class="img-responsive"></a></div>
+                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[1].cliente_website_url}}"><img width="150" height="150" src="{{Wrapper_slider1[1].imagen}}" class="img-responsive"></a></div>
               </div>
               <div class="item">
-                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[2].cliente_website_url}}"><img width="150" height="150" src="{{API_PATH_MEDIA}}{{Wrapper_slider1[2].imagen}}" class="img-responsive"></a></div>
+                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[2].cliente_website_url}}"><img width="150" height="150" src="{{Wrapper_slider1[2].imagen}}" class="img-responsive"></a></div>
               </div>
               <div class="item">
-                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[3].cliente_website_url}}"><img width="150" height="150" src="{{API_PATH_MEDIA}}{{Wrapper_slider1[3].imagen}}" class="img-responsive"></a></div>
+                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[3].cliente_website_url}}"><img width="150" height="150" src="{{Wrapper_slider1[3].imagen}}" class="img-responsive"></a></div>
               </div>
               <div class="item">
-                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[4].cliente_website_url}}"><img width="150" height="150" src="{{API_PATH_MEDIA}}{{Wrapper_slider1[4].imagen}}" class="img-responsive"></a></div>
+                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[4].cliente_website_url}}"><img width="150" height="150" src="{{Wrapper_slider1[4].imagen}}" class="img-responsive"></a></div>
               </div>
               <div class="item">
-                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[5].cliente_website_url}}"><img width="150" height="150" src="{{API_PATH_MEDIA}}{{Wrapper_slider1[5].imagen}}" class="img-responsive"></a></div>
+                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[5].cliente_website_url}}"><img width="150" height="150" src="{{Wrapper_slider1[5].imagen}}" class="img-responsive"></a></div>
               </div>
               <div class="item">
-                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[6].cliente_website_url}}"><img width="150" height="150" src="{{API_PATH_MEDIA}}{{Wrapper_slider1[6].imagen}}" class="img-responsive"></a></div>
+                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[6].cliente_website_url}}"><img width="150" height="150" src="{{Wrapper_slider1[6].imagen}}" class="img-responsive"></a></div>
               </div>
               <div class="item">
-                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[7].cliente_website_url}}"><img width="150" height="150" src="{{API_PATH_MEDIA}}{{Wrapper_slider1[7].imagen}}" class="img-responsive"></a></div>
+                <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[7].cliente_website_url}}"><img width="150" height="150" src="{{Wrapper_slider1[7].imagen}}" class="img-responsive"></a></div>
               </div>
             </div>
             <a class="left carousel-control" data-target="#carouselclientes1" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
             <a class="right carousel-control" data-target="#carouselclientes1" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-          </div>
+          </div>-->
         </div>
         <div class="hidden-xs" style="margin-bottom:50px"></div>
         <div class="col-md-12">
-          <br class="hidden-xs" />
-          <br class="hidden-xs" />
-          <div class="carousel carousel-showmanymoveone slide" id="carouselclientes2">
+          <ui-carousel slides="Wrapper_slider2" slides-to-show="4" slides-to-scroll="1">
+            <carousel-item>
+              <a href="{{item.cliente_website_url}}"><img width="150" height="150" src="{{item.imagen}}" class="img-responsive"></a>
+            </carousel-item>
+          </ui-carousel>
+          <!--<div class="carousel carousel-showmanymoveone slide" id="carouselclientes2">
             <div class="carousel-inner">
               <div class="item active">
                 <div class="col-xs-12 col-sm-6 col-md-3"><a href="{{Wrapper_slider1[8].cliente_website_url}}"><img width="150" height="150" src="{{API_PATH_MEDIA}}{{Wrapper_slider1[8].imagen}}" class="img-responsive"></a></div>
@@ -157,7 +167,7 @@
             </div>
             <a class="left carousel-control" data-target="#carouselclientes2" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
             <a class="right carousel-control" data-target="#carouselclientes2" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-          </div>
+          </div>-->
         </div>
       </div>
 
