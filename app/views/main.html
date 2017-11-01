@@ -61,8 +61,8 @@
           <div class="media" style="width:100%; height:170px;">
             <div class="media-left">
               <a href="/vacante/{{ofert.id}}" target="_blank">
-                <img width="80" height="80" src="{{API_PATH_MEDIA}}{{ofert.company_logo}}" alt="" ng-if="!ofert.keep_company_alias">
-                <img width="80" height="80" src="{{API_PATH_MEDIA}}/media/avatar_default/Avatar.jpg" alt="" ng-if="ofert.keep_company_alias">
+                <img width="80" height="80" src="{{API_PATH_MEDIA}}{{ofert.company_logo}}" alt="" ng-if="ofert.keep_company_alias">
+                <img width="80" height="80" src="{{API_PATH_MEDIA}}/media/avatar_default/Avatar.jpg" alt="" ng-if="!ofert.keep_company_alias">
               </a>
             </div>
             <div class="media-body">
@@ -71,12 +71,12 @@
                 <h4 ng-if="idiomaLocal == 'en_EN'" class="negrita">{{ofert.name | limitTo:20}}<span ng-if="ofert.name.length > 20">...</span></h4>
               </a>
 
-              <small class="negrita" ng-bind-html="ofert.company" ng-if="!ofert.keep_company_alias"></small>
-              <small class="negrita" ng-bind-html="ofert.alternate_company_alias" ng-if="ofert.keep_company_alias"></small>
-              <p ng-if="idiomaLocal == 'es_MX' && !ofert.keep_company_alias">{{ofert.activities | limitTo:40}}<span ng-if="ofert.name.length > 35">...</span></p>
-              <p ng-if="idiomaLocal == 'en_EN' && !ofert.keep_company_alias">{{ofert.activities | limitTo:40}}<span ng-if="ofert.name.length > 35">...</span></p>
-              <p ng-if="idiomaLocal == 'es_MX' && ofert.keep_company_alias">{{ofert.alternate_company_description | limitTo:40}}<span ng-if="ofert.name.length > 35">...</span></p>
-              <p ng-if="idiomaLocal == 'en_EN' && ofert.keep_company_alias">{{ofert.alternate_company_description | limitTo:40}}<span ng-if="ofert.name.length > 35">...</span></p>
+              <small class="negrita" ng-bind-html="ofert.company" ng-if="ofert.keep_company_alias"></small>
+              <small class="negrita" ng-bind-html="ofert.alternate_company_alias" ng-if="!ofert.keep_company_alias"></small>
+              <p ng-if="idiomaLocal == 'es_MX' && ofert.keep_company_alias">{{ofert.activities | limitTo:40}}<span ng-if="ofert.name.length > 35">...</span></p>
+              <p ng-if="idiomaLocal == 'en_EN' && ofert.keep_company_alias">{{ofert.activities | limitTo:40}}<span ng-if="ofert.name.length > 35">...</span></p>
+              <p ng-if="idiomaLocal == 'es_MX' && !ofert.keep_company_alias">{{ofert.alternate_company_description | limitTo:40}}<span ng-if="ofert.name.length > 35">...</span></p>
+              <p ng-if="idiomaLocal == 'en_EN' && !ofert.keep_company_alias">{{ofert.alternate_company_description | limitTo:40}}<span ng-if="ofert.name.length > 35">...</span></p>
             </div>
           </div>
         </div>
@@ -173,7 +173,7 @@
 
 
       <div class="col-xs-12 hidden-lg">
-        <a href="/clientes" class="btn btn-default"><span ng-if="idiomaLocal == 'es_MX'">Nuestros clientes</span><span ng-if="idiomaLocal == 'en_EN'">Our clients</span></a>
+        <a class="btn btn-default"><span ng-if="idiomaLocal == 'es_MX'" ui-sref="clientes({idioma:'es'})">Nuestros clientes</span><span ng-if="idiomaLocal == 'en_EN'" ui-sref="clientes({idioma:'en'})">Our clients</span></a>
       </div>
     </div>
   </div>
@@ -182,10 +182,10 @@
 
   <div class="container text-center margin-bottom visible-lg">
     <div class="col-xs-12 col-lg-6">
-      <a href="/comofunciona/comofunciona#comofunciona" class="btn btn-default"><span ng-if="idiomaLocal == 'es_MX'">Todas las vacantes</span><span ng-if="idiomaLocal == 'en_EN'">All vacancies</span></a>
+      <a href="" class="btn btn-default"><span ng-if="idiomaLocal == 'es_MX'" ui-sref="comofunciona({scrollTo: 'comofunciona', idioma: 'es'})">Todas las vacantes</span><span ng-if="idiomaLocal == 'en_EN'" ui-sref="comofunciona({scrollTo: 'comofunciona', idioma: 'en'})">All vacancies</span></a>
     </div>
     <div class="col-xs-12 col-lg-6">
-      <a href="/clientes" class="btn btn-default"><span ng-if="idiomaLocal == 'es_MX'">Nuestros clientes</span><span ng-if="idiomaLocal == 'en_EN'">Our clients</span></a>
+      <a href="" class="btn btn-default"><span ng-if="idiomaLocal == 'es_MX'" ui-sref="clientes({idioma:'es'})">Nuestros clientes</span><span ng-if="idiomaLocal == 'en_EN'" ui-sref="clientes({idioma:'en'})">Our clients</span></a>
     </div>
   </div>
 
@@ -208,7 +208,7 @@
           <br class="hidden-lg" />
         </div>
         <div class="carousel-caption-boton">
-          <a href ui-sref="registro({user: 'organizacion'})" class="btn btn-lg btn-primary btn-banner"><span ng-if="idiomaLocal == 'es_MX'">{{pro.mensaje_boton}}</span><span ng-if="idiomaLocal == 'en_EN'">{{pro.mensaje_boton_en}}</span></a>
+          <a class="btn btn-lg btn-primary btn-banner"><span ng-if="idiomaLocal == 'es_MX'" ui-sref="registro({user: 'organizacion', idioma: 'es'})">{{pro.mensaje_boton}}</span><span ng-if="idiomaLocal == 'en_EN'" ui-sref="registro({user: 'organizacion', idioma: 'en'})">{{pro.mensaje_boton_en}}</span></a>
         </div>
       </div>
       <div class="col-xs-12 col-lg-6" style="padding-left: 0; padding-right: 0;" ng-repeat="pro in regpro">
@@ -218,7 +218,7 @@
           <br class="hidden-lg" />
         </div>
         <div class="carousel-caption-boton">
-          <a href ui-sref="registro({user: 'postulante'})" class="btn btn-lg btn-primary btn-banner"><span ng-if="idiomaLocal == 'es_MX'">{{pro.mensaje_boton}}</span><span ng-if="idiomaLocal == 'en_EN'">{{pro.mensaje_boton_en}}</span></a>
+          <a class="btn btn-lg btn-primary btn-banner"><span ng-if="idiomaLocal == 'es_MX'" ui-sref="registro({user: 'postulante', idioma: 'es'})">{{pro.mensaje_boton}}</span><span ng-if="idiomaLocal == 'en_EN'" ui-sref="registro({user: 'postulante', idioma: 'en'})">{{pro.mensaje_boton_en}}</span></a>
         </div>
       </div>
 
@@ -251,7 +251,7 @@
           <br />
         </div>
         <div class="col-xs-12">
-          <a ng-href="/blog" class="btn btn-default"><span ng-if="idiomaLocal == 'es_MX'">Ver más...</span><span ng-if="idiomaLocal == 'en_EN'">See more...</span></a>
+          <a href="" class="btn btn-default"><span ng-if="idiomaLocal == 'es_MX'" ui-sref="blog({idioma: 'es'})">Ver más...</span><span ng-if="idiomaLocal == 'en_EN'" ui-sref="blog({idioma: 'en'})">See more...</span></a>
         </div>
       </div>
       <div class="col-xs-12 col-lg-6 text-center">

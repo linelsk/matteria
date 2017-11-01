@@ -10,6 +10,17 @@ angular.module('tcsGruntApp')
       $scope.classregistro
       $scope.idiomaLocal = $window.localStorage.idioma;
 
+      //if ($stateParams.idioma == 'en') {
+      //    $window.localStorage.idioma = 'en_EN';
+      //    $scope.idiomaLocal = 'en_EN';
+      //    //$window.location.assign('/#!/en');
+      //}
+      //else {
+      //    $window.localStorage.idioma = 'es_MX';
+      //    $scope.idiomaLocal = 'es_MX';
+      //    //$window.location.assign('/#!/es');
+      //}
+
       $scope.calcular = function () {
 
           if ($window.localStorage.idioma == 'es_MX') {

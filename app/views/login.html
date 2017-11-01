@@ -44,8 +44,8 @@
                         </div>
                     </md-input-container>
                     <div class="col-xs-12 text-center margin-bottom">
-                        <a href="/recuperarcontrasena" ng-if="idiomaLocal == 'es_MX'">¿Olvidaste tu contraseña? </a>
-                        <a href="/recuperarcontrasena" ng-if="idiomaLocal == 'en_EN'">Did you forget your password?</a>
+                        <a ui-sref="recuperarcontrasena({idioma:'es'})" ng-if="idiomaLocal == 'es_MX'">¿Olvidaste tu contraseña? </a>
+                        <a ui-sref="recuperarcontrasena({idioma:'en'})" ng-if="idiomaLocal == 'en_EN'">Did you forget your password?</a>
                     </div> 
                     <div class="col-xs-12 text-center">
                         <button class="btn btn-lg btn-primary btn-registrate" ng-click="entrarOrganizacion($event);"><span ng-if="idiomaLocal == 'es_MX'">Entrar</span><span ng-if="idiomaLocal == 'en_EN'">Log In </span></button>
@@ -82,8 +82,8 @@
                         </div>
                     </md-input-container>
                     <div class="col-xs-12 text-center margin-bottom">
-                      <a href="/recuperarcontrasena" ng-if="idiomaLocal == 'es_MX'">¿Olvidaste tu contraseña? </a>
-                      <a href="/recuperarcontrasena" ng-if="idiomaLocal == 'en_EN'">Did you forget your password?</a>
+                      <a ui-sref="recuperarcontrasena({idioma:'es'})" ng-if="idiomaLocal == 'es_MX'">¿Olvidaste tu contraseña? </a>
+                      <a ui-sref="recuperarcontrasena({idioma:'en'})" ng-if="idiomaLocal == 'en_EN'">Did you forget your password?</a>
                     </div>
                     <div class="col-xs-12 text-center">
                         <button class="btn btn-lg btn-primary btn-registrate" ng-click="entrarPostulante($event);"><span ng-if="idiomaLocal == 'es_MX'">Entrar</span><span ng-if="idiomaLocal == 'en_EN'">Log In </span></button>

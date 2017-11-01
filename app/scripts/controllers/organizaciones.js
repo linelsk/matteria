@@ -8,7 +8,7 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-    .controller('OrganizacionesCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$window', function ($scope, API_PATH_MEDIA, contenidoFactory, $window) {
+    .controller('OrganizacionesCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$window', '$stateParams', '$location', function ($scope, API_PATH_MEDIA, contenidoFactory, $window, $stateParams, $location) {
 
       $scope.slider = [{}];
       $scope.quehacemos = [{}];
@@ -19,17 +19,33 @@ angular.module('tcsGruntApp')
       $scope.hacemoss = [];
       $scope.ver = true;
       $scope.idiomaLocal = $window.localStorage.idioma;
+      $scope.dialog = false;
+
+      console.log($location.path().split("/")[$location.path().split("/").length - 1]);
+      //console.log($stateParams.idioma);
+      //if ($location.path().split("/")[$location.path().split("/").length - 1] == 'en') {
+      //    $window.localStorage.idioma = 'en_EN';
+      //    $scope.idiomaLocal = 'en_EN';
+      //    $window.location.assign('/#!/en');
+      //}
+      //else {
+      //    $window.localStorage.idioma = 'es_MX';
+      //    $scope.idiomaLocal = 'es_MX';
+      //    $window.location.assign('/#!/es');
+      //}
 
       $scope.calcular = function () {
 
           if ($window.localStorage.idioma == 'es_MX') {
               $scope.idiomaLocal = 'es_MX';
+              //$location.path('/organizaciones/top/es').replace();
           }
           else {
               $scope.idiomaLocal = 'en_EN';
+              //$location.path('/organizaciones/top/en').replace();
           }
           $scope.slider = $scope.slider;
-          $scope.hacemoss = $scope.hacemoss;
+          $scope.hacemoss = $scope.hacemoss;          
       }
 
       $scope.$watch($scope.calcular);
@@ -63,7 +79,7 @@ angular.module('tcsGruntApp')
 
       //Slider
       contenidoFactory.ServiceContenido('fcm/organizaciones-info/', 'GET', '{}').then(function (data) {
-          console.log(data.data);
+          //console.log(data.data);
           $scope.slider = data.data
       });
 
@@ -86,8 +102,93 @@ angular.module('tcsGruntApp')
 
       //Vacantes Cubiertas
       contenidoFactory.ServiceContenido('fcm/vacantes-cubiertas/', 'GET', '{}').then(function (data) {
-          console.log(data.data);
+          //console.log(data.data);
           $scope.utimasvacantes = data.data;
       });
+
+      //Modal
+      contenidoFactory.ServiceContenido('catalogs/company-services/?format=json', 'GET', '{}').then(function (data) {
+        $scope.modal.services = data.data
+        //_dataservicio = data.status;
+        if (data.status == '-1' || data.status == '500' || data.status == '400') {
+            _data = contenidoFactory.mensaje(ev, "Algo salio mal, por favor vuele a cargar la página");
+        };
+    });
+
+    $scope.modal = {
+        "name": "",
+        "email": "",
+        "phone_number": "",
+        "services": [],
+        "comments": ""
+    }
+
+    //$scope.postula = function (ev) {
+    //    ventana();
+    //};
+
+    $scope.postula = function (ev) {
+        $scope.dialog = true;
+
+        $(function () {
+            $("#dialog-confirm").dialog({
+                open: function (event, ui) {
+                    $(".ui-dialog-titlebar-close", ui.dialog).hide();
+                    $(".ui-dialog-titlebar", ui.dialog).hide();
+                    //$('body').css('overflow', 'hidden');
+                },
+                show: {
+                    effect: "fade",
+                    duration: 100
+                },
+                hide: {
+                    effect: "fade",
+                    duration: 100
+                },
+                resizable: false,
+                height: "auto",
+                width: 800,
+                modal: true,
+                buttons: [
+                    {
+                        text: 'Enviar',
+                        open: function () { $(this).addClass('md-primary md-confirm-button md-button md-autofocus md-ink-ripple md-default-theme') }, //will append a class called 'b' to the created 'OK' button.
+                        click: function () {
+                            if ($scope.modal.name != "" && $scope.modal.email) {
+                                $scope.isClick = true;
+                                $(this).dialog("close");
+                                $('body').css('overflow', 'scroll');
+                                $scope.dialog = false;
+
+                                contenidoFactory.ServicePerfil('contact-services/', 'POST', {
+                                    "name": $scope.modal.name,
+                                    "email": $scope.modal.email,
+                                    "phone_number": $scope.modal.phone_number,
+                                    "services": $scope.modal.servicios,
+                                    "comments": $scope.modal.comments
+                                }).then(function (data) {
+                                    console.log(data);
+                                    $(this).dialog("close");
+                                    //$('body').css('overflow', 'scroll');
+                                    $scope.dialog = false;
+                                    contenidoFactory.mensaje(ev, "Datos enviados");
+                                });
+                            }
+                        }
+                    },
+                    {
+                        text: "Cerrar", //md-primary md-cancel-button md-button md-ink-ripple md-default-theme
+                        open: function () { $(this).addClass('md-primary md-cancel-button md-button md-ink-ripple md-default-theme') }, //will append a class called 'b' to the created 'OK' button.
+                        click: function () {                               
+                            $(this).dialog("close");
+                            //$('body').css('overflow', 'scroll');
+                            $scope.dialog = false;
+                            //console.log($scope.modal.servicios);
+                        }
+                    }
+                ]
+            });
+        });
+    }
 
   }]);

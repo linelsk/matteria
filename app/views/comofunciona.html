@@ -580,20 +580,20 @@
             </div>
             <div class="col-xs-12 col-md-3">
               <div class="col-xs-12">
-                <img class="img-responsive" src="{{API_PATH_MEDIA}}{{vacante.company_logo}}" ng-if="!vacante.keep_company_alias"/>
-                <img class="img-responsive" src="{{API_PATH_MEDIA}}/media/avatar_default/Avatar.jpg" ng-if="vacante.keep_company_alias" />
+                <img class="img-responsive" src="{{API_PATH_MEDIA}}{{vacante.company_logo}}" ng-if="vacante.keep_company_alias"/>
+                <img class="img-responsive" src="{{API_PATH_MEDIA}}/media/avatar_default/Avatar.jpg" ng-if="!vacante.keep_company_alias" />
               </div>
             </div>
             <div class="col-xs-12 col-md-9 margin-bottom">
               <h3 class="negrita text-left" style="margin-bottom:0; margin-top:0;"><a style="cursor:pointer" ng-click="url(vacante.id);">{{vacante.name}}</a></h3>
-              <p class="negrita text-left" style="margin-top:0;" ng-if="!vacante.keep_company_alias">{{vacante.company}}</p>
-              <p class="negrita text-left" style="margin-top:0;" ng-if="vacante.keep_company_alias">{{vacante.alternate_company_alias}}</p>
+              <p class="negrita text-left" style="margin-top:0;" ng-if="vacante.keep_company_alias">{{vacante.company}}</p>
+              <p class="negrita text-left" style="margin-top:0;" ng-if="!vacante.keep_company_alias">{{vacante.alternate_company_alias}}</p>
               <p class="negrita text-left" style="margin-top:0;">{{vacante.city}}<span ng-if="vacante.city">, </span>{{vacante.country.name}}</p>
               <p class="negrita" style="margin-bottom:0; margin-top:0;">
                 Mision del cargo:
               </p>
-              <p class="text-left" ng-bind-html="vacante.activities" ng-if="!vacante.keep_company_alias"></p>
-              <p class="text-left" ng-bind-html="vacante.alternate_company_description" ng-if="vacante.keep_company_alias"></p>
+              <p class="text-left" ng-bind-html="vacante.activities" ng-if="vacante.keep_company_alias"></p>
+              <p class="text-left" ng-bind-html="vacante.alternate_company_description" ng-if="!vacante.keep_company_alias"></p>
               <p style="margin-bottom:0;"><span class="negrita">Fecha: </span>{{vacante.open_opening}}</p>
             </div>
             <div class="text-right">
@@ -610,20 +610,20 @@
             </div>
             <div class="col-xs-12 col-md-3">
               <div class="col-xs-12">
-                <img class="img-responsive" src="{{API_PATH_MEDIA}}{{vacante.company_logo}}" ng-if="!vacante.keep_company_alias" />
-                <img class="img-responsive" src="{{API_PATH_MEDIA}}/media/avatar_default/Avatar.jpg" ng-if="vacante.keep_company_alias" />
+                <img class="img-responsive" src="{{API_PATH_MEDIA}}{{vacante.company_logo}}" ng-if="vacante.keep_company_alias" />
+                <img class="img-responsive" src="{{API_PATH_MEDIA}}/media/avatar_default/Avatar.jpg" ng-if="!vacante.keep_company_alias" />
               </div>
             </div>
             <div class="col-xs-12 col-md-9 margin-bottom">
               <h3 class="negrita text-left" style="margin-bottom:0; margin-top:0;"><a style="cursor:pointer" ng-click="url(vacante.id);">{{vacante.name}}</a></h3>
-              <p class="negrita text-left" style="margin-top:0;" ng-if="!vacante.keep_company_alias">{{vacante.company}}</p>
-              <p class="negrita text-left" style="margin-top:0;" ng-if="vacante.keep_company_alias">{{vacante.alternate_company_alias}}</p>
+              <p class="negrita text-left" style="margin-top:0;" ng-if="vacante.keep_company_alias">{{vacante.company}}</p>
+              <p class="negrita text-left" style="margin-top:0;" ng-if="!vacante.keep_company_alias">{{vacante.alternate_company_alias}}</p>
               <p class="negrita text-left" style="margin-top:0;">{{vacante.city}}<span ng-if="vacante.city">, </span>{{vacante.country.name}}</p>
               <p class="negrita" style="margin-bottom:0; margin-top:0;">
-                Mision del cargo:
+                Propósito de la vacante:
               </p>
-              <p class="text-left" ng-bind-html="vacante.activities" ng-if="!vacante.keep_company_alias"></p>
-              <p class="text-left" ng-bind-html="vacante.alternate_company_description" ng-if="vacante.keep_company_alias"></p>
+              <p class="text-left" ng-bind-html="vacante.activities" ng-if="vacante.keep_company_alias"></p>
+              <p class="text-left" ng-bind-html="vacante.alternate_company_description" ng-if="!vacante.keep_company_alias"></p>
               <p style="margin-bottom:0;"><span class="negrita">Fecha: </span>{{vacante.open_opening}}</p>
             </div>
           </div>

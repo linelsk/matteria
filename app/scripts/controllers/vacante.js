@@ -8,7 +8,7 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-    .controller('VacanteCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$stateParams', '$window', '$mdDialog', 'API_PATH', 'Socialshare', function ($scope, API_PATH_MEDIA, contenidoFactory, $stateParams, $window, $mdDialog, API_PATH, Socialshare) {
+    .controller('VacanteCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$stateParams', '$window', '$mdDialog', 'API_PATH', 'Socialshare', '$location', function ($scope, API_PATH_MEDIA, contenidoFactory, $stateParams, $window, $mdDialog, API_PATH, Socialshare, $location) {
 
       $scope.vacante = [{}];
       $scope.compania = [{}];
@@ -20,14 +20,16 @@ angular.module('tcsGruntApp')
       var newLine = escape("\n");
       var url = "<a href'" + window.location.href + "'>" + window.location.href + "</a>"
       $scope.vacanteurl = 'mailto:?subject=Mira esta vacante en matteria, me parece que te puede interesar.&body=' + newLine + window.location.href + newLine + '';
-      $scope.role = $window.localStorage.role;
+      $scope.role = $window.localStorage.role;      
+      $scope.isClick = false;
 
       $scope.doTheBack = function () {
-          $window.history.back();
+          console.log($window.localStorage.url_vacante);
+          $window.location.href = $window.localStorage.url_vacante;
       };
 
-      $scope.url_ = API_PATH + 'vacante/94';
-      console.log($scope.url_);
+      //$scope.url_ = API_PATH + 'vacante/94';
+      //console.log($scope.url_);
       //Socialshare.share({
       //    'provider': 'facebook',
       //    'attrs': {
@@ -70,18 +72,20 @@ angular.module('tcsGruntApp')
                   ventana();
               }
               else {
+                  $scope.isClick = true;
                   contenidoFactory.ServicePerfil('openings/applications/create/', 'POST', {
                       "candidate": $window.localStorage.id_candidate,
                       "opening": $stateParams.id,
                       "salary_min": null,
                       "salary_max": null
                   }).then(function (data) {
-                      $window.location.href = "/postulacionrecibida";
+                      //$scope.isClick = true;
+                      $window.location.href = "/postulacionrecibida/es";
                       //console.log(data);
                   });
               }
           }
-          else {
+          else {              
               var confirm = $mdDialog.confirm(
                   {
                       targetEvent: ev,
@@ -96,7 +100,7 @@ angular.module('tcsGruntApp')
                       '</md-dialog>'
                   });
               $mdDialog.show(confirm).then(function () {
-                  $window.location.href = "/registro/postulante";
+                  $window.location.href = "/registro/postulante/es";
               });              
           }
       }
@@ -147,13 +151,17 @@ angular.module('tcsGruntApp')
                         text: 'Enviar',
                         open: function () { $(this).addClass('md-primary md-confirm-button md-button md-autofocus md-ink-ripple md-default-theme') }, //will append a class called 'b' to the created 'OK' button.
                         click: function () {
+                            $scope.isClick = true;
+                            $(this).dialog("close");
+                            $('body').css('overflow', 'scroll');
+                            $scope.dialog = false;
                             contenidoFactory.ServicePerfil('openings/applications/create/', 'POST', {
                                 "candidate": $window.localStorage.id_candidate,
                                 "opening": $stateParams.id,
                                 "salary_min": $scope.desde,
                                 "salary_max": $scope.hasta
                             }).then(function (data) {
-                                $window.location.href = "/postulacionrecibida";
+                                $window.location.href = "/postulacionrecibida/es";
                             });
                         }
                     },

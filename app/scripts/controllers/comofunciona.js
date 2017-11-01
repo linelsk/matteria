@@ -8,7 +8,7 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-  .controller('ComoFuncionaCtrl', ['$scope', 'API_PATH_MEDIA', 'API_PATH', 'contenidoFactory', '$location', '$timeout', '$q', '$http', '$window', '$mdSidenav', function ($scope, API_PATH_MEDIA, API_PATH, contenidoFactory, $location, $timeout, $q, $http, $window, $mdSidenav) {
+    .controller('ComoFuncionaCtrl', ['$scope', 'API_PATH_MEDIA', 'API_PATH', 'contenidoFactory', '$location', '$timeout', '$q', '$http', '$window', '$mdSidenav', '$stateParams', function ($scope, API_PATH_MEDIA, API_PATH, contenidoFactory, $location, $timeout, $q, $http, $window, $mdSidenav, $stateParams) {
       $scope.filterInicio = new Date();
       $scope.filterFin = new Date();
 
@@ -32,6 +32,17 @@ angular.module('tcsGruntApp')
       $scope.IsCiudad = false;
       $scope.API_PATH_MEDIA = API_PATH_MEDIA;
       $scope.idiomaLocal = $window.localStorage.idioma;
+
+      //if ($stateParams.idioma == 'en') {
+      //    $window.localStorage.idioma = 'en_EN';
+      //    $scope.idiomaLocal = 'en_EN';
+      //    //$window.location.assign('/#!/en');
+      //}
+      //else {
+      //    $window.localStorage.idioma = 'es_MX';
+      //    $scope.idiomaLocal = 'es_MX';
+      //    //$window.location.assign('/#!/es');
+      //}
 
       $scope.calcular = function () {
 
@@ -142,7 +153,8 @@ angular.module('tcsGruntApp')
       });
 
       $scope.url = function (id) {
-          console.log(id);
+          //console.log(id);
+          $window.localStorage.url_vacante = $location.path();
           $location.url('/vacante/' + id);
       }
       //Busquedas

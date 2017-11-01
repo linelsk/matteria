@@ -32,8 +32,8 @@ angular
         '720kb.socialshare',
         'ui.carousel'
     ])
-    .constant('API_PATH', 'http://matteria.co:8002/api/')
-    .constant('API_PATH_MEDIA', 'http://matteria.co:8002')
+    .constant('API_PATH', 'http://matteria.co:8003/api/')
+    .constant('API_PATH_MEDIA', 'http://matteria.co:8003')
 
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $qProvider, $httpProvider, $translateProvider, API_PATH) {
         //$httpProvider.defaults.headers.common = {};
@@ -42,8 +42,8 @@ angular
         //$httpProvider.defaults.headers.patch = {};
         //$httpProvider.defaults.headers.get = {};
 
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        //$httpProvider.defaults.useXDomain = true;
+        //delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
         //$.get(API_PATH + "fcm/sliders/", function (data, status) {
         //    console.log(data);
@@ -59,15 +59,15 @@ angular
         //    'FOO': 'Dies ist ein Absatz'
         //});
 
-        $translateProvider.useMissingTranslationHandlerLog();
-        $translateProvider.useSanitizeValueStrategy('sanitize');
-        $translateProvider.preferredLanguage('es_MX');
+        //$translateProvider.useMissingTranslationHandlerLog();
+        //$translateProvider.useSanitizeValueStrategy('sanitize');
+        //$translateProvider.preferredLanguage('es_MX');
 
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('main', {
-                url: '/',
+                url: '/:idioma',
                 templateUrl: 'views/main.html'
                 //controller: 'MainCtrl'
                 //data: {
@@ -78,12 +78,12 @@ angular
                 //}
             })
             .state('configuracion', {
-                url: '/configuracion',
+                url: '/configuracion/:idioma',
                 templateUrl: 'views/configuracion.html',
                 controller: 'ConfiguracionPostulanteCtrl'
             })
             .state('perfilorganizacion', {
-                url: '/perfilorganizacion',
+                url: '/perfilorganizacion/:idioma',
                 templateUrl: 'views/perfilorganizacion.html',
 
                 data: {
@@ -109,12 +109,12 @@ angular
                 controller: 'VerPostulantesCtrl'
             })
             .state('perfilpostulante', {
-                url: '/perfilpostulante',
+                url: '/perfilpostulante/:idioma',
                 templateUrl: 'views/perfilpostulante.html',
                 controller: 'PerfilPostulanteCtrl'
             })
             .state('organizaciones', {
-                url: '/organizaciones/:scrollTo',
+                url: '/organizaciones/:scrollTo/:idioma',
                 templateUrl: 'views/organizaciones.html',
                 controller: 'OrganizacionesCtrl',
                 onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
@@ -125,12 +125,12 @@ angular
                 }
             })
             .state('clientes', {
-                url: '/clientes',
+                url: '/clientes/:idioma',
                 templateUrl: 'views/clientes.html',
                 controller: 'ClientesCtrl'
             })
             .state('quienessomos', {
-                url: '/quienessomos/:scrollTo',
+                url: '/quienessomos/:scrollTo/:idioma',
                 templateUrl: 'views/quienessomos.html',
                 controller: 'QuienesSomosCtrl',
                 onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
@@ -141,17 +141,17 @@ angular
                 }
             })
             .state('configuracionorganizacion', {
-                url: '/configuracionorganizacion',
+                url: '/configuracionorganizacion/:idioma',
                 templateUrl: 'views/configuracionorganizacion.html',
                 controller: 'ConfiguracionOrganizacionCtrl'
             })
             .state('ingresa', {
-                url: '/ingresa/:user',
+                url: '/ingresa/:user/:idioma',
                 templateUrl: 'views/login.html',
                 controller: 'LoginCtrl'
             })
             .state('registro', {
-                url: '/registro/:user',
+                url: '/registro/:user/:idioma',
                 templateUrl: 'views/registro.html',
                 controller: 'RegistroCtrl'
             })
@@ -161,17 +161,17 @@ angular
                 controller: 'VacanteCtrl'
             })
             .state('faq', {
-                url: '/faq',
+                url: '/faq/:idioma',
                 templateUrl: 'views/FAQ.html',
                 controller: 'FaqCtrl'
             })
             .state('blog', {
-                url: '/blog',
+                url: '/blog/:idioma',
                 templateUrl: 'views/blog.html',
                 controller: 'MainCtrl'
             })
             .state('comofunciona', {
-                url: '/comofunciona/:scrollTo',
+                url: '/comofunciona/:scrollTo/:idioma',
                 templateUrl: 'views/comofunciona.html',
                 controller: 'ComoFuncionaCtrl',
                 onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
@@ -202,7 +202,7 @@ angular
                 controller: 'PerfilCompartidoPostulanteCtrl'
             })
             .state('misvacantes', {
-                url: '/misvacantes',
+                url: '/misvacantes/:idioma',
                 templateUrl: 'views/misvacantes.html',
                 controller: 'MisVacanteCtrl'
             })
@@ -212,22 +212,22 @@ angular
                 controller: 'MisVacanteCtrl'
             })
             .state('recuperarcontrasena', {
-                url: '/recuperarcontrasena',
+                url: '/recuperarcontrasena/:idioma',
                 templateUrl: 'views/recuperarcontrasena.html',
                 controller: 'LoginCtrl'
             })
             .state('vacanterecibida', {
-                url: '/vacanterecibida',
+                url: '/vacanterecibida/:idioma',
                 templateUrl: 'views/vacanterecibida.html',
                 controller: 'AboutCtrl'
             })
             .state('postulacionrecibida', {
-                url: '/postulacionrecibida',
+                url: '/postulacionrecibida/:idioma',
                 templateUrl: 'views/postulacionrecibida.html',
                 controller: 'AboutCtrl'
             })
             .state('mispostulaciones', {
-                url: '/mispostulaciones',
+                url: '/mispostulaciones/:idioma',
                 templateUrl: 'views/mispostulaciones.html',
                 controller: 'MisPostulacionesCtrl'
             })
@@ -257,7 +257,7 @@ angular
                 controller: 'AboutCtrl'
             })
             .state('comofuncionahead', {
-                url: '/comofuncionahead',
+                url: '/comofuncionahead/:idioma',
                 templateUrl: 'views/comofuncionahead.html',
                 controller: 'ComoFuncionaCtrl'
             })

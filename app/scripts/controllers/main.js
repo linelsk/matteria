@@ -8,7 +8,7 @@
  * Controller of the tcsGruntApp
  */
 angular.module('tcsGruntApp')
-    .controller('MainCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$interpolate', 'API_PATH', '$window', function ($scope, API_PATH_MEDIA, contenidoFactory, $interpolate, API_PATH, $window) {
+    .controller('MainCtrl', ['$scope', 'API_PATH_MEDIA', 'contenidoFactory', '$interpolate', 'API_PATH', '$window', '$stateParams', '$location', function ($scope, API_PATH_MEDIA, contenidoFactory, $interpolate, API_PATH, $window, $stateParams, $location) {
 
         $scope.fastfacts = [{}];
         $scope.ofertas = [{}];
@@ -32,8 +32,23 @@ angular.module('tcsGruntApp')
         $scope.IndicatorsIn = "";
         $scope.WrapperIn = "";
 
-        //console.log($scope.idiomaLocal);
+        //console.log($stateParams.idioma);
 
+        if ($location.path() == '/') {
+            $location.path('es').replace();
+
+        }
+
+        if ($stateParams.idioma == 'en') {
+            $window.localStorage.idioma = 'en_EN';
+            $scope.idiomaLocal = 'en_EN';
+            //$window.location.assign('/#!/en');
+        }
+        else {
+            $window.localStorage.idioma = 'es_MX';
+            $scope.idiomaLocal = 'es_MX';
+            //$window.location.assign('/#!/es');
+        }
 
         $scope.calcular = function () {
 
@@ -41,11 +56,17 @@ angular.module('tcsGruntApp')
                 $scope.idiomaLocal = 'es_MX';
                 $scope.Indicators = $scope.IndicatorsEsp;
                 $scope.Wrapper = $scope.WrapperEsp;
+                //history.pushState(null, "", "es");
+                
+                //console.log($location.path());
             }
             else {
                 $scope.idiomaLocal = 'en_EN';
                 $scope.Indicators = $scope.IndicatorsIn;
                 $scope.Wrapper = $scope.WrapperIn;
+                //history.pushState(null, "", "en");
+                //$location.path('en').replace();
+                //console.log($location.path());
             }
             $scope.fastfacts = $scope.fastfacts;
             $scope.ofertas = $scope.ofertas;
@@ -73,8 +94,8 @@ angular.module('tcsGruntApp')
                                 '<span class="negrita hidden-xs">' + data.data[i].mensaje + '</span>' +
                                 '</div>' +
                                 '<div class="carousel-caption-boton">' +
-                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton + '</a>' +
-                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton + '</a>' +
+                                '<a href="/quienessomos/manifiesto/es#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton + '</a>' +
+                                '<a href="/quienessomos/manifiesto/es#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton + '</a>' +
                                 '</div>' +
                                 '</div>';
                             break;
@@ -86,8 +107,8 @@ angular.module('tcsGruntApp')
                                 '<span class="negrita hidden-xs">' + data.data[i].mensaje + '</span>' +
                                 '</div>' +
                                 '<div class="carousel-caption-boton">' +
-                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton + '</a>' +
-                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton + '</a>' +
+                                '<a href="/quienessomos/manifiesto/es#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton + '</a>' +
+                                '<a href="/quienessomos/manifiesto/es#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton + '</a>' +
                                 '</div>' +
                                 '</div>';
                     }
@@ -106,8 +127,8 @@ angular.module('tcsGruntApp')
                                 '<span class="negrita hidden-xs">' + data.data[i].mensaje_en + '</span>' +
                                 '</div>' +
                                 '<div class="carousel-caption-boton">' +
-                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton_en + '</a>' +
-                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton_en + '</a>' +
+                                '<a href="/quienessomos/manifiesto/en#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton_en + '</a>' +
+                                '<a href="/quienessomos/manifiesto/en#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton_en + '</a>' +
                                 '</div>' +
                                 '</div>';
                             break;
@@ -119,8 +140,8 @@ angular.module('tcsGruntApp')
                                 '<span class="negrita hidden-xs">' + data.data[i].mensaje_en + '</span>' +
                                 '</div>' +
                                 '<div class="carousel-caption-boton">' +
-                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton_en + '</a>' +
-                                '<a href="/quienessomos/manifiesto#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton_en + '</a>' +
+                                '<a href="/quienessomos/manifiesto/en#manifiesto" class="btn btn-lg btn-primary btn-banner hidden-xs hidden-sm">' + data.data[i].mensaje_boton_en + '</a>' +
+                                '<a href="/quienessomos/manifiesto/en#manifiesto" class="btn btn-xs btn-primary btn-banner hidden-lg hidden-md">' + data.data[i].mensaje_boton_en + '</a>' +
                                 '</div>' +
                                 '</div>';
                     }
@@ -197,7 +218,7 @@ angular.module('tcsGruntApp')
 
         //Carrousel Clientes
         contenidoFactory.ServiceContenido('fcm/clientes/', 'GET', '{}').then(function (data) {
-            // console.log(data.data.length % 2);
+            //console.log(data.data);
 
             if (data.data.length % 2 == 1) {
                 for (var i = 0; i < Math.round(data.data.length / 2); i++) {
@@ -239,7 +260,7 @@ angular.module('tcsGruntApp')
 
         //Blog
         contenidoFactory.ServiceContenido('fcm/blog/', 'GET', '{}').then(function (data) {
-            //console.log(data);
+            console.log(data);
             $scope.text = data.data[0].descripcion;
             $scope.blog = data.data;
 
